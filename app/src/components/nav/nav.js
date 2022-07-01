@@ -12,7 +12,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { NavLink } from 'react-router-dom';
 const Nav = (props) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const pages = ['map','log']; // Used for the mapping of pages, you can also see that the Map will have a tenary for checking if its the / home
+  const pages = ['home','log']; // Used for the mapping of pages, you can also see that the Map will have a tenary for checking if its the / home
 
   // Open and close are for mobile view
   const handleOpenNavMenu = (event) => {
@@ -60,7 +60,7 @@ const Nav = (props) => {
               }}
             >
               {pages.map((page,index) => (
-                <MenuItem component={NavLink} to={page === 'map' ? '/' : `/${page}`} key={index} onClick={handleCloseNavMenu} sx={{backgroundColor:"#333",p:2,"&.active": {color: "#bbdefb"}}}>
+                <MenuItem component={NavLink} to={page === 'home' ? '/' : `/${page}`} key={index} onClick={handleCloseNavMenu} sx={{backgroundColor:"#333",p:2,"&.active": {color: "#bbdefb"}}}>
                   <Typography sx={{textTransform:'uppercase',textAlign:'center'}}>{page}</Typography>
                 </MenuItem>
               ))}
@@ -73,7 +73,7 @@ const Nav = (props) => {
               <Box key={index}>
                 <Button
                   component={NavLink}
-                  to={page === 'map' ? '/' : `/${page}`} // Careful here, the logic is simple: If its the home return to it else create the path
+                  to={page === 'home' ? '/' : `/${page}`} // Careful here, the logic is simple: If its the home return to it else create the path
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, mx:3, color:'#fff', display: 'block', "&.active": {color: "#bbdefb"}}}
                   >

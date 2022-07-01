@@ -79,7 +79,7 @@ const Home = (props) => {
                     {/* Avatar and Banner */}
                     <Grid container item direction="column" xs={2}>
                         {/* Avatar */}
-                        <Grid item display='flex' flexDirection='column' sx={{backgroundColor:"#f22",display:"flex",justifyContent:'center',alignItems:'center'}} xs={3}> 
+                        <Grid item display='flex' flexDirection='column' sx={{backgroundColor:"#666", display:"flex", justifyContent:'center', alignItems:'center'}} xs={3}> 
                             <Avatar   sx={{ width: '50%', height: '90%', fontSize:"5em" }}>S</Avatar>
                             {/* <FormControl sx={{pt:5}} component="form" onSubmit={submitCity}>
                                 <TextField
@@ -100,7 +100,7 @@ const Home = (props) => {
                             </FormControl> */}
                         </Grid>
                         {/* Banner */}
-                        <Grid item display='flex' flexDirection='column' xs={9}  sx={{backgroundColor:"#0f0",display:"flex",justifyContent:'center',alignItems:'center'}}> 
+                        <Grid item display='flex' flexDirection='column' xs={9}  sx={{backgroundColor:"#333", display:"flex", justifyContent:'center', alignItems:'center'}}> 
                             <Typography variant="span">Banner</Typography>
                         </Grid>
                     </Grid>
@@ -108,19 +108,17 @@ const Home = (props) => {
                     {/* Navigation and Chat */}
                     <Grid container item direction="column" xs={10}>
                         {/* Navigation */}
-                        <Grid item display='flex' flexDirection='column' xs={3}  sx={{backgroundColor:"#00f",display:"flex",justifyContent:'center',alignItems:'center'}}> 
+                        <Grid item display='flex' flexDirection='column' xs={3}  sx={{backgroundColor:"#444", display:"flex", justifyContent:'center', alignItems:'center'}}> 
                             <Typography variant="span">Navi</Typography>
-                            
                         </Grid>
                         {/* Chat */}
-                        <Grid item display='flex' flexDirection='column' xs={9}  sx={{backgroundColor:"#0ff",display:"flex",justifyContent:'center',alignItems:'center'}}> 
-                            <Typography variant="span">Chat</Typography>
-                            <Typography variant="span">Chat</Typography>
-                            <Typography variant="span">Chat</Typography>
-                            <Typography variant="span">Chat</Typography>
-                            <Typography variant="span">Chat</Typography>
-                            <Typography variant="span">Chat</Typography>
-                            
+                        <Grid item container direction='column' xs={9} sx={{ display:"flex", paddingY: 6, paddingX: 10 }}> 
+                            <Grid item sx={{display:'flex', justifyContent:'flex-end'}}>
+                                <Typography variant="span">Chat</Typography>
+                            </Grid>
+                            <Grid item sx={{ display:'flex', justifyContent:'baseline'}}>
+                                <Typography variant="span">Chat</Typography>
+                            </Grid>
                         </Grid>
                     </Grid>
                 </Grid>
