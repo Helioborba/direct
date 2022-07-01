@@ -76,7 +76,7 @@ const Home = (props) => {
             <Nav></Nav>
             <Box sx={{p:{xs:"5rem 0 5rem 0", lg:5}, display:'flex', justifyContent:'space-between', alignItems:'center'}}>
                 <Grid container direction="row" alignItems="stretch" sx={{backgroundColor:"#222",minHeight:"90vh", borderRadius:{xs:0, lg:3} }}>
-                    {/* Avatar and Banner */}
+                    {/* Avatar and Navigation */}
                     <Grid container item direction="column" xs={2}>
                         {/* Avatar */}
                         <Grid item display='flex' flexDirection='column' sx={{backgroundColor:"#666", display:"flex", justifyContent:'center', alignItems:'center'}} xs={3}> 
@@ -99,25 +99,49 @@ const Home = (props) => {
                                 <Button sx={{mt:2}} type="submit">Add</Button>
                             </FormControl> */}
                         </Grid>
-                        {/* Banner */}
+                        {/* Navi */}
                         <Grid item display='flex' flexDirection='column' xs={9}  sx={{backgroundColor:"#333", display:"flex", justifyContent:'center', alignItems:'center'}}> 
-                            <Typography variant="span">Banner</Typography>
+                            <Typography variant="span">Navigation</Typography>
                         </Grid>
                     </Grid>
 
-                    {/* Navigation and Chat */}
+                    {/* Banner and Chat */}
                     <Grid container item direction="column" xs={10}>
-                        {/* Navigation */}
+                        {/* Banner */}
                         <Grid item display='flex' flexDirection='column' xs={3}  sx={{backgroundColor:"#444", display:"flex", justifyContent:'center', alignItems:'center'}}> 
-                            <Typography variant="span">Navi</Typography>
+                            <Typography variant="span">Banner</Typography>
                         </Grid>
                         {/* Chat */}
                         <Grid item container direction='column' xs={9} sx={{ display:"flex", paddingY: 6, paddingX: 10 }}> 
                             <Grid item sx={{display:'flex', justifyContent:'flex-end'}}>
-                                <Typography variant="span">Chat</Typography>
+                                <Box sx={{padding: 2, borderRadius:2, color:'#000', backgroundColor:"#bbdefb"}}>
+                                    <Typography variant="span">Hello sir</Typography>
+                                </Box>
+                            </Grid>
+                            <Grid item sx={{display:'flex', justifyContent:'flex-end'}}>
+                                <Box sx={{mt:1, p: 2, borderRadius:2, color:'#000', backgroundColor:"#bbdefb"}}>
+                                    <Typography variant="span">How are you?</Typography>
+                                </Box>
                             </Grid>
                             <Grid item sx={{ display:'flex', justifyContent:'baseline'}}>
-                                <Typography variant="span">Chat</Typography>
+                                <Box sx={{padding: 2, borderRadius:2, color:'#000', backgroundColor:"#bbdefb"}}>
+                                    <Typography variant="span">Good, and you?</Typography>
+                                </Box>
+                            </Grid>
+                            <Grid item sx={{display:'flex', justifyContent:'flex-end'}}>
+                                <Box sx={{mt:1, p: 2, borderRadius:2, color:'#000', backgroundColor:"#bbdefb"}}>
+                                    <Typography variant="span">All is good!</Typography>
+                                </Box>
+                            </Grid>
+                            <Grid item sx={{display:'flex', justifyContent:'flex-end'}}>
+                                <Box sx={{mt:1, p: 2, borderRadius:2, color:'#000', backgroundColor:"#bbdefb"}}>
+                                    <Typography variant="span">Save for last friday thought</Typography>
+                                </Box>
+                            </Grid>
+                            <Grid item sx={{display:'flex', justifyContent:'flex-end'}}>
+                                <Box sx={{mt:1, p: 2, borderRadius:2, color:'#000', backgroundColor:"#bbdefb", maxWidth:"70%"}}>
+                                    <Typography variant="span">Had to go to the grocery store buy some beers, however because of some soccer game that happened, they did not have any at all! in the end I had to buy some coke cuz it was the only thing they still had</Typography>
+                                </Box>
                             </Grid>
                         </Grid>
                     </Grid>
