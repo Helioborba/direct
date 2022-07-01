@@ -38,7 +38,7 @@ const Log = (props) => {
             <Nav></Nav>
             <Box sx={{p:2}}>
                 <Typography variant="h3" sx={{pb:2}}>
-                    List of nations down here:
+                    textext
                 </Typography>
                 <Grid container sx={{p:2}} justifyContent="center" direction='column'>
                     {render()}

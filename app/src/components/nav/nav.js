@@ -35,7 +35,7 @@ const Nav = (props) => {
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
-              sx={{color:'#bbdefb'}}
+              sx={{color:'#1976d2'}}
             >
               <MenuIcon />
             </IconButton>
@@ -60,7 +60,7 @@ const Nav = (props) => {
               }}
             >
               {pages.map((page,index) => (
-                <MenuItem component={NavLink} to={page === 'home' ? '/' : `/${page}`} key={index} onClick={handleCloseNavMenu} sx={{backgroundColor:"#333",p:2,"&.active": {color: "#bbdefb"}}}>
+                <MenuItem component={NavLink} to={page === 'home' ? '/' : `/${page}`} key={index} onClick={handleCloseNavMenu} sx={{color:'#fff',backgroundColor:"#333",p:2,"&.active": {color: "#1976d2"}}}>
                   <Typography sx={{textTransform:'uppercase',textAlign:'center'}}>{page}</Typography>
                 </MenuItem>
               ))}
@@ -75,7 +75,7 @@ const Nav = (props) => {
                   component={NavLink}
                   to={page === 'home' ? '/' : `/${page}`} // Careful here, the logic is simple: If its the home return to it else create the path
                   onClick={handleCloseNavMenu}
-                  sx={{ my: 2, mx:3, color:'#fff', display: 'block', "&.active": {color: "#bbdefb"}}}
+                  sx={{ my: 2, mx:3, color:'#fff', display: 'block', "&.active": {color: "#1976d2"}}}
                   >
                   {page}
                 </Button>

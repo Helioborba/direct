@@ -1,6 +1,7 @@
 import { useContext, useEffect, useRef } from "react";
 import {Box, Typography, Grid, Button} from "@mui/material";
 import { styled } from '@mui/material/styles';
+import banner from "../others/images/banner.jpg";
 import Nav from "../components/nav/nav.js";
 import { FormControl, TextField } from "@mui/material";
 import Message from '../context/message.js';
@@ -79,70 +80,90 @@ const Home = (props) => {
                     {/* Avatar and Navigation */}
                     <Grid container item direction="column" xs={2}>
                         {/* Avatar */}
-                        <Grid item display='flex' flexDirection='column' sx={{backgroundColor:"#666", display:"flex", justifyContent:'center', alignItems:'center'}} xs={3}> 
+                        <Grid item display='flex' flexDirection='column' sx={{backgroundColor:"#111", borderTopLeftRadius:{xs:0, lg:15}, display:"flex", justifyContent:'center', alignItems:'center'}} xs={3}> 
                             <Avatar   sx={{ width: '50%', height: '90%', fontSize:"5em" }}>S</Avatar>
-                            {/* <FormControl sx={{pt:5}} component="form" onSubmit={submitCity}>
-                                <TextField
-                                    id="inpuy-field-city"
-                                    inputRef={cityRef}
-                                    label="Add City"
-                                    defaultValue="Rome"
-                                    InputLabelProps={{
-                                        sx: { color: '#fff'}
-                                    }}
-                                    sx={{
-                                        '& fieldset': {
-                                            borderColor: 'white'
-                                        }
-                                    }}
-                                />
-                                <Button sx={{mt:2}} type="submit">Add</Button>
-                            </FormControl> */}
                         </Grid>
                         {/* Navi */}
-                        <Grid item display='flex' flexDirection='column' xs={9}  sx={{backgroundColor:"#333", display:"flex", justifyContent:'center', alignItems:'center'}}> 
-                            <Typography variant="span">Navigation</Typography>
+                        <Grid item display='flex' flexDirection='column' xs={9}  sx={{display:"flex", justifyContent:"flex-end", alignItems:'center', backgroundColor:"#111", borderBottomLeftRadius:{xs:0, lg:15}, p:5, boxShadow:'12px 0px 10px -3px rgba(10,10,10,0.2)'}}> 
+                            <Grid item>
+                                <Button sx={{':hover': {color:"white",  backgroundColor: `rgba(200,200,200,0.04)`}}}>
+                                    Go back
+                                </Button>
+                            </Grid>
                         </Grid>
                     </Grid>
-
+                    {/* backgroundImage: `url(${banner})`, */}
                     {/* Banner and Chat */}
                     <Grid container item direction="column" xs={10}>
                         {/* Banner */}
-                        <Grid item display='flex' flexDirection='column' xs={3}  sx={{backgroundColor:"#444", display:"flex", justifyContent:'center', alignItems:'center'}}> 
-                            <Typography variant="span">Banner</Typography>
+                        <Grid item display='flex' flexDirection='column' xs={3}  sx={{backgroundImage: `url(${banner})`, borderRadius:{xs:0, lg:3}, display:"flex", justifyContent:'center', alignItems:'center'}}> 
+                            <Typography></Typography>
                         </Grid>
-                        {/* Chat */}
-                        <Grid item container direction='column' xs={9} sx={{ display:"flex", paddingY: 6, paddingX: 10 }}> 
-                            <Grid item sx={{display:'flex', justifyContent:'flex-end'}}>
-                                <Box sx={{padding: 2, borderRadius:2, color:'#000', backgroundColor:"#bbdefb"}}>
-                                    <Typography variant="span">Hello sir</Typography>
+                        {/* Chat */} 
+                        {/* Just a template for now, but the idea is solid */}
+                        {/* Recall that theres a massive overflow problem here! need to implement the scroll down there  */}
+                        <Grid item container direction='column'  xs={9} sx={{ textAlign:"start", paddingY: 6, paddingX: 10, overflow:"hidden" }}> 
+                            <Grid item sx={{display:'flex',  width:"100%", justifyContent:'flex-end'}}>
+                                <Box sx={{position:"relative",  padding: 2, borderRadius:2, color:'#000', backgroundColor:"#bbdefb"}}>
+                                    <Avatar sx={{position:"absolute", right:-50, top:-20}}>S</Avatar>
+                                    <Typography>Hello sir</Typography>
                                 </Box>
                             </Grid>
-                            <Grid item sx={{display:'flex', justifyContent:'flex-end'}}>
-                                <Box sx={{mt:1, p: 2, borderRadius:2, color:'#000', backgroundColor:"#bbdefb"}}>
-                                    <Typography variant="span">How are you?</Typography>
+                            <Grid item sx={{display:'flex', width:"100%", justifyContent:'flex-end'}}>
+                                <Box sx={{position:"relative",mt:1, p: 2, borderRadius:2, color:'#000', maxWidth:"70%", backgroundColor:"#bbdefb"}}>
+                                    <Avatar sx={{position:"absolute", right:-50, top:-20}}>S</Avatar>
+                                    <Typography>How are you?</Typography>
                                 </Box>
                             </Grid>
-                            <Grid item sx={{ display:'flex', justifyContent:'baseline'}}>
-                                <Box sx={{padding: 2, borderRadius:2, color:'#000', backgroundColor:"#bbdefb"}}>
-                                    <Typography variant="span">Good, and you?</Typography>
+                            <Grid item sx={{ display:'flex', width:"100%", justifyContent:'baseline'}}>
+                                <Box sx={{position:"relative",padding: 2, borderRadius:2, color:'#000', maxWidth:"70%", backgroundColor:"#bbdefb"}}>
+                                    <Avatar sx={{position:"absolute", left:-50, top:-20}}>S</Avatar>
+                                    <Typography>Good, and you?</Typography>
                                 </Box>
                             </Grid>
-                            <Grid item sx={{display:'flex', justifyContent:'flex-end'}}>
-                                <Box sx={{mt:1, p: 2, borderRadius:2, color:'#000', backgroundColor:"#bbdefb"}}>
-                                    <Typography variant="span">All is good!</Typography>
+                            <Grid item sx={{display:'flex', width:"100%", justifyContent:'flex-end'}}>
+                                <Box sx={{position:"relative",mt:1, p: 2, borderRadius:2, color:'#000', maxWidth:"70%", backgroundColor:"#bbdefb"}}>
+                                    <Avatar sx={{position:"absolute", right:-50, top:-20}}>S</Avatar>
+                                    <Typography>All is good!</Typography>
                                 </Box>
                             </Grid>
-                            <Grid item sx={{display:'flex', justifyContent:'flex-end'}}>
-                                <Box sx={{mt:1, p: 2, borderRadius:2, color:'#000', backgroundColor:"#bbdefb"}}>
-                                    <Typography variant="span">Save for last friday thought</Typography>
+                            <Grid item sx={{display:'flex', width:"100%", justifyContent:'flex-end'}}>
+                                <Box sx={{position:"relative",mt:1, p: 2, borderRadius:2, color:'#000', maxWidth:"70%", backgroundColor:"#bbdefb"}}>
+                                    <Avatar sx={{position:"absolute", right:-50, top:-20}}>S</Avatar>
+                                    <Typography>save for last friday thought</Typography>
                                 </Box>
                             </Grid>
-                            <Grid item sx={{display:'flex', justifyContent:'flex-end'}}>
-                                <Box sx={{mt:1, p: 2, borderRadius:2, color:'#000', backgroundColor:"#bbdefb", maxWidth:"70%"}}>
-                                    <Typography variant="span">Had to go to the grocery store buy some beers, however because of some soccer game that happened, they did not have any at all! in the end I had to buy some coke cuz it was the only thing they still had</Typography>
+                            <Grid item sx={{ display:'flex', width:"100%", justifyContent:'flex-end'}}>
+                                <Box sx={{position:"relative",mt:1, p: 2, borderRadius:2, color:'#000', maxWidth:"70%", backgroundColor:"#bbdefb"}}>
+                                    <Avatar sx={{position:"absolute", right:-50, top:-20}}>S</Avatar>
+                                    <Typography>had to go to the grocery store buy some beer, however because of some soccer game that happened, they did not have any at all! in the end I had to buy some coke cuz it was the only thing they still had</Typography>
                                 </Box>
                             </Grid>
+                            <Grid item sx={{ display:'flex', width:"100%", justifyContent:'baseline'}}>
+                                <Box sx={{position:"relative",padding: 2, borderRadius:2, color:'#000', maxWidth:"70%", backgroundColor:"#bbdefb"}}>
+                                    <Avatar sx={{position:"absolute", left:-50, top:-20}}>S</Avatar>
+                                    <Typography>okay..?</Typography>
+                                </Box>
+                            </Grid>
+                            {/* <Grid item>
+                                <FormControl sx={{pt:5}} component="form" >
+                                    <TextField
+                                        id="inpuy-field-city"
+                                        inputRef={cityRef}
+                                        label="Add City"
+                                        defaultValue="Rome"
+                                        InputLabelProps={{
+                                            sx: { color: '#fff'}
+                                        }}
+                                        sx={{
+                                            '& fieldset': {
+                                                borderColor: 'white'
+                                            }
+                                        }}
+                                    />
+                                    <Button sx={{mt:2}} type="submit">Add</Button>
+                                </FormControl> 
+                            </Grid> */}
                         </Grid>
                     </Grid>
                 </Grid>
