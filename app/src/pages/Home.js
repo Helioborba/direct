@@ -72,11 +72,39 @@ const Home = (props) => {
     //     )
     // }
     //mt2
+    // Custom scrollbar
+    const scrollBar = {
+        /* width */
+        '::-webkit-scrollbar': {
+            width: '10px',
+            
+        },
+  
+        /* Track */
+        '::-webkit-scrollbar-track': {
+            boxShadow: 'inset 0 0 5px grey',
+            borderTopLeftRadius:{xs:0, lg:15},
+            borderBottomRightRadius:{xs:0, lg:15}
+            
+        },
+           
+        /* Handle */
+        '::-webkit-scrollbar-thumb': {
+            background: '#666',
+            borderTopLeftRadius:{xs:0, lg:15},
+            borderBottomRightRadius:{xs:0, lg:15}
+        },
+          
+        /* Handle on hover */
+        '::-webkit-scrollbar-thumb:hover': {
+            background: '#333'
+        }
+    }
     return(
         <Box sx={{width:"100vw", minHeight:"100vh", backgroundColor:"#555"}}>
             <Nav></Nav>
             <Box sx={{p:{xs:"5rem 0 5rem 0", lg:5}, display:'flex', justifyContent:'space-between', alignItems:'center'}}>
-                <Grid container direction="row" alignItems="stretch" sx={{backgroundColor:"#222",minHeight:"90vh", borderRadius:{xs:0, lg:3} }}>
+                <Grid container direction="row"  sx={{backgroundColor:"#222",  height:"80vh", borderRadius:{xs:0, lg:3} }}>
                     {/* Avatar and Navigation */}
                     <Grid container item direction="column" xs={2}>
                         {/* Avatar */}
@@ -102,68 +130,107 @@ const Home = (props) => {
                         {/* Chat */} 
                         {/* Just a template for now, but the idea is solid */}
                         {/* Recall that theres a massive overflow problem here! need to implement the scroll down there  */}
-                        <Grid item container direction='column'  xs={9} sx={{ textAlign:"start", paddingY: 6, paddingX: 10, overflow:"hidden" }}> 
-                            <Grid item sx={{display:'flex',  width:"100%", justifyContent:'flex-end'}}>
-                                <Box sx={{position:"relative",  padding: 2, borderRadius:2, color:'#000', backgroundColor:"#bbdefb"}}>
-                                    <Avatar sx={{position:"absolute", right:-50, top:-20}}>S</Avatar>
-                                    <Typography>Hello sir</Typography>
-                                </Box>
+                        <Grid item container direction='column' wrap='nowrap'  xs={9} sx={{ maxHeight:'70vh', overflow:"hidden" }}> 
+                            <Grid item container sx={{textAlign:"start", paddingY: 6, paddingX: 10, overflowY:'scroll', ...scrollBar}}>
+                                <Grid item sx={{display:'flex',  width:"100%", justifyContent:'flex-end'}}>
+                                    <Box sx={{position:"relative",  padding: 2, borderRadius:2, color:'#000', backgroundColor:"#bbdefb"}}>
+                                        <Avatar sx={{position:"absolute", right:-50, top:-20}}>S</Avatar>
+                                        <Typography>Hello sir</Typography>
+                                    </Box>
+                                </Grid>
+                                <Grid item sx={{display:'flex', width:"100%", justifyContent:'flex-end'}}>
+                                    <Box sx={{position:"relative",mt:1, p: 2, borderRadius:2, color:'#000', maxWidth:"70%", backgroundColor:"#bbdefb"}}>
+                                        <Avatar sx={{position:"absolute", right:-50, top:-20}}>S</Avatar>
+                                        <Typography>How are you?</Typography>
+                                    </Box>
+                                </Grid>
+                                <Grid item sx={{ display:'flex', width:"100%", justifyContent:'baseline'}}>
+                                    <Box sx={{position:"relative",padding: 2, borderRadius:2, color:'#000', maxWidth:"70%", backgroundColor:"#bbdefb"}}>
+                                        <Avatar sx={{position:"absolute", left:-50, top:-20}}>S</Avatar>
+                                        <Typography>Good, and you?</Typography>
+                                    </Box>
+                                </Grid>
+                                <Grid item sx={{display:'flex', width:"100%", justifyContent:'flex-end'}}>
+                                    <Box sx={{position:"relative", mt:1, p: 2, borderRadius:2, color:'#000', maxWidth:"70%", backgroundColor:"#bbdefb"}}>
+                                        <Avatar sx={{position:"absolute", right:-50, top:-20}}>S</Avatar>
+                                        <Typography>All is good!</Typography>
+                                    </Box>
+                                </Grid>
+                                <Grid item sx={{display:'flex', width:"100%", justifyContent:'flex-end'}}>
+                                    <Box sx={{position:"relative", mt:1, p: 2, borderRadius:2, color:'#000', maxWidth:"70%", backgroundColor:"#bbdefb"}}>
+                                        <Avatar sx={{position:"absolute", right:-50, top:-20}}>S</Avatar>
+                                        <Typography>save for last friday though</Typography>
+                                    </Box>
+                                </Grid>
+                                <Grid item sx={{ display:'flex', width:"100%", justifyContent:'flex-end'}}>
+                                    <Box sx={{position:"relative", mt:1, p: 2, borderRadius:2, color:'#000', maxWidth:"70%", backgroundColor:"#bbdefb"}}>
+                                        <Avatar sx={{position:"absolute", right:-50, top:-20}}>S</Avatar>
+                                        <Typography>had to go to the grocery store buy some beer, however because of some soccer game that happened, they did not have any at all! in the end I had to buy some coke cuz it was the only thing they still had</Typography>
+                                    </Box>
+                                </Grid>
+                                <Grid item sx={{ display:'flex', width:"100%", justifyContent:'flex-end'}}>
+                                    <Box sx={{position:"relative", mt:1, p: 2, borderRadius:2, color:'#000', maxWidth:"70%", backgroundColor:"#bbdefb"}}>
+                                        <Avatar sx={{position:"absolute", right:-50, top:-20}}>S</Avatar>
+                                        <Typography>had to go to the grocery store buy some beer, however because of some soccer game that happened, they did not have any at all! in the end I had to buy some coke cuz it was the only thing they still had</Typography>
+                                    </Box>
+                                </Grid>
+                                <Grid item sx={{ display:'flex', width:"100%", justifyContent:'flex-end'}}>
+                                    <Box sx={{position:"relative", mt:1, p: 2, borderRadius:2, color:'#000', maxWidth:"70%", backgroundColor:"#bbdefb"}}>
+                                        <Avatar sx={{position:"absolute", right:-50, top:-20}}>S</Avatar>
+                                        <Typography>had to go to the grocery store buy some beer, however because of some soccer game that happened, they did not have any at all! in the end I had to buy some coke cuz it was the only thing they still had</Typography>
+                                    </Box>
+                                </Grid>
+                                <Grid item sx={{ display:'flex', width:"100%", justifyContent:'flex-end'}}>
+                                    <Box sx={{position:"relative", mt:1, p: 2, borderRadius:2, color:'#000', maxWidth:"70%", backgroundColor:"#bbdefb"}}>
+                                        <Avatar sx={{position:"absolute", right:-50, top:-20}}>S</Avatar>
+                                        <Typography>had to go to the grocery store buy some beer, however because of some soccer game that happened, they did not have any at all! in the end I had to buy some coke cuz it was the only thing they still had</Typography>
+                                    </Box>
+                                </Grid>
+                                <Grid item sx={{ display:'flex', width:"100%", justifyContent:'flex-end'}}>
+                                    <Box sx={{position:"relative", mt:1, p: 2, borderRadius:2, color:'#000', maxWidth:"70%", backgroundColor:"#bbdefb"}}>
+                                        <Avatar sx={{position:"absolute", right:-50, top:-20}}>S</Avatar>
+                                        <Typography>had to go to the grocery store buy some beer, however because of some soccer game that happened, they did not have any at all! in the end I had to buy some coke cuz it was the only thing they still had</Typography>
+                                    </Box>
+                                </Grid>
+                                <Grid item sx={{ display:'flex', width:"100%", justifyContent:'flex-end'}}>
+                                    <Box sx={{position:"relative", mt:1, p: 2, borderRadius:2, color:'#000', maxWidth:"70%", backgroundColor:"#bbdefb"}}>
+                                        <Avatar sx={{position:"absolute", right:-50, top:-20}}>S</Avatar>
+                                        <Typography>had to go to the grocery store buy some beer, however because of some soccer game that happened, they did not have any at all! in the end I had to buy some coke cuz it was the only thing they still had</Typography>
+                                    </Box>
+                                </Grid>
+                                
+                                <Grid item sx={{ display:'flex', width:"100%", justifyContent:'baseline'}}>
+                                    <Box sx={{position:"relative", padding: 2, borderRadius:2, color:'#000', maxWidth:"70%", backgroundColor:"#bbdefb"}}>
+                                        <Avatar sx={{position:"absolute", left:-50, top:-20}}>S</Avatar>
+                                        <Typography>okay..?</Typography>
+                                    </Box>
+                                </Grid>
                             </Grid>
-                            <Grid item sx={{display:'flex', width:"100%", justifyContent:'flex-end'}}>
-                                <Box sx={{position:"relative",mt:1, p: 2, borderRadius:2, color:'#000', maxWidth:"70%", backgroundColor:"#bbdefb"}}>
-                                    <Avatar sx={{position:"absolute", right:-50, top:-20}}>S</Avatar>
-                                    <Typography>How are you?</Typography>
-                                </Box>
-                            </Grid>
-                            <Grid item sx={{ display:'flex', width:"100%", justifyContent:'baseline'}}>
-                                <Box sx={{position:"relative",padding: 2, borderRadius:2, color:'#000', maxWidth:"70%", backgroundColor:"#bbdefb"}}>
-                                    <Avatar sx={{position:"absolute", left:-50, top:-20}}>S</Avatar>
-                                    <Typography>Good, and you?</Typography>
-                                </Box>
-                            </Grid>
-                            <Grid item sx={{display:'flex', width:"100%", justifyContent:'flex-end'}}>
-                                <Box sx={{position:"relative",mt:1, p: 2, borderRadius:2, color:'#000', maxWidth:"70%", backgroundColor:"#bbdefb"}}>
-                                    <Avatar sx={{position:"absolute", right:-50, top:-20}}>S</Avatar>
-                                    <Typography>All is good!</Typography>
-                                </Box>
-                            </Grid>
-                            <Grid item sx={{display:'flex', width:"100%", justifyContent:'flex-end'}}>
-                                <Box sx={{position:"relative",mt:1, p: 2, borderRadius:2, color:'#000', maxWidth:"70%", backgroundColor:"#bbdefb"}}>
-                                    <Avatar sx={{position:"absolute", right:-50, top:-20}}>S</Avatar>
-                                    <Typography>save for last friday thought</Typography>
-                                </Box>
-                            </Grid>
-                            <Grid item sx={{ display:'flex', width:"100%", justifyContent:'flex-end'}}>
-                                <Box sx={{position:"relative",mt:1, p: 2, borderRadius:2, color:'#000', maxWidth:"70%", backgroundColor:"#bbdefb"}}>
-                                    <Avatar sx={{position:"absolute", right:-50, top:-20}}>S</Avatar>
-                                    <Typography>had to go to the grocery store buy some beer, however because of some soccer game that happened, they did not have any at all! in the end I had to buy some coke cuz it was the only thing they still had</Typography>
-                                </Box>
-                            </Grid>
-                            <Grid item sx={{ display:'flex', width:"100%", justifyContent:'baseline'}}>
-                                <Box sx={{position:"relative",padding: 2, borderRadius:2, color:'#000', maxWidth:"70%", backgroundColor:"#bbdefb"}}>
-                                    <Avatar sx={{position:"absolute", left:-50, top:-20}}>S</Avatar>
-                                    <Typography>okay..?</Typography>
-                                </Box>
-                            </Grid>
-                            {/* <Grid item>
-                                <FormControl sx={{pt:5}} component="form" >
-                                    <TextField
-                                        id="inpuy-field-city"
-                                        inputRef={cityRef}
-                                        label="Add City"
-                                        defaultValue="Rome"
-                                        InputLabelProps={{
-                                            sx: { color: '#fff'}
-                                        }}
-                                        sx={{
-                                            '& fieldset': {
-                                                borderColor: 'white'
-                                            }
-                                        }}
-                                    />
-                                    <Button sx={{mt:2}} type="submit">Add</Button>
+                            <Grid item sx={{display:'flex', justifyContent:'center', alignItems:'center', backgroundColor:'#333', p:5}}>
+                                <FormControl component="form" sx={{display:'flex', justifyContent:'center', alignItems:'center'}} >
+                                    <Grid container direction='row'>
+                                        <Grid item>
+                                            <TextField
+                                                id="inpuy-field-city"
+                                                inputRef={cityRef}
+                                                label="Chat"
+                                                defaultValue="Smth"
+                                                InputLabelProps={{
+                                                    sx: { color: '#fff'}
+                                                }}
+                                                sx={{
+                                                    '& fieldset': {
+                                                        borderColor: 'white'
+                                                    }
+                                                }}
+                                            />
+                                        </Grid>
+                                        <Grid item>
+                                            <Button sx={{mt:2}} type="submit">Send ></Button>
+                                        </Grid>
+                                    </Grid>
                                 </FormControl> 
-                            </Grid> */}
+                            </Grid>
                         </Grid>
                     </Grid>
                 </Grid>
