@@ -1,12 +1,14 @@
 import { useContext, useEffect, useRef } from "react";
-import {Box, Typography, Grid, Button} from "@mui/material";
+import {Box, Typography, Grid} from "@mui/material";
 import { styled } from '@mui/material/styles';
 import banner from "../others/images/banner.jpg";
 import Nav from "../components/nav/nav.js";
 import { FormControl, TextField } from "@mui/material";
 import Message from '../context/message.js';
 import {Avatar} from "@mui/material";
-
+import Button from "../components/UI/buttons/button";
+import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
+import SendIcon from '@mui/icons-material/Send';
 
 const Home = (props) => {
     // const ctxClock = useContext(ClockContext);
@@ -114,7 +116,7 @@ const Home = (props) => {
                         {/* Navi */}
                         <Grid item display='flex' flexDirection='column' xs={9}  sx={{display:"flex", justifyContent:"flex-end", alignItems:'center', backgroundColor:"#111", borderBottomLeftRadius:{xs:0, lg:15}, p:5, boxShadow:'12px 0px 10px -3px rgba(10,10,10,0.2)'}}> 
                             <Grid item>
-                                <Button sx={{':hover': {color:"white",  backgroundColor: `rgba(200,200,200,0.04)`}}}>
+                                <Button>
                                     Go back
                                 </Button>
                             </Grid>
@@ -206,27 +208,39 @@ const Home = (props) => {
                                     </Box>
                                 </Grid>
                             </Grid>
-                            <Grid item sx={{display:'flex', justifyContent:'center', alignItems:'center', backgroundColor:'#333', p:5}}>
-                                <FormControl component="form" sx={{display:'flex', justifyContent:'center', alignItems:'center'}} >
+                            <Grid item sx={{display:'flex', borderTop:"1px solid #333", justifyContent:'center', alignItems:'center', p:5}}>
+                                <FormControl component="form" sx={{width:"100%"}}>
                                     <Grid container direction='row'>
-                                        <Grid item>
+                                        <Grid item xs={1} display='flex' justifyContent='center' alignItems='center'>
+                                            <CreateNewFolderIcon sx={{width:60, height:60}}></CreateNewFolderIcon>
+                                        </Grid>
+                                        <Grid item xs={9}>
                                             <TextField
                                                 id="inpuy-field-city"
                                                 inputRef={cityRef}
-                                                label="Chat"
-                                                defaultValue="Smth"
+                                                fullWidth
+                                                placeholder={"Write your message"}
                                                 InputLabelProps={{
                                                     sx: { color: '#fff'}
                                                 }}
                                                 sx={{
+                                                    '& input': {
+                                                        color: '#fff'
+                                                    },
                                                     '& fieldset': {
-                                                        borderColor: 'white'
-                                                    }
+                                                        borderColor: '#fff'
+                                                    },
+                                                    '&:hover fieldset': {
+                                                        borderColor: (theme) => `${theme.palette.primary.main} !important`
+                                                    },
+                                                    '&.Mui-focused input': { // - Set the Input border when parent is focused 
+                                                        borderColor: '#fff !important',
+                                                    },
                                                 }}
                                             />
                                         </Grid>
-                                        <Grid item>
-                                            <Button sx={{mt:2}} type="submit">Send ></Button>
+                                        <Grid item xs={2} justifyContent='center'>
+                                            <Button sx={{mt:2}} type="submit"><Grid container><Grid item xs={10}>Send</Grid><Grid item xs={2}><SendIcon/></Grid></Grid></Button>
                                         </Grid>
                                     </Grid>
                                 </FormControl> 
