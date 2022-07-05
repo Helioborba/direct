@@ -1,15 +1,15 @@
 import { useContext, useEffect, useRef } from "react";
 import {Box, Typography, Grid} from "@mui/material";
+import Link from '@mui/material/Link';
 import { styled } from '@mui/material/styles';
 import banner from "../others/images/banner.jpg";
 import Nav from "../components/nav/nav.js";
-import { FormControl, TextField, IconButton } from "@mui/material";
+import { FormControl, TextField } from "@mui/material";
 import Message from '../context/message.js';
 import {Avatar} from "@mui/material";
 import Button from "../components/UI/buttons/button";
 import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
 import SendIcon from '@mui/icons-material/Send';
-import Input from "../components/form/input";
 
 const Home = (props) => {
     // const ctxClock = useContext(ClockContext);
@@ -20,30 +20,6 @@ const Home = (props) => {
     const canvasRef = useRef();
     ctxCanvas.canvasProvider = canvasRef;
     
-    // file input
-    const fileInput = useRef(null);
-
-    const handleClick = () => {
-        fileInput.current.click();
-    }
-
-    const handleFileChange = event => {
-        const data = event.target.value;
-        // fetch('/upload', {
-        //     method: 'POST', 
-        //     mode: 'cors',
-        //     cache: 'no-cache',
-        //     credentials: 'same-origin',
-        //     headers: {
-        //       'Content-Type': 'application/json'
-        //     },
-        //     redirect: 'follow',
-        //     referrerPolicy: 'no-referrer', 
-        //     body: JSON.stringify(data) 
-        // });
-        console.log(`Data sent.\n${data}`);
-    }
-
     // get the data from input of city
     // function submitCity(event) {
     //     event.preventDefault();
@@ -98,13 +74,8 @@ const Home = (props) => {
     //         </Box>
     //     )
     // }
-
-    // <IconButton component='span' for="myInputFile" sx={{display:'flex', justifyContent:'center', alignItems:'center', p:0, color:"#fff"}}>
-    //     <CreateNewFolderIcon sx={{width:60, height:60}}></CreateNewFolderIcon>
-    //     <Input type="file" name='myInputFile' id="myInputFile" sx={{display:'none'}}/>
-    // </IconButton>   
-
-    // Custom scrollbar, this should become a component in itself
+    //mt2
+    // Custom scrollbar
     const scrollBar = {
         /* width */
         '::-webkit-scrollbar': {
@@ -152,11 +123,12 @@ const Home = (props) => {
                             </Grid>
                         </Grid>
                     </Grid>
+                    {/* backgroundImage: `url(${banner})`, */}
                     {/* Banner and Chat */}
                     <Grid container item direction="column" xs={10}>
                         {/* Banner */}
                         <Grid item display='flex' flexDirection='column' xs={3}  sx={{backgroundImage: `url(${banner})`, borderRadius:{xs:0, lg:3}, display:"flex", justifyContent:'center', alignItems:'center'}}> 
-                            <Typography>Nova Otavian</Typography>
+                            <Typography></Typography>
                         </Grid>
                         {/* Chat */} 
                         {/* Just a template for now, but the idea is solid */}
@@ -229,6 +201,7 @@ const Home = (props) => {
                                         <Typography>had to go to the grocery store buy some beer, however because of some soccer game that happened, they did not have any at all! in the end I had to buy some coke cuz it was the only thing they still had</Typography>
                                     </Box>
                                 </Grid>
+                                
                                 <Grid item sx={{ display:'flex', width:"100%", justifyContent:'baseline'}}>
                                     <Box sx={{position:"relative", padding: 2, borderRadius:2, color:'#000', maxWidth:"70%", backgroundColor:"#bbdefb"}}>
                                         <Avatar sx={{position:"absolute", left:-50, top:-20}}>S</Avatar>
@@ -239,12 +212,10 @@ const Home = (props) => {
                             <Grid item sx={{display:'flex', borderTop:"1px solid #333", justifyContent:'center', alignItems:'center', p:5}}>
                                 <FormControl component="form" sx={{width:"100%"}}>
                                     <Grid container direction='row'>
-                                        <Grid item xs={1} display='flex' justifyContent='center' alignItems='center'>   
-                                            <IconButton component='button' onClick={() => handleClick()} sx={{display:'flex', justifyContent:'center', alignItems:'center', p:0, color:"#fff"}}>
+                                        <Grid item xs={1} display='flex' justifyContent='center' alignItems='center'>
+                                            {/* <Link component='a' href='/people'>
                                                 <CreateNewFolderIcon sx={{width:60, height:60}}></CreateNewFolderIcon>
-                                                <Input type="file" onChange={(e) => handleFileChange(e)} ref={fileInput} id="anex-chat-file" style={{display:'none'}}/>
-                                                <Input component='input' />
-                                            </IconButton>                               
+                                            </Link> */}
                                         </Grid>
                                         <Grid item xs={9}>
                                             <TextField
@@ -255,16 +226,11 @@ const Home = (props) => {
                                                 InputLabelProps={{
                                                     sx: { color: '#fff'}
                                                 }}
-                                              
                                                 sx={{
-                                                    input: { // set the input styles and autofill
-                                                        color: '#fff',
-                                                        "&:-webkit-autofill": {
-                                                          WebkitBoxShadow: "0 0 0 1000px #222 inset",
-                                                          WebkitTextFillColor: '#fff !important'
-                                                        }
+                                                    '& input': {
+                                                        color: '#fff'
                                                     },
-                                                    fieldset: {
+                                                    '& fieldset': {
                                                         borderColor: '#fff'
                                                     },
                                                     '&:hover fieldset': {
@@ -276,17 +242,8 @@ const Home = (props) => {
                                                 }}
                                             />
                                         </Grid>
-                                        <Grid item xs={2} sx={{display:'flex', justifyContent:'center', alignItems:'center', p:0}}>
-                                            <Button type="submit">
-                                                <Grid container sx={{display:'flex', justifyContent:'center', alignItems:'center', p:0}}>
-                                                    <Grid item xs={10} textAlign='center'>
-                                                        Send
-                                                    </Grid>
-                                                    <Grid item xs={2} textAlign='center'>
-                                                        <SendIcon/>
-                                                    </Grid>
-                                                </Grid>
-                                            </Button>
+                                        <Grid item xs={2} justifyContent='center'>
+                                            <Button sx={{mt:2}} type="submit"><Grid container><Grid item xs={10}>Send</Grid><Grid item xs={2}><SendIcon/></Grid></Grid></Button>
                                         </Grid>
                                     </Grid>
                                 </FormControl> 
