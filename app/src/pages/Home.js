@@ -16,7 +16,7 @@ const Home = (props) => {
     // const ctxNations = useContext(NationsContext);
     const ctxCanvas = useContext(Message);
 
-    const cityRef = useRef();
+    const chatField = useRef();
     const canvasRef = useRef();
     ctxCanvas.canvasProvider = canvasRef;
     
@@ -45,14 +45,24 @@ const Home = (props) => {
     }
 
     // get the data from input of city
-    // function submitCity(event) {
-    //     event.preventDefault();
-    //     const city = new City(cityRef.current.value);
-    //     city.createArmy();
-    //     ctxNations.nationsCurrentHandler([...ctxNations.nationsProvider,city]); // push the new city
-    //     cityRef.current.value = '';
-    //     drawOn(ctxNations.canvasNodes, canvasRef, city);
-    // }
+    function sendMessage(event) {
+        event.preventDefault();
+        const message = {message: chatField.current.value}
+        // fetch('/sendMessage', {
+        //     method: 'POST', 
+        //     mode: 'cors',
+        //     cache: 'no-cache',
+        //     credentials: 'same-origin',
+        //     headers: {
+        //       'Content-Type': 'application/json'
+        //     },
+        //     redirect: 'follow',
+        //     referrerPolicy: 'no-referrer', 
+        //     body: JSON.stringify(message) 
+        // });
+        console.log(message)
+        chatField.current.value = '';
+    }
     
     // used for the canvas draw and for each time the page goes to another one
     // Careful here, the marches are also drawn.
@@ -237,19 +247,18 @@ const Home = (props) => {
                                 </Grid>
                             </Grid>
                             <Grid item sx={{display:'flex', borderTop:"1px solid #333", justifyContent:'center', alignItems:'center', p:5}}>
-                                <FormControl component="form" sx={{width:"100%"}}>
+                                <FormControl component="form" onSubmit={sendMessage} sx={{width:"100%"}}>
                                     <Grid container direction='row'>
                                         <Grid item xs={1} display='flex' justifyContent='center' alignItems='center'>   
                                             <IconButton component='button' onClick={() => handleClick()} sx={{display:'flex', justifyContent:'center', alignItems:'center', p:0, color:"#fff"}}>
                                                 <CreateNewFolderIcon sx={{width:60, height:60}}></CreateNewFolderIcon>
                                                 <Input type="file" onChange={(e) => handleFileChange(e)} ref={fileInput} id="anex-chat-file" style={{display:'none'}}/>
-                                                <Input component='input' />
                                             </IconButton>                               
                                         </Grid>
                                         <Grid item xs={9}>
                                             <TextField
                                                 id="inpuy-field-city"
-                                                inputRef={cityRef}
+                                                inputRef={chatField}
                                                 fullWidth
                                                 placeholder={"Write your message"}
                                                 InputLabelProps={{
