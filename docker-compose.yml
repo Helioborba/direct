@@ -16,6 +16,7 @@ services:
 
     api:
         stdin_open: true
+       
         environment:
             - NODE_ENV=development
             - CHOKIDAR_USEPOLLING=true
@@ -37,6 +38,8 @@ services:
         depends_on: 
             - client
             - api
+        volumes:
+            - 'D:/workshop/direct/nginx/default_dev.conf:/etc/nginx/conf.d/default.conf'
     
     mysql_db:
         build:
