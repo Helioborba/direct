@@ -1,6 +1,5 @@
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect, useState, useRef } from "react";
 import {Box, Typography, Grid} from "@mui/material";
-import { styled } from '@mui/material/styles';
 import banner from "../others/images/banner.jpg";
 import Nav from "../components/nav/nav.js";
 import { FormControl, TextField, IconButton } from "@mui/material";
@@ -11,14 +10,19 @@ import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
 import SendIcon from '@mui/icons-material/Send';
 import Input from "../components/form/input";
 
-const Home = (props) => {
-    const ctxCanvas = useContext(Message);
+// Caixas do chat
+import ChatUserBox from "../components/chatBoxes/user";
+import ChatOthersBox from "../components/chatBoxes/others";
 
+const Home = (props) => {
+    const [connection] = useState(new WebSocket("ws://localhost:5000/ws"));
+    const [currentMessages, setCurrentMessages] = useState([]);
+    const [reload, setReload] = useState(false)
+    const ctxMessage = useContext(Message);
     const chatField = useRef();
-    const canvasRef = useRef();
-    ctxCanvas.canvasProvider = canvasRef;
-    
-    // file input
+
+   
+    // Preciso trabalhar no envio de imagens depois
     const fileInput = useRef(null);
 
     const handleClick = () => {
@@ -41,83 +45,74 @@ const Home = (props) => {
         // });
         console.log(`Data sent.\n${data}`);
     }
+    
+    // Principal: a cada mensagem recebida do WebSocket, adiciona ao contexto e ao estado normal
+    useEffect( () => {
+        const identifier = setTimeout( () => {
+            connection.onmessage = event => {
+                // O context tem todos os dados recebidos do WebSocket; eles são JSONs (em string) contendo a mensagem e o user
+                ctxMessage.messageProvider.push(JSON.parse(event.data)); // Transformar em object o json recebido
+                setReload(!reload)
 
-    // get the data from input of city
+                // Parece que é necessário limpar o ultimo estado?
+                // Na vdd, quando os dados são mudados dentro do useEffect, eles não trigam o re-render
+                setCurrentMessages([]);
+                setCurrentMessages(ctxMessage.messageProvider);
+            }
+        return () => {
+            clearTimeout(identifier);
+        };
+      })
+    },[reload,connection,ctxMessage.messageProvider,currentMessages])
+
+    // Roda apenas quando a pessoa troca a pagina, assim mantemos os dados da conversa
+    useEffect( () => {
+        const identifier = setTimeout( () => {
+            setCurrentMessages([]);
+            setCurrentMessages(ctxMessage.messageProvider);
+        return () => {
+            clearTimeout(identifier);
+        };
+      })
+    },[ctxMessage.messageProvider])
+
+    // Enviar pelo websocket os dados
     function sendMessage(event) {
         event.preventDefault();
-        const message = {message: chatField.current.value}
-        // fetch('/sendMessage', {
-        //     method: 'POST', 
-        //     mode: 'cors',
-        //     cache: 'no-cache',
-        //     credentials: 'same-origin',
-        //     headers: {
-        //       'Content-Type': 'application/json'
-        //     },
-        //     redirect: 'follow',
-        //     referrerPolicy: 'no-referrer', 
-        //     body: JSON.stringify(message) 
-        // });
-        console.log(message)
+        const message = {message: chatField.current.value, name: 'User'}; // 'User depois vai virar o id do usuario'
+        connection.send(JSON.stringify(message));
         chatField.current.value = '';
     }
     
-    // used for the canvas draw and for each time the page goes to another one
-    // Careful here, the marches are also drawn.
-    // useEffect( () => {
-    //     const identifier = setTimeout( () => {
-    //         // Its probably not a good idea to perform such a memory heavy operation here inside this use effect to get the nodes
-    //         ctxNations.canvasNodesCurrentHandler(draw(canvasRef,ctxNations.canvasNodes))
-    //         drawLine(canvasRef,ctxCanvas.currentAtMarch);
-    //         //drawLine(ctxCanvas.canvasProvider);
-    //         // draw canvas and create the nodes
-    //     return () => {
-    //         clearTimeout(identifier);
-    //     };
-    //   })
-    // },[])
    
-    // used for keeping track of the movements, based on the clock
-    // useEffect( () => {
-    //     const identifier = setTimeout( () => {
-    //         drawLine(canvasRef,ctxCanvas.currentAtMarch);
-    //     return () => {
-    //         clearTimeout(identifier);
-    //     };
-    //   })
-    // },[ctxClock.clockProvider])
+    const componenteDados = () => { 
+        // In case its still empty, this is a simple way of not breaking the app
+        // if (!currentMessages) { 
+        //     return ( 
+        //         [null]
+        //     )
+        // }
+    
+        return (            
+            currentMessages.map( (value, index) => {
+                if (value.name === "User") {
+                    return (
+                        <ChatUserBox key={index}>{value.message}</ChatUserBox>
+                    )
+                } else {
+                    return (
+                        <ChatOthersBox key={index}>{value.message}</ChatOthersBox>
+                    )
+                }
+            })
+        )
+    }
 
-    // const componenteDados = () => { 
-    //     // In case its still empty
-    //     if (!ctxClock.clockProvider) {
-    //         return ( 
-    //             <Box>
-    //                 <Typography>Month: </Typography> 
-    //                 <Typography>Day: </Typography> 
-    //                 <Typography>Year: </Typography> 
-    //             </Box>
-    //         )
-    //     }
-    //     return ( 
-    //         <Box>
-    //             <Typography>{`Month: ${ctxClock.clockProvider.monthName}`}</Typography> 
-    //             <Typography>{`Day: ${ctxClock.clockProvider.day}`}</Typography> 
-    //             <Typography>{`Year: ${ctxClock.clockProvider.year}`}</Typography> 
-    //         </Box>
-    //     )
-    // }
-
-    // <IconButton component='span' for="myInputFile" sx={{display:'flex', justifyContent:'center', alignItems:'center', p:0, color:"#fff"}}>
-    //     <CreateNewFolderIcon sx={{width:60, height:60}}></CreateNewFolderIcon>
-    //     <Input type="file" name='myInputFile' id="myInputFile" sx={{display:'none'}}/>
-    // </IconButton>   
-
-    // Custom scrollbar, this should become a component in itself
+    // scrollbar customizada; deve virar um component em si depois.
     const scrollBar = {
         /* width */
         '::-webkit-scrollbar': {
             width: '10px',
-            
         },
   
         /* Track */
@@ -125,7 +120,6 @@ const Home = (props) => {
             boxShadow: 'inset 0 0 5px grey',
             borderTopLeftRadius:{xs:0, lg:15},
             borderBottomRightRadius:{xs:0, lg:15}
-            
         },
            
         /* Handle */
@@ -145,6 +139,7 @@ const Home = (props) => {
             <Nav></Nav>
             <Box sx={{p:{xs:"5rem 0 5rem 0", lg:5}, display:'flex', justifyContent:'space-between', alignItems:'center'}}>
                 <Grid container direction="row"  sx={{backgroundColor:"#222",  height:"80vh", borderRadius:{xs:0, lg:3} }}>
+                    
                     {/* Avatar and Navigation */}
                     <Grid container item direction="column" xs={2}>
                         {/* Avatar */}
@@ -152,7 +147,7 @@ const Home = (props) => {
                             <Avatar sx={{ width: '50%', height: '90%', fontSize:"5em" }}>S</Avatar>
                         </Grid>
                         {/* Navi */}
-                        <Grid item display='flex' flexDirection='column' xs={9}  sx={{display:"flex", justifyContent:"flex-end", alignItems:'center', backgroundColor:"#111", borderBottomLeftRadius:{xs:0, lg:15}, p:5, boxShadow:'12px 0px 10px -3px rgba(10,10,10,0.2)'}}> 
+                        <Grid item display='flex' flexDirection='column' xs={9} sx={{display:"flex", justifyContent:"flex-end", alignItems:'center', backgroundColor:"#111", borderBottomLeftRadius:{xs:0, lg:15}, p:5, boxShadow:'12px 0px 10px -3px rgba(10,10,10,0.2)'}}> 
                             <Grid item>
                                 <Button>
                                     Go back
@@ -160,35 +155,18 @@ const Home = (props) => {
                             </Grid>
                         </Grid>
                     </Grid>
+                    
                     {/* Banner and Chat */}
                     <Grid container item direction="column" xs={10}>
                         {/* Banner */}
-                        <Grid item display='flex' flexDirection='column' xs={3}  sx={{backgroundImage: `url(${banner})`, borderRadius:{xs:0, lg:3}, display:"flex", justifyContent:'center', alignItems:'center'}}> 
+                        <Grid item display='flex' flexDirection='column' xs={3} sx={{backgroundImage: `url(${banner})`, borderRadius:{xs:0, lg:3}, display:"flex", justifyContent:'center', alignItems:'center'}}> 
                             <Typography>Nova Otavian</Typography>
                         </Grid>
                         {/* Chat */} 
-                        {/* Just a template for now, but the idea is solid */}
-                        {/* Recall that theres a massive overflow problem here! need to implement the scroll down there  */}
                         <Grid item container direction='column' wrap='nowrap'  xs={9} sx={{display:'flex', justifyContent:'space-between', maxHeight:'70vh', overflow:"hidden" }}> 
                             <Grid item container sx={{textAlign:"start", paddingY: 6, paddingX: 10, overflowY:'scroll', ...scrollBar}}>
-                                <Grid item sx={{display:'flex', width:"100%", justifyContent:'flex-end'}}>
-                                    <Box sx={{position:"relative",mt:1, p: 2, borderRadius:2, color:'#000', maxWidth:"70%", backgroundColor:"#bbdefb"}}>
-                                        <Avatar sx={{position:"absolute", right:-50, top:-20}}>S</Avatar>
-                                        <Typography>How are you?</Typography>
-                                    </Box>
-                                </Grid>
-                                <Grid item sx={{ display:'flex', width:"100%", justifyContent:'baseline'}}>
-                                    <Box sx={{position:"relative",padding: 2, borderRadius:2, color:'#000', maxWidth:"70%", backgroundColor:"#bbdefb"}}>
-                                        <Avatar sx={{position:"absolute", left:-50, top:-20}}>S</Avatar>
-                                        <Typography>Good, and you?</Typography>
-                                    </Box>
-                                </Grid>
-                                <Grid item sx={{ display:'flex', width:"100%", justifyContent:'flex-end'}}>
-                                    <Box sx={{position:"relative", mt:1, p: 2, borderRadius:2, color:'#000', maxWidth:"70%", backgroundColor:"#bbdefb"}}>
-                                        <Avatar sx={{position:"absolute", right:-50, top:-20}}>S</Avatar>
-                                        <Typography>had to go to the grocery store buy some beer, however because of some soccer game that happened, they did not have any at all! in the end I had to buy some coke cuz it was the only thing they still had</Typography>
-                                    </Box>
-                                </Grid>
+                                {/* HERE IS THE MAIN CHAT BOXES */}
+                                {componenteDados()}
                             </Grid>
                             <Grid item sx={{display:'flex', borderTop:"1px solid #333", justifyContent:'center', alignItems:'center', p:2}}>
                                 <FormControl component="form" onSubmit={sendMessage} sx={{width:"100%"}}>
@@ -229,7 +207,7 @@ const Home = (props) => {
                                             />
                                         </Grid>
                                         <Grid item xs={2} sx={{display:'flex', justifyContent:'center', alignItems:'center', p:0}}>
-                                            <Button type="submit">
+                                            <Button onClick={sendMessage}>
                                                 <Grid container sx={{display:'flex', justifyContent:'center', alignItems:'center', p:2}}>
                                                     <Grid item xs={10} sx={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
                                                         <Typography>Send</Typography>

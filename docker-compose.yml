@@ -16,7 +16,7 @@ services:
 
     api:
         stdin_open: true
-       
+        command: npm run start
         environment:
             - NODE_ENV=development
             - CHOKIDAR_USEPOLLING=true

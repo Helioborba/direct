@@ -52,7 +52,7 @@ wsServer.on("connection", function(ws) {
         wsServer.clients.forEach(function each(client) {
             if (client.readyState === WebSocket.OPEN) { 
               client.send(msg.toString());
-              console.log('received message');
+              console.log('received message',msg.toString());
             }
         })
     })

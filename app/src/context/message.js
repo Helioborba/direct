@@ -2,27 +2,27 @@
 import React, {useState} from 'react';
 
 /**
- * Holds the canvas context and the nodes of the current marches
+ * Context for the messages (JSX objects)
  * 
  */
 const Message = React.createContext({
-    canvasProvider: undefined,
-    CanvasCurrentHandler: () => {},
+    messageProvider: [],
+    messageCurrentHandler: () => {},
     marchNodes: [],
     marchNodesHandler: () => {},
     currentAtMarch: {},
     currentAtMarchHandler: () => {}
 });
 
-export const CanvasContextProvider = (props) => {
-    const [canvasCurrent,canvasCurrentHandler] = useState(undefined);
-    const [marchNodes,marchNodesHandler] = useState([]);
-    const [currentAtMarch,currentAtMarchHandler] = useState({});
+export const MessageContextProvider = (props) => {
+    const [messageCurrent, messageCurrentHandler] = useState([]);
+    const [marchNodes, marchNodesHandler] = useState([]);
+    const [currentAtMarch, currentAtMarchHandler] = useState({});
 
     return(
         <Message.Provider value={{
-            canvasProvider: canvasCurrent,
-            canvasCurrentHandler: canvasCurrentHandler,
+            messageProvider: messageCurrent,
+            messageCurrentHandler: messageCurrentHandler,
             marchNodes: marchNodes,
             marchNodesHandler: marchNodesHandler,
             currentAtMarch: currentAtMarch,
