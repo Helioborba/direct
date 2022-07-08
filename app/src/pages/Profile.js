@@ -1,8 +1,8 @@
-import { useContext } from "react";
+// import { useContext } from "react";
 import {Box, Grid, Typography} from "@mui/material";
 import Nav from "../components/nav/nav.js";
 
-const Log = (props) => {
+const Profile = (props) => {
     // const ctxNations = useContext(NationsContext);
 
     // for (const node of ctxNations.canvasNodes) {
@@ -48,6 +48,6 @@ const Log = (props) => {
     )
 }
 
-export default Log;
+export default Profile;
 
 

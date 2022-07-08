@@ -5,21 +5,20 @@ import {Route,Routes} from "react-router-dom";
 
 // Pages
 import Home from "../../pages/Home.js";
-import Log from "../../pages/Log.js";
+import Chat from "../../pages/Chat.js";
+import Search from "../../pages/Search.js";
+import Profile from "../../pages/Profile.js";
 import NotFound from "../../pages/NotFound.js";
 
-// Diary is the blog part
-// About for who I am (or who are we...)
-// Archive for the stuff by date
-// Snips for some random codes
 const Router = (props) => {
     return (
         <React.Fragment>
             <Box>
                 <Routes>
                     <Route path="/" element={<Home></Home>}/>
-                    {/* about...                     */}
-                    <Route path="/Log" element={<Log></Log>}/>
+                    <Route path="/chat" element={<Chat></Chat>}/>
+                    <Route path="/search" element={<Search></Search>}/>
+                    <Route path="/profile" element={<Profile></Profile>}/>
                     <Route path="/*" element={<NotFound></NotFound>}/>
                 </Routes>
             </Box>

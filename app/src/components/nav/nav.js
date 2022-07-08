@@ -12,7 +12,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { NavLink } from 'react-router-dom';
 const Nav = (props) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const pages = ['home','people']; // Used for the mapping of pages, you can also see that the Map will have a tenary for checking if its the / home
+  const pages = ['home','chat','search','profile']; // Used for the mapping of pages, you can also see that the Map will have a tenary for checking if its the / home
 
   // Open and close are for mobile view
   const handleOpenNavMenu = (event) => {
@@ -60,7 +60,7 @@ const Nav = (props) => {
               }}
             >
               {pages.map((page,index) => (
-                <MenuItem component={NavLink} to={page === 'home' ? '/' : `/${page}`} key={index} onClick={handleCloseNavMenu} sx={{color:'#fff',backgroundColor:"#333",p:2,"&.active": {color: "# "}}}>
+                <MenuItem component={NavLink} to={page === 'home' ? '/' : `/${page}`} key={index} onClick={handleCloseNavMenu} sx={{color:'#fff', backgroundColor:"#333", p:2, "&.active": {color: "# "}}}>
                   <Typography sx={{textTransform:'uppercase',textAlign:'center'}}>{page}</Typography>
                 </MenuItem>
               ))}

@@ -2,7 +2,7 @@
 import {Box, Grid, Typography} from "@mui/material";
 import Nav from "../components/nav/nav.js";
 
-const Log = (props) => {
+const Search = (props) => {
     // const ctxNations = useContext(NationsContext);
 
     // for (const node of ctxNations.canvasNodes) {
@@ -30,7 +30,7 @@ const Log = (props) => {
 
     // }
     function render() {
-        return (<p>nothing here </p>)
+        return (<Typography>Nothing Here</Typography>)
     }
 
     return(
@@ -48,6 +48,6 @@ const Log = (props) => {
     )
 }
 
-export default Log;
+export default Search;
 
 
