@@ -7,7 +7,11 @@ WORKDIR /app
 
 # Copy first the package json, else it will rerun ALL the installs, bad idea
 COPY ./package.json ./
-RUN npm install
+RUN npm install 
+
+# This step is only to fix the dependency in react-spring animations
+RUN npm install react-spring --legacy-peer-deps 
+
 COPY ./ ./
 RUN npm run build 
 

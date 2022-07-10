@@ -63,18 +63,7 @@ const Chat = (props) => {
             clearTimeout(identifier);
         };
       })
-    },[reload, connection, ctxMessage.messageProvider, currentMessages])
-
-    // Roda apenas quando a pessoa troca a pagina, assim mantemos os dados da conversa
-    useEffect( () => {
-        const identifier = setTimeout( () => {
-            setCurrentMessages([]);
-            setCurrentMessages(ctxMessage.messageProvider);
-        return () => {
-            clearTimeout(identifier);
-        };
-      })
-    },[ctxMessage.messageProvider])
+    },[reload, connection, ctxMessage.messageProvider, currentMessages])     
 
     // Enviar pelo websocket os dados
     function sendMessage(event) {
