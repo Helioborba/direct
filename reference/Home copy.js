@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState, useRef } from "react";
 import {Box, Typography, Grid} from "@mui/material";
-import Nav from "../components/nav/nav.js";
+import Nav from "../app/src/components/nav/nav.js";
 import {Avatar} from "@mui/material";
 import { useSpring, animated } from 'react-spring'
-import Button from "../components/UI/buttons/button.js";
+import * as easings from 'd3-ease';
 // Problema com o SVG: Ele é grande demais e esta ofuscando a nav 
 const Home = (props) => {
     
@@ -13,10 +13,10 @@ const Home = (props) => {
         const { x } = useSpring({
             reset: true,
             reverse: flip,
-            from: { x: 3 },
+            from: { x: 0 },
             x: 1,
             delay: 1000,
-            config: { frequency:2},
+            config: {friction:200,tension:180},
             onRest: () => {
                 setFlip(!flip)
             },
@@ -32,23 +32,29 @@ const Home = (props) => {
         //     //config: config.molasses,
         //     onRest: () => setPathOpacity(!pathOpacity),
         // })
-        // function trig(x) {
-        //     x.from(1200)
-        //     x.to(x => (1 - x) * 1195)
-        // }
+
         return (
           <animated.svg
             style={{overflow:'visible', position:"absolute", top:290, width: 1200, height: 1 }}
+            
             strokeWidth="2"
+            
             stroke="rgb(255, 30, 171)"
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeDasharray={1200}
             strokeDashoffset={
-               x.to(x => (1 - x) * 1195) 
+                flip ? x.to(x => (1 - x) * 1195) : x.to(x => (1 - x) * 1195)
             }
             >
-            <path d="M 0 0 q 600 100 1200 0" style={{stroke:'#1976d2', fill:"#222", fillOpacity:"0",  strokeWidth:5}} />
+            <path d="M 0 0 q 600 100 1200 0" style={{stroke:'blue', fill:"#222", fillOpacity:"0",  strokeWidth:5}} />
+            <g stroke="black" strokeWidth="3" fill="red">
+                <circle id="P-0-S" cx="0" cy="0" r="3" />
+                <circle id="P-1" cx="300" cy="37" r="3" />
+                <circle id="P-2-M" cx="600" cy="50" r="3" />
+                <circle id="P-3" cx="900" cy="37" r="3" />
+                <circle id="P-4-E" cx="1200" cy="0" r="3" />
+            </g>
           </animated.svg>
         )
     }
@@ -75,22 +81,19 @@ const Home = (props) => {
                         <Typography variant='h1'>Welcome to Direct</Typography>
                         {SVG()}
                     </Grid>
-                    <Grid item container xs={7} sx={{display:'flex', justifyContent:"space-between", p:5, alignItems:"center"}}>
-                        <Grid item  sx={{display:'flex', flexDirection:"column", justifyContent:"start", alignItems:"center"}}>
-                            <Typography variant="h2">What is Direct?</Typography>
-                            <Typography variant="p" sx={{fontSize:'1.2em'}}>Direct is a chat app built around the user, with the user in mind.</Typography>
-                            <Typography variant="p">Talk with friends, chat in groups, send funny images or work sheets to colleagues, find a group or a topic in rise.</Typography>
-                            <Typography>Everything you need, in one place.</Typography>
-                            <Button>Join Direct</Button>
-                        </Grid>
+                    <Grid item xs={7} sx={{display:'flex', justifyContent:"space-between", alignItems:"center"}}>
+                        <Avatar>S</Avatar>
+                        <Avatar>S</Avatar>
+                        <Avatar>S</Avatar>
+                        <Avatar>S</Avatar>
+                        <Avatar>S</Avatar>
                     </Grid>
-                    <Grid item container xs={2} sx={{display:'flex', justifyContent:"end", p:5, alignItems:"center"}}>
-                        <Grid item sx={{display:'flex', flexDirection:"column", justifyContent:"center", alignItems:"center"}}>
-                            <Typography variant="h2">One word of Direct</Typography>
-                            <Typography variant="p">We care for your personal data</Typography>
-                            <Typography variant="p">We care to make the userr find what he likes</Typography>
-                            <Typography variant="p">We care to make the experience of enjoying a chat multinational</Typography>
-                        </Grid>
+                    <Grid item xs={2} sx={{display:'flex', justifyContent:"space-between", alignItems:"center"}}>
+                        <Avatar>S</Avatar>
+                        <Avatar>S</Avatar>
+                        <Avatar>S</Avatar>
+                        <Avatar>S</Avatar>
+                        <Avatar>S</Avatar>
                     </Grid>
                 </Grid>
             </Box>
