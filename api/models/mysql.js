@@ -1,15 +1,20 @@
 import db from '../connections/my-con.js';
 
-// retorna o objeto da conexao para execultar queries
-export default class Create {
-    constructor(title, content) {
-        this.title = title;
-        this.content = content;
+/**
+ *   Object containing the bridge for the queries
+ *   For post use addUser().
+ *   For get use fetchAll().
+ * */
+export default class UserObject {
+    constructor(username, email, password) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
     }
 
-    save() {
+    addUser() {
         return db.execute(
-            'INSERT INTO tester (title, content) VALUES (?, ?)', [this.title, this.content]
+            'INSERT INTO users (username, email, password) VALUES (?, ?, ?)', [this.username, this.email, this.password]
         );
     }
 

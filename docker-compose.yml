@@ -48,10 +48,11 @@ services:
         ports:
             - 3306:3306
         volumes:
-            - ./mysql/Dump20220503.sql:/docker-entrypoint-initdb.d/Dump20220503.sql
-
-    # adminer:
-    #     image: adminer
-    #     restart: always
-    #     ports:
-    #     - 1000:8080
+            - ./mysql/DumpAdminer.sql:/docker-entrypoint-initdb.d/DumpAdminer.sql
+        environment:
+            - MYSQL_ROOT_PASSWORD=root
+    adminer:
+        image: adminer
+        restart: always
+        ports:
+        - 1000:8080

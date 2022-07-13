@@ -32,9 +32,10 @@ const Modal = (props) => {
     event.preventDefault();
 
     // The data
-    const userData = { username: usernameField.current.value, email: emailField.current.value, password: passwordField.current.value,};
+    const userData = { data : { username: usernameField.current.value, email: emailField.current.value, password: passwordField.current.value} };
     
-    fetch('/aoi/new_user', {
+    console.log(userData)
+    fetch('/api/sys/new_user', {
         method: 'POST', 
         mode: 'cors',
         cache: 'no-cache',
