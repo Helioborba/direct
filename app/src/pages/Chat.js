@@ -168,7 +168,7 @@ const Chat = (props) => {
                                         </Grid>
                                         <Grid item xs={9}>
                                             <TextField
-                                                id="inpuy-field-city"
+                                                id="input-field-chat"
                                                 inputRef={chatField}
                                                 fullWidth
                                                 placeholder={"Write your message"}
@@ -196,7 +196,7 @@ const Chat = (props) => {
                                             />
                                         </Grid>
                                         <Grid item xs={2} sx={{display:'flex', justifyContent:'center', alignItems:'center', p:0}}>
-                                            <Button onClick={sendMessage}>
+                                            <Button type={'submit'}>
                                                 <Grid container sx={{display:'flex', justifyContent:'center', alignItems:'center', p:2}}>
                                                     <Grid item xs={10} sx={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
                                                         <Typography>Send</Typography>

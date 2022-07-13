@@ -12,7 +12,7 @@ import Modal from "../components/modals/modal.js";
 const Home = (props) => {
     const [open, setOpen] = useState(false);
 
-    function showModal() {
+    function onClose() {
         setOpen(!open);
     }
 
@@ -55,28 +55,13 @@ const Home = (props) => {
       })
     },[])
 
-
+    // Cut the border later with > border-image: linear-gradient(to right, #000 50%, transparent 50%) 100% 1;
     return(
         <Box sx={{width:"100vw", minHeight:"100vh", backgroundColor:"#333"}}>
-            {/* <ModalMUI
-                open={open}
-                onClose={showModal}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-            > */}
-                {/* <Box sx={style}>
-                    <Typography id="modal-modal-title" variant="h6" component="h2">
-                        Text in a modal
-                    </Typography>
-                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                        Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-                    </Typography>
-                </Box>
-            </ModalMUI> */}
-            <Modal open={open} showModal={showModal}></Modal>
+            <Modal open={open} onClose={onClose}></Modal>
             <Nav></Nav>
             <Box  sx={{p:{xs:"5rem 0 5rem 0", lg:2}, display:'flex', justifyContent:'space-between', alignItems:'center'}}>
-                <Grid container direction="column" wrap="nowrap"  sx={{backgroundColor:"#222",  minHeight:"88vh", pt:2, borderRadius:{xs:0, lg:3} }}>
+                <Grid container direction="column" wrap="nowrap"  sx={{backgroundColor:"#222",  minHeight:"88vh", pt:2, mr:2, borderRadius:{xs:0, lg:3}, border:"4px solid #1976d2" }}>
                     <Grid item xs={12} sx={{ position:'relative', display:'flex', flexDirection:"column", justifyContent:"center", alignItems:"center"}} >
                         {/* <Avatar>S</Avatar>
                         <Avatar>S</Avatar>
@@ -117,7 +102,7 @@ const Home = (props) => {
                             <Typography variant="h2">Ready to be Direct?</Typography>
                             <Typography variant="p" sx={{fontSize:'1.2em'}}> Various groups awaits you! come and chat with everyone, even the creators of Direct</Typography>
                             <Typography>Everything you need, in one place.</Typography>
-                            <Button color={'#1976d2'} onClick={() => showModal()}>Join Direct</Button>
+                            <Button color={'#1976d2'} onClick={() => onClose()}>Join Direct</Button>
                         </Grid>
                     </Grid>
                 </Grid>

@@ -28,6 +28,12 @@ export async function postGres(req, res, next) {
 }
 
 
+export async function postNewUser(req, res, next) { 
+    const gp = req.body.indice;
+    res.send({ message: 'Data received successfully'});
+    console.log("request post:", gp);
+}
+
 export async function getGres(req, res, next) { // Pega todos os valores na linha
     // This sleep is just for checking the loading page in the app
     // await sleep(2000); // dont forget to remove this later!
