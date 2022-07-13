@@ -20,7 +20,7 @@ const style = {
 
 
 // What should be done: have a alert play after closing if the operation went alright
-const Modal = (props) => {
+const ModalAccount = (props) => {
   // Refs are used for the form inputs
   const usernameField = useRef();
   const emailField = useRef();
@@ -226,4 +226,4 @@ const Modal = (props) => {
   );
 }
 
-export default Modal;
+export default ModalAccount;

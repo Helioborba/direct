@@ -20,6 +20,7 @@ export async function postNewUser(req, res, next) {
     .catch( err => console.log(err));
 }
 
+
 export async function getUserData(req, res, next) { // Pega todos os valores na linha
     // This sleep is just for checking the loading page in the app
     // await sleep(2000); // dont forget to remove this later!

@@ -1,13 +1,11 @@
 import { useContext, useEffect, useState, useRef } from "react";
 import {Box, Typography, Grid} from "@mui/material";
 import Nav from "../components/nav/nav.js";
-import {Avatar} from "@mui/material";
 import { useSpring, animated } from 'react-spring';
 import ChatIcon from '@mui/icons-material/Chat';
 import SendIcon from '@mui/icons-material/Send';
 import Button from "../components/UI/buttons/button.js";
-import ModalMUI from '@mui/material/Modal';
-import Modal from "../components/modals/modal.js";
+import ModalAccount from "../components/modals/modalAccount.js";
 // Problema com o SVG: Ele é grande demais e esta ofuscando a nav 
 const Home = (props) => {
     const [open, setOpen] = useState(false);
@@ -58,10 +56,10 @@ const Home = (props) => {
     // Cut the border later with > border-image: linear-gradient(to right, #000 50%, transparent 50%) 100% 1;
     return(
         <Box sx={{width:"100vw", minHeight:"100vh", backgroundColor:"#333"}}>
-            <Modal open={open} onClose={onClose}></Modal>
+            <ModalAccount open={open} onClose={onClose}/>
             <Nav></Nav>
             <Box  sx={{p:{xs:"5rem 0 5rem 0", lg:2}, display:'flex', justifyContent:'space-between', alignItems:'center'}}>
-                <Grid container direction="column" wrap="nowrap"  sx={{backgroundColor:"#222",  minHeight:"88vh", pt:2, mr:2, borderRadius:{xs:0, lg:3}, border:"4px solid #1976d2" }}>
+                <Grid container direction="column" wrap="nowrap"  sx={{backgroundColor:"#222",  minHeight:"88vh", pt:2, pb:10, mr:2, borderRadius:{xs:0, lg:3}, border:"4px solid #1976d2" }}>
                     <Grid item xs={12} sx={{ position:'relative', display:'flex', flexDirection:"column", justifyContent:"center", alignItems:"center"}} >
                         {/* <Avatar>S</Avatar>
                         <Avatar>S</Avatar>
@@ -102,7 +100,7 @@ const Home = (props) => {
                             <Typography variant="h2">Ready to be Direct?</Typography>
                             <Typography variant="p" sx={{fontSize:'1.2em'}}> Various groups awaits you! come and chat with everyone, even the creators of Direct</Typography>
                             <Typography>Everything you need, in one place.</Typography>
-                            <Button color={'#1976d2'} onClick={() => onClose()}>Join Direct</Button>
+                            <Button color={'#1976d2'} sx={{fontSize:'1.4em'}} onClick={() => onClose()}>Join Direct</Button>
                         </Grid>
                     </Grid>
                 </Grid>
