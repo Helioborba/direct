@@ -1,10 +1,10 @@
 import { Router } from 'express';
-import { getUserData, postNewUser } from '../controllers/api-cons.js';
+import { postNewUser, postFindUser } from '../controllers/api-cons.js';
 
 const router = Router();
 
 // Operations with direct database
-router.get("/get_user", getUserData); // GET
 router.post("/new_user", postNewUser)
+router.post("/findUser", postFindUser)
 
 export default router;

@@ -34,7 +34,7 @@ const ModalLogin = (props) => {
     // The data
     const userData = { data : { username: usernameField.current.value, password: passwordField.current.value} };
     
-    fetch('/api/sys/login', {
+    fetch('/api/sys/findUser', {
         method: 'POST', 
         mode: 'cors',
         cache: 'no-cache',

@@ -1,5 +1,5 @@
 // mysql
 export const myHost = "mysql_db";
-export const myUser = "user";
+export const myUser = "root";
 export const myDatabase = "direct";
-export const myPassword = "password";
+export const myPassword = "root";

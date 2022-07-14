@@ -11,27 +11,32 @@ function sleep(ms) {
 export async function postNewUser(req, res, next) { 
     const data = req.body.data;
     console.log("data received: ", data);
+
+    // Query stage
     const User = new UserObject(data.username, data.email, data.password);
-    User
-    .addUser()
+    User.addUser()
     .then( (data) => {
         res.send({ message: 'Added Successfully'});
     })
     .catch( err => console.log(err));
 }
 
+export async function postFindUser(req, res, next) { 
+    const data = req.body.data;
+    console.log("data: ", data);
 
-export async function getUserData(req, res, next) { // Pega todos os valores na linha
-    // This sleep is just for checking the loading page in the app
-    // await sleep(2000); // dont forget to remove this later!
-    
-    res.header('Access-Control-Allow-Origin', req.headers.origin);
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    UserObject
-    .allValues()
+    // Query stage
+    UserObject.findUser(data.username, data.password)
     .then( (data) => {
-        data.rows.sort( (a, b) => a.id - b.id) // takes 2 rows per sort, then check its ID for sorting 
-        res.send( {posts:data.rows});
+        if( data[0] === undefined ) {
+            res.send({ message: 'Login Failed', error: true});
+        } else {
+            if(data[0][0]?.username) {
+                res.send({ message: 'Login Success', error: false});
+            } else {
+                res.send({ message: 'Login Failed', error: true});
+            }
+        }
     })
-    .catch( err => console.log(err));
+    .catch( err => console.log(err) );
 }

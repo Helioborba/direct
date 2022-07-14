@@ -25,10 +25,9 @@ const Nav = (props) => {
     setOpen(!open);
   }
 
-  // Can't separate those functions, that's why we still got the onClose up there
+  // Can't join those functions, that's why we still got the onClose up there
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
-    setOpen(!open);
   };
 
   return (
@@ -74,6 +73,9 @@ const Nav = (props) => {
                     <Typography sx={{textTransform:'uppercase',textAlign:'center'}}>{page}</Typography>
                   </MenuItem>
                 ))}
+                <MenuItem  key={'r-9'} onClick={ () => {handleCloseNavMenu(); onClose() } } sx={{color:'#fff', backgroundColor:"#333", p:2, "&.active": {color: "# "}}}>
+                  <Typography sx={{textTransform:'uppercase',textAlign:'center'}}>Login</Typography>
+                </MenuItem>
               </Menu>
             </Box>
             {/* Could also map this later just like above for the pages */}
@@ -94,7 +96,7 @@ const Nav = (props) => {
               {/* This one is out of the group because it's not actually a route */}
               <Box key={'0-end'}>
                   <Button
-                    onClick={handleCloseNavMenu}
+                    onClick={ () => {handleCloseNavMenu(); onClose() } }
                     sx={{ my: 2, mx:3, color:'#fff', display: 'block', "&.active": {color: "#1976d2"}}}
                   >
                     Login
