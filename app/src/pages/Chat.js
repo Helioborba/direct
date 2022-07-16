@@ -20,7 +20,7 @@ const Chat = (props) => {
     const [reload, setReload] = useState(false)
     const ctxMessage = useContext(Message);
     const chatField = useRef();
-
+    console.log(ctxMessage.userProvider);
    
     // Preciso trabalhar no envio de imagens depois
     const fileInput = useRef(null);
@@ -149,7 +149,7 @@ const Chat = (props) => {
                     <Grid container item direction="column" xs={10}>
                         {/* Banner */}
                         <Grid item display='flex' flexDirection='column' xs={3} sx={{backgroundImage: `url(${banner})`, borderRadius:{xs:0, lg:3}, display:"flex", justifyContent:'center', alignItems:'center'}}> 
-                            <Typography>Nova Otavian</Typography>
+                            <Typography>{ctxMessage.userProvider?.name}</Typography>
                         </Grid>
                         {/* Chat */} 
                         <Grid item container direction='column' wrap='nowrap'  xs={9} sx={{display:'flex', justifyContent:'space-between', maxHeight:'70vh', overflow:"hidden" }}> 

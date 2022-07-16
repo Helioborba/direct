@@ -31,10 +31,12 @@ export async function postFindUser(req, res, next) {
         if( data[0] === undefined ) {
             res.send({ message: 'Login Failed', error: true});
         } else {
-            if(data[0][0]?.username) {
-                res.send({ message: 'Login Success', error: false});
+            const parsedData = data[0][0] || null; // get the data inside the row
+            // Check if the row returned data or not
+            if(parsedData?.username) {
+                res.send({ logged: true, message: 'Login Success', id: parsedData.id, name: parsedData.username, error: false});
             } else {
-                res.send({ message: 'Login Failed', error: true});
+                res.send({ logged: false, message: 'Login Failed', error: true}); // Tell the client the login attempt failed
             }
         }
     })

@@ -8,25 +8,19 @@ import React, {useState} from 'react';
 const Message = React.createContext({
     messageProvider: [],
     messageCurrentHandler: () => {},
-    marchNodes: [],
-    marchNodesHandler: () => {},
-    currentAtMarch: {},
-    currentAtMarchHandler: () => {}
+    userProvider: {},
+    userHandler: () => {}
 });
 
 export const MessageContextProvider = (props) => {
     const [messageCurrent, messageCurrentHandler] = useState([]);
-    const [marchNodes, marchNodesHandler] = useState([]);
-    const [currentAtMarch, currentAtMarchHandler] = useState({});
-
+    const [user, userHandler] = useState({logged: false});
     return(
         <Message.Provider value={{
             messageProvider: messageCurrent,
             messageCurrentHandler: messageCurrentHandler,
-            marchNodes: marchNodes,
-            marchNodesHandler: marchNodesHandler,
-            currentAtMarch: currentAtMarch,
-            currentAtMarchHandler: currentAtMarchHandler
+            userProvider: user,
+            userHandler: userHandler
         }}>
         {props.children}
         </Message.Provider>

@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography';
 import ModalMUI from '@mui/material/Modal';
 import { FormControl, TextField, Grid } from "@mui/material";
 import Button from "../UI/buttons/button";
+import Message from '../../context/message.js';
 
 const style = {
   position: 'absolute',
@@ -23,42 +24,44 @@ const style = {
 // What should be done: have a alert play after closing if the operation went alright
 // Welcome back! we have been waiting for you 
 const ModalLogin = (props) => {
-  // Refs are used for the form inputs
-  const usernameField = useRef();
-  const passwordField = useRef();
+    // Refs are used for the form inputs
+    const usernameField = useRef();
+    const passwordField = useRef();
+    const loginContext = useContext(Message);
+        
+    // Send data to server
+    function sendLoginRequest(event) {
+        event.preventDefault();
 
-  // Send data to server
-  function sendLoginRequest(event) {
-    event.preventDefault();
+        // The data
+        const userData = { data : { username: usernameField.current.value, password: passwordField.current.value} };
+        
+        fetch('/api/sys/findUser', {
+            method: 'POST', 
+            mode: 'cors',
+            cache: 'no-cache',
+            credentials: 'same-origin',
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            redirect: 'follow',
+            referrerPolicy: 'no-referrer', 
+            body: JSON.stringify(userData) 
+        })
+        .then(res => res.json())
+        .then(data => {
+            loginContext.userHandler(data)
+            console.log(data);
+        })
+        .catch( err => console.log(err));
 
-    // The data
-    const userData = { data : { username: usernameField.current.value, password: passwordField.current.value} };
-    
-    fetch('/api/sys/findUser', {
-        method: 'POST', 
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        redirect: 'follow',
-        referrerPolicy: 'no-referrer', 
-        body: JSON.stringify(userData) 
-    })
-    .then(res => res.json())
-    .then(data => {
-        console.log(data);
-    })
-    .catch( err => console.log(err));
-
-    // Clear the fields
-    usernameField.current.value = '';
-    passwordField.current.value = '';
-    
-    // Close modal
-    props.onClose();
-  }
+        // Clear the fields
+        usernameField.current.value = '';
+        passwordField.current.value = '';
+        
+        // Close modal
+        props.onClose();
+    }
 
   return (
     <React.Fragment>

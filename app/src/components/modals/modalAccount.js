@@ -33,8 +33,7 @@ const ModalAccount = (props) => {
 
     // The data
     const userData = { data : { username: usernameField.current.value, email: emailField.current.value, password: passwordField.current.value} };
-    
-    console.log(userData)
+
     fetch('/api/sys/new_user', {
         method: 'POST', 
         mode: 'cors',

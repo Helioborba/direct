@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -11,10 +11,12 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import { NavLink } from 'react-router-dom';
 import ModalLogin from '../modals/modalLogin';
+import Message from '../../context/message';
 const Nav = (props) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [open, setOpen] = useState(false);
   const pages = ['home','chat','search','profile']; // Used for the mapping of pages, you can also see that the Map will have a tenary for checking if its the / home
+  const ctxLogin = useContext(Message);
 
   // Open and close are for mobile view
   const handleOpenNavMenu = (event) => {
@@ -25,11 +27,59 @@ const Nav = (props) => {
     setOpen(!open);
   }
 
+  // Used for the logout
+  const handleLogout = (event) => {
+    ctxLogin.userHandler({logged:false})
+    // Need to add a load state here
+  };
+
   // Can't join those functions, that's why we still got the onClose up there
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
 
+  function renderLogin() {
+    return (
+      <MenuItem  key={'r-9'} onClick={ () => {handleCloseNavMenu(); onClose() } } sx={{color:'#fff', backgroundColor:"#333", p:2, "&.active": {color: "#1976d2"}}}>
+        <Typography sx={{textTransform:'uppercase',textAlign:'center'}}>Login</Typography>
+      </MenuItem>
+    )
+  }
+
+  function renderLogout() {
+    return (
+      <MenuItem  key={'r-9'} onClick={ () => {handleCloseNavMenu(); handleLogout() } } sx={{color:'#fff', backgroundColor:"#333", p:2, "&.active": {color: "#1976d2"}}}>
+        <Typography sx={{textTransform:'uppercase',textAlign:'center'}}>Logout</Typography>
+      </MenuItem>
+    )
+  }
+
+  function renderLoginButton() {
+    return (
+      <Box key={'0-end'}>
+        <Button
+          onClick={ () => {handleCloseNavMenu(); onClose() } }
+          sx={{ my: 2, mx:3, color:'#fff', display: 'block', "&.active": {color: "#1976d2"}}}
+        >
+          Login
+        </Button>
+      </Box>
+    )
+  }
+
+  function renderLogoutButton() {
+    return (
+      <Box key={'0-end'}>
+        <Button
+          onClick={ () => {handleCloseNavMenu(); handleLogout(); } }
+          sx={{ my: 2, mx:3, color:'#fff', display: 'block', "&.active": {color: "#1976d2"}}}
+        >
+          Logout
+        </Button>
+      </Box>
+    )
+  }
+  
   return (
     <React.Fragment>
       <ModalLogin open={open} onClose={onClose}/>
@@ -69,13 +119,12 @@ const Nav = (props) => {
                 }}
               >
                 {pages.map((page,index) => (
-                  <MenuItem component={NavLink} to={page === 'home' ? '/' : `/${page}`} key={index} onClick={handleCloseNavMenu} sx={{color:'#fff', backgroundColor:"#333", p:2, "&.active": {color: "# "}}}>
+                  <MenuItem component={NavLink} to={page === 'home' ? '/' : `/${page}`} key={index} onClick={handleCloseNavMenu} sx={{color:'#fff', backgroundColor:"#333", p:2, "&.active": {color: "#1976d2"}}}>
                     <Typography sx={{textTransform:'uppercase',textAlign:'center'}}>{page}</Typography>
                   </MenuItem>
                 ))}
-                <MenuItem  key={'r-9'} onClick={ () => {handleCloseNavMenu(); onClose() } } sx={{color:'#fff', backgroundColor:"#333", p:2, "&.active": {color: "# "}}}>
-                  <Typography sx={{textTransform:'uppercase',textAlign:'center'}}>Login</Typography>
-                </MenuItem>
+                {ctxLogin.userProvider.logged ? null : renderLogin()}
+                {!ctxLogin.userProvider.logged ? null : renderLogout()}
               </Menu>
             </Box>
             {/* Could also map this later just like above for the pages */}
@@ -94,14 +143,8 @@ const Nav = (props) => {
                 </Box>
               ))}
               {/* This one is out of the group because it's not actually a route */}
-              <Box key={'0-end'}>
-                  <Button
-                    onClick={ () => {handleCloseNavMenu(); onClose() } }
-                    sx={{ my: 2, mx:3, color:'#fff', display: 'block', "&.active": {color: "#1976d2"}}}
-                  >
-                    Login
-                  </Button>
-                </Box>
+              {ctxLogin.userProvider.logged ? null : renderLoginButton()}
+              {!ctxLogin.userProvider.logged ? null : renderLogoutButton()}
             </Box>
           </Toolbar>
         </Container>
