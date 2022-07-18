@@ -2,13 +2,10 @@ import { useContext, useEffect, useState, useRef } from "react";
 import {Box, Typography, Grid} from "@mui/material";
 import banner from "../others/images/banner.jpg";
 import Nav from "../components/nav/nav.js";
-import { FormControl, TextField, IconButton } from "@mui/material";
 import Message from '../context/message.js';
 import {Avatar} from "@mui/material";
 import Button from "../components/UI/buttons/button";
-import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
-import SendIcon from '@mui/icons-material/Send';
-import Input from "../components/form/input";
+import ChatInput from "../components/form/chatInput.js";
 
 // Caixas do chat
 import ChatUserBox from "../components/chatBoxes/user";
@@ -68,12 +65,17 @@ const Chat = (props) => {
     // Enviar pelo websocket os dados
     function sendMessage(event) {
         event.preventDefault();
-        const message = {message: chatField.current.value, name: 'User'}; // 'User depois vai virar o id do usuario'
+        const message = {message: chatField.current.value, name: ctxMessage.userProvider?.name }; // 'User depois vai virar o id do usuario'
         connection.send(JSON.stringify(message));
         chatField.current.value = '';
     }
     
-   
+    function getAvatarDefault(name) {
+        if (name) {
+            return Array.from(name)[0];
+        }
+    }
+
     const componenteDados = () => { 
         // In case its still empty, this is a simple way of not breaking the app
         // if (!currentMessages) { 
@@ -84,13 +86,13 @@ const Chat = (props) => {
     
         return (            
             currentMessages.map( (value, index) => {
-                if (value.name === "User") {
+                if (value.name === ctxMessage.userProvider?.name) {
                     return (
-                        <ChatUserBox key={index}>{value.message}</ChatUserBox>
+                        <ChatUserBox key={index} user={getAvatarDefault(ctxMessage.userProvider?.name)}>{value.message}</ChatUserBox>
                     )
                 } else {
                     return (
-                        <ChatOthersBox key={index}>{value.message}</ChatOthersBox>
+                        <ChatOthersBox key={index} user={getAvatarDefault(value.name)}>{value.message}</ChatOthersBox>
                     )
                 }
             })
@@ -133,7 +135,7 @@ const Chat = (props) => {
                     <Grid container item direction="column" xs={2}>
                         {/* Avatar */}
                         <Grid item display='flex' flexDirection='column' sx={{backgroundColor:"#222", borderTopLeftRadius:{xs:0, lg:15}, display:"flex", justifyContent:'center', alignItems:'center'}} xs={3}> 
-                            <Avatar sx={{ width: '50%', height: '90%', fontSize:"5em" }}>S</Avatar>
+                            <Avatar sx={{ width: '50%', height: '90%', fontSize:"5em" }}>{getAvatarDefault(ctxMessage.userProvider?.name)}</Avatar>
                         </Grid>
                         {/* Navi */}
                         <Grid item display='flex' flexDirection='column' xs={9} sx={{display:"flex", justifyContent:"flex-end", alignItems:'center', backgroundColor:"#222", borderBottomLeftRadius:{xs:0, lg:15}, p:5, boxShadow:'12px 0px 10px -5px rgba(10,10,10,0.2)'}}> 
@@ -158,57 +160,7 @@ const Chat = (props) => {
                                 {componenteDados()}
                             </Grid>
                             <Grid item sx={{display:'flex', borderTop:"1px solid #333", justifyContent:'center', alignItems:'center', p:2}}>
-                                <FormControl component="form" onSubmit={sendMessage} sx={{width:"100%"}}>
-                                    <Grid container direction='row'>
-                                        <Grid item xs={1} display='flex' justifyContent='center' alignItems='center'>   
-                                            <IconButton component='button' onClick={() => handleClick()} sx={{display:'flex', justifyContent:'center', alignItems:'center', p:0, color:"#fff"}}>
-                                                <CreateNewFolderIcon sx={{width:60, height:60}}></CreateNewFolderIcon>
-                                                <Input type="file" onChange={(e) => handleFileChange(e)} ref={fileInput} id="anex-chat-file" style={{display:'none'}}/>
-                                            </IconButton>                               
-                                        </Grid>
-                                        <Grid item xs={9}>
-                                            <TextField
-                                                id="input-field-chat"
-                                                inputRef={chatField}
-                                                fullWidth
-                                                placeholder={"Write your message"}
-                                                InputLabelProps={{
-                                                    sx: { color: '#fff'}
-                                                }}
-                                                sx={{
-                                                    input: { // set the input styles and autofill
-                                                        color: '#fff',
-                                                        "&:-webkit-autofill": {
-                                                          WebkitBoxShadow: "0 0 0 1000px #222 inset",
-                                                          WebkitTextFillColor: '#fff !important'
-                                                        }
-                                                    },
-                                                    fieldset: {
-                                                        borderColor: '#fff'
-                                                    },
-                                                    '&:hover fieldset': {
-                                                        borderColor: (theme) => `${theme.palette.primary.main} !important`
-                                                    },
-                                                    '&.Mui-focused input': { // - Set the Input border when parent is focused 
-                                                        borderColor: '#fff !important',
-                                                    },
-                                                }}
-                                            />
-                                        </Grid>
-                                        <Grid item xs={2} sx={{display:'flex', justifyContent:'center', alignItems:'center', p:0}}>
-                                            <Button type={'submit'}>
-                                                <Grid container sx={{display:'flex', justifyContent:'center', alignItems:'center', p:2}}>
-                                                    <Grid item xs={10} sx={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
-                                                        <Typography>Send</Typography>
-                                                    </Grid>
-                                                    <Grid item xs={2} sx={{display:'flex', justifyContent:'center', alignItems:'center',}}>
-                                                        <SendIcon/>
-                                                    </Grid>
-                                                </Grid>
-                                            </Button>
-                                        </Grid>
-                                    </Grid>
-                                </FormControl> 
+                                {ctxMessage.userProvider.logged ? [<ChatInput key={'E-10'} sendMessage={sendMessage} handleClick={handleClick} handleFileChange={handleFileChange} fileInput={fileInput} chatField={chatField}/>] : [<Typography key={'E-10'}>Not Logged</Typography>]}
                             </Grid>
                         </Grid>
                     </Grid>
