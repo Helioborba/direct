@@ -5,7 +5,7 @@ import {Route,Routes} from "react-router-dom";
 
 // Pages
 import Home from "../../pages/Home.js";
-import Chat from "../../pages/Chat.js";
+import Chat from "../../pages/FriendList.js"; // not to be confused with the ChatModel
 import Search from "../../pages/Search.js";
 import Profile from "../../pages/Profile.js";
 import NotFound from "../../pages/NotFound.js";

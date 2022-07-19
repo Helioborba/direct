@@ -12,9 +12,13 @@ import MenuItem from '@mui/material/MenuItem';
 import { NavLink } from 'react-router-dom';
 import ModalLogin from '../modals/modalLogin';
 import Message from '../../context/message';
+import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import ModalNotification from '../modals/modalNotification';
+
 const Nav = (props) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [open, setOpen] = useState(false);
+  const [openNotification, setOpenNotification] = useState(false);
   const pages = ['home','chat','search','profile']; // Used for the mapping of pages, you can also see that the Map will have a tenary for checking if its the / home
   const ctxLogin = useContext(Message);
 
@@ -25,6 +29,10 @@ const Nav = (props) => {
   
   function onClose() {
     setOpen(!open);
+  }
+
+  function onCloseNotification() {
+    setOpenNotification(!openNotification);
   }
 
   // Used for the logout
@@ -84,7 +92,7 @@ const Nav = (props) => {
     <React.Fragment>
       <ModalLogin open={open} onClose={onClose}/>
       <AppBar position="static" sx={{backgroundColor:"#222"}}>
-        <Container maxWidth="xl">
+        <Container maxWidth={'100%'}>
           <Toolbar disableGutters>
             {/* This first area is the mobile screen side menu */}
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -146,6 +154,10 @@ const Nav = (props) => {
               {ctxLogin.userProvider.logged ? null : renderLoginButton()}
               {!ctxLogin.userProvider.logged ? null : renderLogoutButton()}
             </Box>
+            <IconButton onClick={onCloseNotification} sx={{display:'flex', justifyContent:'center', alignItems:'center', color:'#1976d2'}}>
+              <ModalNotification openNotification={openNotification} onCloseNotification={onCloseNotification}></ModalNotification>
+              <NotificationsNoneIcon m={0}></NotificationsNoneIcon>
+            </IconButton>
           </Toolbar>
         </Container>
       </AppBar>

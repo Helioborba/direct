@@ -1,17 +1,17 @@
 import { useContext, useEffect, useState, useRef } from "react";
 import {Box, Typography, Grid} from "@mui/material";
-import banner from "../others/images/banner.jpg";
-import Nav from "../components/nav/nav.js";
+import banner from "../../others/images/banner.jpg";
+import Nav from "../nav/nav.js";
 import Message from '../context/message.js';
 import {Avatar} from "@mui/material";
-import Button from "../components/UI/buttons/button";
-import ChatInput from "../components/form/chatInput.js";
+import Button from "../UI/buttons/button";
+import ChatInput from "../form/chatInput.js";
 
 // Caixas do chat
-import ChatUserBox from "../components/chatBoxes/user";
-import ChatOthersBox from "../components/chatBoxes/others";
+import ChatUserBox from "../chatBoxes/user";
+import ChatOthersBox from "../chatBoxes/others";
 
-const Chat = (props) => {
+const ChatModel = (props) => {
     const [connection] = useState(new WebSocket("ws://localhost:5000/ws"));
     const [currentMessages, setCurrentMessages] = useState([]);
     const [reload, setReload] = useState(false)
@@ -170,4 +170,4 @@ const Chat = (props) => {
     )
 }
 
-export default Chat;
+export default ChatModel;
