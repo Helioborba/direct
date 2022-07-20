@@ -14,6 +14,8 @@ import ModalLogin from '../modals/modalLogin';
 import Message from '../../context/message';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import ModalNotification from '../modals/modalNotification';
+import Badge from '@mui/material/Badge';
+
 
 const Nav = (props) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -91,6 +93,7 @@ const Nav = (props) => {
   return (
     <React.Fragment>
       <ModalLogin open={open} onClose={onClose}/>
+      <ModalNotification openNotification={openNotification} onCloseNotification={onCloseNotification}></ModalNotification>
       <AppBar position="static" sx={{backgroundColor:"#222"}}>
         <Container maxWidth={'100%'}>
           <Toolbar disableGutters>
@@ -155,8 +158,9 @@ const Nav = (props) => {
               {!ctxLogin.userProvider.logged ? null : renderLogoutButton()}
             </Box>
             <IconButton onClick={onCloseNotification} sx={{display:'flex', justifyContent:'center', alignItems:'center', color:'#1976d2'}}>
-              <ModalNotification openNotification={openNotification} onCloseNotification={onCloseNotification}></ModalNotification>
-              <NotificationsNoneIcon m={0}></NotificationsNoneIcon>
+              <Badge badgeContent={0} color="success">
+                <NotificationsNoneIcon></NotificationsNoneIcon>
+              </Badge>
             </IconButton>
           </Toolbar>
         </Container>

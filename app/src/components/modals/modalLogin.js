@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, useRef } from "react";
+import React, { useContext, useRef } from "react";
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import ModalMUI from '@mui/material/Modal';
@@ -27,7 +27,7 @@ const ModalLogin = (props) => {
     // Refs are used for the form inputs
     const usernameField = useRef();
     const passwordField = useRef();
-    const loginContext = useContext(Message);
+    const ctxLogin = useContext(Message);
         
     // Send data to server
     function sendLoginRequest(event) {
@@ -50,7 +50,7 @@ const ModalLogin = (props) => {
         })
         .then(res => res.json())
         .then(data => {
-            loginContext.userHandler(data)
+            ctxLogin.userHandler(data)
             console.log(data);
         })
         .catch( err => console.log(err));
