@@ -17,7 +17,6 @@ const ChatModel = (props) => {
     const [reload, setReload] = useState(false)
     const ctxMessage = useContext(Message);
     const chatField = useRef();
-    console.log(ctxMessage.userProvider);
    
     // Preciso trabalhar no envio de imagens depois
     const fileInput = useRef(null);

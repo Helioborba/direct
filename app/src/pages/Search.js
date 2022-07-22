@@ -1,6 +1,7 @@
 // import { useContext } from "react";
-import {Box, Grid, Typography} from "@mui/material";
+import {Avatar, Box, Grid, Typography} from "@mui/material";
 import Nav from "../components/nav/nav.js";
+import ModelPagination from "../components/pagination/pagination.js";
 
 const Search = (props) => {
     // const ctxNations = useContext(NationsContext);
@@ -34,14 +35,48 @@ const Search = (props) => {
     }
 
     return(
-        <Box sx={{width:"100vw", minHeight:"100vh", backgroundColor:"#555"}}>
+        <Box sx={{width:"100vw", minHeight:"100vh", backgroundColor:"#333"}}>
             <Nav></Nav>
-            <Box sx={{p:2}}>
-                <Typography variant="h3" sx={{pb:2}}>
-                    textext
-                </Typography>
-                <Grid container sx={{p:2}} justifyContent="center" direction='column'>
-                    {render()}
+            <Box sx={{p:{xs:"5rem 0 5rem 0", lg:2}, display:'flex', justifyContent:'space-between', alignItems:'center'}}>
+                <Grid container direction="column"  sx={{p:3, backgroundColor:"#222", display:"flex", justifyContent:"space-between", alignItems:"center",  height:"88vh", borderRadius:{xs:0, lg:3} }}>
+                    <Grid container item sx={{display:"flex", justifyContent:"space-between", alignItems:"center"}}>
+                        <Grid container item sx={{display:"flex", justifyContent:"space-between", alignItems:"center",backgroundColor:"red"}}>
+                            <Grid item> 
+                                <Avatar sx={{ width: '50%', height: '90%', fontSize:"5em" }}>S</Avatar>
+                            </Grid>
+                            <Grid item> 
+                                <Avatar sx={{ width: '50%', height: '90%', fontSize:"5em" }}>S</Avatar>
+                            </Grid>
+                            <Grid item> 
+                                <Avatar sx={{ width: '50%', height: '90%', fontSize:"5em" }}>S</Avatar>
+                            </Grid>
+                        </Grid>
+                        <Grid container item sx={{backgroundColor:"blue", display:"flex", justifyContent:"space-between", alignItems:"center"}}>
+                            <Grid item> 
+                                <Avatar sx={{ width: '50%', height: '90%', fontSize:"5em" }}>S</Avatar>
+                            </Grid>
+                            <Grid item> 
+                                <Avatar sx={{ width: '50%', height: '90%', fontSize:"5em" }}>S</Avatar>
+                            </Grid>
+                            <Grid item> 
+                                <Avatar sx={{ width: '50%', height: '90%', fontSize:"5em" }}>S</Avatar>
+                            </Grid>
+                        </Grid>
+                        <Grid container item sx={{backgroundColor:"purple", display:"flex", justifyContent:"space-between", alignItems:"center"}}>
+                            <Grid item> 
+                                <Avatar sx={{ width: '50%', height: '90%', fontSize:"5em" }}>S</Avatar>
+                            </Grid>
+                            <Grid item> 
+                                <Avatar sx={{ width: '50%', height: '90%', fontSize:"5em" }}>S</Avatar>
+                            </Grid>
+                            <Grid item> 
+                                <Avatar sx={{ width: '50%', height: '90%', fontSize:"5em" }}>S</Avatar>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                    <Grid item>
+                        <ModelPagination></ModelPagination>
+                    </Grid>
                 </Grid>
             </Box>
         </Box>

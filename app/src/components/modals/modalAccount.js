@@ -64,162 +64,162 @@ const ModalAccount = (props) => {
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
         >
-            <Box sx={style}>
-                <Typography id="modal-modal-title" variant="h6" component="h2">
-                    Create Account
-                </Typography>
-                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                    To create your account in Direct we need the following information:
-                </Typography>
-                <FormControl component="form" onSubmit={sendNewUserRequest} sx={{width:"100%",pt:2}}>
-                  <Grid container direction='row'>
-                    <Grid item xs={6} p={2}>
-                      <Typography>
-                        Username
-                      </Typography>
-                      <TextField
-                        id="input-field-username"
-                        inputRef={usernameField}
-                        fullWidth
-                        placeholder={"Type your Username"}
-                        InputLabelProps={{
-                            sx: { color: '#000'}
-                        }}
-                        sx={{
-                            input: { // set the input styles and autofill
-                                color: '#000',
-                                "&:-webkit-autofill": {
-                                  WebkitBoxShadow: "0 0 0 1000px #fff inset",
-                                  WebkitTextFillColor: '#000 !important'
-                                }
-                            },
-                            fieldset: {
-                                borderColor: '#000'
-                            },
-                            '&:hover fieldset': {
-                                borderColor: (theme) => `${theme.palette.primary.main} !important`
-                            },
-                            '&.Mui-focused input': { // - Set the Input border when parent is focused 
-                                borderColor: '#fff !important',
-                            },
-                        }}
-                      />
-                    </Grid>
-                    <Grid item xs={6} p={2}>
-                      <Typography>
-                        Email
-                      </Typography>
-                      <TextField
-                        id="input-field-email"
-                        inputRef={emailField}
-                        fullWidth
-                        placeholder={"Type your Email"}
-                        InputLabelProps={{
-                            sx: { color: '#000'}
-                        }}
-                        sx={{
-                            input: { // set the input styles and autofill
-                                color: '#000',
-                                "&:-webkit-autofill": {
-                                  WebkitBoxShadow: "0 0 0 1000px #fff inset",
-                                  WebkitTextFillColor: '#000 !important'
-                                }
-                            },
-                            fieldset: {
-                                borderColor: '#000'
-                            },
-                            '&:hover fieldset': {
-                                borderColor: (theme) => `${theme.palette.primary.main} !important`
-                            },
-                            '&.Mui-focused input': { // - Set the Input border when parent is focused 
-                                borderColor: '#fff !important',
-                            },
-                        }}
-                      />
-                    </Grid>
-                    <Grid item xs={6} p={2}>
-                      <Typography>
-                        Password
-                      </Typography>
-                      <TextField
-                        id="input-field-password"
-                        inputRef={passwordField}
-                        fullWidth
-                        placeholder={"Type your Password"}
-                        InputLabelProps={{
-                            sx: { color: '#000'}
-                        }}
-                        sx={{
-                            input: { // set the input styles and autofill
-                                color: '#000',
-                                "&:-webkit-autofill": {
-                                  WebkitBoxShadow: "0 0 0 1000px #fff inset",
-                                  WebkitTextFillColor: '#000 !important'
-                                }
-                            },
-                            fieldset: {
-                                borderColor: '#000'
-                            },
-                            '&:hover fieldset': {
-                                borderColor: (theme) => `${theme.palette.primary.main} !important`
-                            },
-                            '&.Mui-focused input': { // - Set the Input border when parent is focused 
-                                borderColor: '#fff !important',
-                            },
-                        }}
-                      />
-                    </Grid>
-                    <Grid item xs={6} p={2}>
-                      <Typography>
-                        Retype Password
-                      </Typography>
-                      <TextField
-                        id="input-field-password-check"
-                        //inputRef={retypeField} Disabled for now
-                        fullWidth
-                        placeholder={"Retype your Password"}
-                        InputLabelProps={{
-                            sx: { color: '#000'}
-                        }}
-                        sx={{
-                            input: { // set the input styles and autofill
-                                color: '#000',
-                                "&:-webkit-autofill": {
-                                  WebkitBoxShadow: "0 0 0 1000px #fff inset",
-                                  WebkitTextFillColor: '#000 !important'
-                                }
-                            },
-                            fieldset: {
-                                borderColor: '#000'
-                            },
-                            '&:hover fieldset': {
-                                borderColor: (theme) => `${theme.palette.primary.main} !important`
-                            },
-                            '&.Mui-focused input': { // - Set the Input border when parent is focused 
-                                borderColor: '#fff !important',
-                            },
-                        }}
-                      />
-                    </Grid>
-                    <Grid item xs={12} sx={{display:'flex', justifyContent:'center', alignItems:'center', mt: 5}}>
-                      <Button color={"#1976d2"} type={'submit'} variant={'outlined'} sx={{ '&:hover': {borderColor: '#1976d2'}, m:1}}>
-                          <Grid container sx={{display:'flex', justifyContent:'center', alignItems:'center', p:1}}>
-                              <Grid item xs={12} sx={{display:'flex', justifyContent:'center', alignItems:'center'}}>
-                                  <Typography>Join Direct</Typography>
-                              </Grid>
-                          </Grid>
-                      </Button>
-                      <Button color={"#1976d2"} onClick={props.onClose} variant={'outlined'} sx={{ '&:hover': {borderColor: '#1976d2'}, ml:3}}>
-                          <Grid container sx={{display:'flex', justifyContent:'center', alignItems:'center', p:1}}>
-                              <Grid item xs={12}>
-                                  <Typography>Close</Typography>
-                              </Grid>
-                          </Grid>
-                      </Button>
-                    </Grid>
+          <Box sx={style}>
+              <Typography id="modal-modal-title" variant="h6" component="h2">
+                  Create Account
+              </Typography>
+              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                  To create your account in Direct we need the following information:
+              </Typography>
+              <FormControl component="form" onSubmit={sendNewUserRequest} sx={{width:"100%",pt:2}}>
+                <Grid container direction='row'>
+                  <Grid item xs={6} p={2}>
+                    <Typography>
+                      Username
+                    </Typography>
+                    <TextField
+                      id="input-field-username"
+                      inputRef={usernameField}
+                      fullWidth
+                      placeholder={"Type your Username"}
+                      InputLabelProps={{
+                          sx: { color: '#000'}
+                      }}
+                      sx={{
+                          input: { // set the input styles and autofill
+                              color: '#000',
+                              "&:-webkit-autofill": {
+                                WebkitBoxShadow: "0 0 0 1000px #fff inset",
+                                WebkitTextFillColor: '#000 !important'
+                              }
+                          },
+                          fieldset: {
+                              borderColor: '#000'
+                          },
+                          '&:hover fieldset': {
+                              borderColor: (theme) => `${theme.palette.primary.main} !important`
+                          },
+                          '&.Mui-focused input': { // - Set the Input border when parent is focused 
+                              borderColor: '#fff !important',
+                          },
+                      }}
+                    />
                   </Grid>
-              </FormControl> 
-            </Box>
+                  <Grid item xs={6} p={2}>
+                    <Typography>
+                      Email
+                    </Typography>
+                    <TextField
+                      id="input-field-email"
+                      inputRef={emailField}
+                      fullWidth
+                      placeholder={"Type your Email"}
+                      InputLabelProps={{
+                          sx: { color: '#000'}
+                      }}
+                      sx={{
+                          input: { // set the input styles and autofill
+                              color: '#000',
+                              "&:-webkit-autofill": {
+                                WebkitBoxShadow: "0 0 0 1000px #fff inset",
+                                WebkitTextFillColor: '#000 !important'
+                              }
+                          },
+                          fieldset: {
+                              borderColor: '#000'
+                          },
+                          '&:hover fieldset': {
+                              borderColor: (theme) => `${theme.palette.primary.main} !important`
+                          },
+                          '&.Mui-focused input': { // - Set the Input border when parent is focused 
+                              borderColor: '#fff !important',
+                          },
+                      }}
+                    />
+                  </Grid>
+                  <Grid item xs={6} p={2}>
+                    <Typography>
+                      Password
+                    </Typography>
+                    <TextField
+                      id="input-field-password"
+                      inputRef={passwordField}
+                      fullWidth
+                      placeholder={"Type your Password"}
+                      InputLabelProps={{
+                          sx: { color: '#000'}
+                      }}
+                      sx={{
+                          input: { // set the input styles and autofill
+                              color: '#000',
+                              "&:-webkit-autofill": {
+                                WebkitBoxShadow: "0 0 0 1000px #fff inset",
+                                WebkitTextFillColor: '#000 !important'
+                              }
+                          },
+                          fieldset: {
+                              borderColor: '#000'
+                          },
+                          '&:hover fieldset': {
+                              borderColor: (theme) => `${theme.palette.primary.main} !important`
+                          },
+                          '&.Mui-focused input': { // - Set the Input border when parent is focused 
+                              borderColor: '#fff !important',
+                          },
+                      }}
+                    />
+                  </Grid>
+                  <Grid item xs={6} p={2}>
+                    <Typography>
+                      Retype Password
+                    </Typography>
+                    <TextField
+                      id="input-field-password-check"
+                      //inputRef={retypeField} Disabled for now
+                      fullWidth
+                      placeholder={"Retype your Password"}
+                      InputLabelProps={{
+                          sx: { color: '#000'}
+                      }}
+                      sx={{
+                          input: { // set the input styles and autofill
+                              color: '#000',
+                              "&:-webkit-autofill": {
+                                WebkitBoxShadow: "0 0 0 1000px #fff inset",
+                                WebkitTextFillColor: '#000 !important'
+                              }
+                          },
+                          fieldset: {
+                              borderColor: '#000'
+                          },
+                          '&:hover fieldset': {
+                              borderColor: (theme) => `${theme.palette.primary.main} !important`
+                          },
+                          '&.Mui-focused input': { // - Set the Input border when parent is focused 
+                              borderColor: '#fff !important',
+                          },
+                      }}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sx={{display:'flex', justifyContent:'center', alignItems:'center', mt: 5}}>
+                    <Button color={"#1976d2"} type={'submit'} variant={'outlined'} sx={{ '&:hover': {borderColor: '#1976d2'}, m:1}}>
+                        <Grid container sx={{display:'flex', justifyContent:'center', alignItems:'center', p:1}}>
+                            <Grid item xs={12} sx={{display:'flex', justifyContent:'center', alignItems:'center'}}>
+                                <Typography>Join Direct</Typography>
+                            </Grid>
+                        </Grid>
+                    </Button>
+                    <Button color={"#1976d2"} onClick={props.onClose} variant={'outlined'} sx={{ '&:hover': {borderColor: '#1976d2'}, ml:3}}>
+                        <Grid container sx={{display:'flex', justifyContent:'center', alignItems:'center', p:1}}>
+                            <Grid item xs={12}>
+                                <Typography>Close</Typography>
+                            </Grid>
+                        </Grid>
+                    </Button>
+                  </Grid>
+                </Grid>
+            </FormControl> 
+          </Box>
         </ModalMUI>
     </React.Fragment>
   );

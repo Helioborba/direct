@@ -45,7 +45,6 @@ const FriendList = (props) => {
             <Box sx={{p:{xs:"5rem 0 5rem 0", lg:2}, display:'flex', justifyContent:'space-between', alignItems:'center'}}>
                 <Grid container direction="row"  sx={{backgroundColor:"#222",  height:"88vh", borderRadius:{xs:0, lg:3} }}>
                     
-                
                 </Grid>
             </Box>
         </Box>
