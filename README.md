@@ -2,5 +2,5 @@
 ## Purpose
 A chat application.
 
-## Additional Information
+## To-do
 - Come up with a better name.

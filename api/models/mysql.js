@@ -22,6 +22,13 @@ export default class UserObject {
         return conn.execute('SELECT title, content FROM `heroku_3f91cda5aaca95a`.`tester`');
     };
 
+    static findLoginUser(user, password) {
+
+        return conn.execute(
+            'SELECT * FROM `users` WHERE `username` = ? AND `password` = ? ', [user, password]
+        );
+    };
+
     static findUser(user, password) {
 
         return conn.execute(

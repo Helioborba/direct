@@ -1,8 +1,7 @@
-import { useContext, useEffect, useState, useRef } from "react";
-import {Box, Typography, Grid} from "@mui/material";
+import React, { useContext, useEffect, useState, useRef } from "react";
+import {Typography, Grid} from "@mui/material";
 import banner from "../../others/images/banner.jpg";
-import Nav from "../nav/nav.js";
-import Message from '../context/message.js';
+import Message from '../../context/message.js';
 import {Avatar} from "@mui/material";
 import Button from "../UI/buttons/button";
 import ChatInput from "../form/chatInput.js";
@@ -125,47 +124,42 @@ const ChatModel = (props) => {
         }
     }
     return(
-        <Box sx={{width:"100vw", minHeight:"100vh", backgroundColor:"#333"}}>
-            <Nav></Nav>
-            <Box sx={{p:{xs:"5rem 0 5rem 0", lg:2}, display:'flex', justifyContent:'space-between', alignItems:'center'}}>
-                <Grid container direction="row"  sx={{backgroundColor:"#222",  height:"88vh", borderRadius:{xs:0, lg:3} }}>
-                    
-                    {/* Avatar and Navigation */}
-                    <Grid container item direction="column" xs={2}>
-                        {/* Avatar */}
-                        <Grid item display='flex' flexDirection='column' sx={{backgroundColor:"#222", borderTopLeftRadius:{xs:0, lg:15}, display:"flex", justifyContent:'center', alignItems:'center'}} xs={3}> 
-                            <Avatar sx={{ width: '50%', height: '90%', fontSize:"5em" }}>{getAvatarDefault(ctxMessage.userProvider?.name)}</Avatar>
-                        </Grid>
-                        {/* Navi */}
-                        <Grid item display='flex' flexDirection='column' xs={9} sx={{display:"flex", justifyContent:"flex-end", alignItems:'center', backgroundColor:"#222", borderBottomLeftRadius:{xs:0, lg:15}, p:5, boxShadow:'12px 0px 10px -5px rgba(10,10,10,0.2)'}}> 
-                            <Grid item>
-                                <Button>
-                                    Go back
-                                </Button>
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                    
-                    {/* Banner and Chat */}
-                    <Grid container item direction="column" xs={10}>
-                        {/* Banner */}
-                        <Grid item display='flex' flexDirection='column' xs={3} sx={{backgroundImage: `url(${banner})`, borderRadius:{xs:0, lg:3}, display:"flex", justifyContent:'center', alignItems:'center'}}> 
-                            <Typography>{ctxMessage.userProvider?.name}</Typography>
-                        </Grid>
-                        {/* Chat */} 
-                        <Grid item container direction='column' wrap='nowrap'  xs={9} sx={{display:'flex', justifyContent:'space-between', maxHeight:'70vh', overflow:"hidden" }}> 
-                            <Grid item container sx={{textAlign:"start", paddingY: 6, paddingX: 10, overflowY:'scroll', ...scrollBar}}>
-                                {/* HERE IS THE MAIN CHAT BOXES */}
-                                {componenteDados()}
-                            </Grid>
-                            <Grid item sx={{display:'flex', borderTop:"1px solid #333", justifyContent:'center', alignItems:'center', p:2}}>
-                                {ctxMessage.userProvider.logged ? [<ChatInput key={'E-10'} sendMessage={sendMessage} handleClick={handleClick} handleFileChange={handleFileChange} fileInput={fileInput} chatField={chatField}/>] : [<Typography key={'E-10'}>Not Logged</Typography>]}
-                            </Grid>
-                        </Grid>
+        
+        <React.Fragment>
+            {/* Avatar and Navigation */}
+            <Grid container item direction="column" xs={2}>
+                {/* Avatar */}
+                <Grid item display='flex' flexDirection='column' sx={{backgroundColor:"#222", borderTopLeftRadius:{xs:0, lg:15}, display:"flex", justifyContent:'center', alignItems:'center'}} xs={3}> 
+                    <Avatar sx={{ width: '50%', height: '90%', fontSize:"5em" }}>{getAvatarDefault(ctxMessage.userProvider?.name)}</Avatar>
+                </Grid>
+                {/* Navi */}
+                <Grid item display='flex' flexDirection='column' xs={9} sx={{display:"flex", justifyContent:"flex-end", alignItems:'center', backgroundColor:"#222", borderBottomLeftRadius:{xs:0, lg:15}, p:5, boxShadow:'12px 0px 10px -5px rgba(10,10,10,0.2)'}}> 
+                    <Grid item>
+                        <Button>
+                            Go back
+                        </Button>
                     </Grid>
                 </Grid>
-            </Box>
-        </Box>
+            </Grid>
+            
+            {/* Banner and Chat */}
+            <Grid container item direction="column" xs={10}>
+                {/* Banner */}
+                <Grid item display='flex' flexDirection='column' xs={3} sx={{backgroundImage: `url(${banner})`, borderRadius:{xs:0, lg:3}, display:"flex", justifyContent:'center', alignItems:'center'}}> 
+                    <Typography>{ctxMessage.userProvider?.name}</Typography>
+                </Grid>
+                {/* Chat */} 
+                <Grid item container direction='column' wrap='nowrap'  xs={9} sx={{display:'flex', justifyContent:'space-between', maxHeight:'70vh', overflow:"hidden" }}> 
+                    <Grid item container sx={{textAlign:"start", paddingY: 6, paddingX: 10, overflowY:'scroll', ...scrollBar}}>
+                        {/* HERE IS THE MAIN CHAT BOXES */}
+                        {componenteDados()}
+                    </Grid>
+                    <Grid item sx={{display:'flex', borderTop:"1px solid #333", justifyContent:'center', alignItems:'center', p:2}}>
+                        {ctxMessage.userProvider.logged ? [<ChatInput key={'E-10'} sendMessage={sendMessage} handleClick={handleClick} handleFileChange={handleFileChange} fileInput={fileInput} chatField={chatField}/>] : [<Typography key={'E-10'}>Not Logged</Typography>]}
+                    </Grid>
+                </Grid>
+            </Grid>
+        </React.Fragment>
     )
 }
 
