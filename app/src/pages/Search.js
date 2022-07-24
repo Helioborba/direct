@@ -1,10 +1,10 @@
 // import { useContext } from "react";
 import {Avatar, Box, Grid, Typography} from "@mui/material";
-import { flexbox } from "@mui/system";
 import Nav from "../components/nav/nav.js";
 import ModelPagination from "../components/pagination/pagination.js";
 import Button from "../components/UI/buttons/button.js";
-
+import icon from "../others/images/icon.png";
+import Image from "../components/UI/image/image.js";
 const Search = (props) => {
     // const ctxNations = useContext(NationsContext);
 
@@ -43,41 +43,62 @@ const Search = (props) => {
                 <Grid container direction="column"  sx={{p:3, backgroundColor:"#222", display:"flex", justifyContent:"space-between", alignItems:"center",  height:"88vh", borderRadius:{xs:0, lg:3} }}>
                     <Grid item xs={1} sx={{position:'relative', width:'100%', display:"flex", justifyContent:"end", alignItems:"center",}}>
                         {/* Theres some padding left here to fix the position */}
-                        <Typography sx={{flex:1,pl:5}}>Results</Typography>          
+                        <Typography sx={{flex:1, pl:5}}>Results</Typography>          
                         <Button>Go back</Button>
                     </Grid>
                     <Grid container direction="column" item xs={10} sx={{display:"flex", alignItems:"center"}}>
-                        <Grid container item xs={4} sx={{display:"flex", justifyContent:"space-between", alignItems:"center",backgroundColor:"red"}}>
-                            <Grid item> 
-                                <Avatar sx={{ width: '50%', height: '90%', fontSize:"5em" }}>S</Avatar>
+                        <Grid container item xs={4} sx={{display:"flex", justifyContent:"space-between", alignItems:"center"}}>
+                            <Grid item xs={3} sx={{display:"flex", alignItems:"center", flexDirection:"column"}}> 
+                                <Image img={icon}></Image>
+                                <Typography pt={2}>ASARERAWERERARER</Typography>
                             </Grid>
-                            <Grid item> 
-                                <Avatar sx={{ width: '50%', height: '90%', fontSize:"5em" }}>S</Avatar>
+                            <Grid item xs={3} sx={{display:"flex", alignItems:"center", flexDirection:"column"}}> 
+                                <Image img={icon}></Image>
+                                <Typography pt={2}>ASARERAWERERARER</Typography>
                             </Grid>
-                            <Grid item> 
-                                <Avatar sx={{ width: '50%', height: '90%', fontSize:"5em" }}>S</Avatar>
+                            <Grid item xs={3} sx={{display:"flex", alignItems:"center", flexDirection:"column"}}> 
+                                <Image img={icon}></Image>
+                                <Typography pt={2}>ASARERAWERERARER</Typography>
                             </Grid>
-                        </Grid>
-                        <Grid container item xs={4} sx={{backgroundColor:"blue", display:"flex", justifyContent:"space-between", alignItems:"center"}}>
-                            <Grid item> 
-                                <Avatar sx={{ width: '50%', height: '90%', fontSize:"5em" }}>S</Avatar>
-                            </Grid>
-                            <Grid item> 
-                                <Avatar sx={{ width: '50%', height: '90%', fontSize:"5em" }}>S</Avatar>
-                            </Grid>
-                            <Grid item> 
-                                <Avatar sx={{ width: '50%', height: '90%', fontSize:"5em" }}>S</Avatar>
+                            <Grid item xs={3} sx={{display:"flex", alignItems:"center", flexDirection:"column"}}> 
+                                <Image img={icon}></Image>
+                                <Typography pt={2}>ASARERAWERERARER</Typography>
                             </Grid>
                         </Grid>
-                        <Grid container item xs={4} sx={{backgroundColor:"purple", display:"flex", justifyContent:"space-between", alignItems:"center"}}>
-                            <Grid item> 
-                                <Avatar sx={{ width: '50%', height: '90%', fontSize:"5em" }}>S</Avatar>
+                        <Grid container item xs={4} sx={{display:"flex", justifyContent:"space-between", alignItems:"center"}}>
+                            <Grid item xs={3} sx={{display:"flex", alignItems:"center", flexDirection:"column"}}> 
+                                <Image img={icon}></Image>
+                                <Typography pt={2}>ASARERAWERERARER</Typography>
                             </Grid>
-                            <Grid item> 
-                                <Avatar sx={{ width: '50%', height: '90%', fontSize:"5em" }}>S</Avatar>
+                            <Grid item xs={3} sx={{display:"flex", alignItems:"center", flexDirection:"column"}}> 
+                                <Image img={icon}></Image>
+                                <Typography pt={2}>ASARERAWERERARER</Typography>
                             </Grid>
-                            <Grid item> 
-                                <Avatar sx={{ width: '50%', height: '90%', fontSize:"5em" }}>S</Avatar>
+                            <Grid item xs={3} sx={{display:"flex", alignItems:"center", flexDirection:"column"}}> 
+                                <Image img={icon}></Image>
+                                <Typography pt={2}>ASARERAWERERARER</Typography>
+                            </Grid>
+                            <Grid item xs={3} sx={{display:"flex", alignItems:"center", flexDirection:"column"}}> 
+                                <Image img={icon}></Image>
+                                <Typography pt={2}>ASARERAWERERARER</Typography>
+                            </Grid>   
+                        </Grid>
+                        <Grid container item xs={4} sx={{display:"flex", justifyContent:"space-between", alignItems:"center"}}>
+                            <Grid item xs={3} sx={{display:"flex", alignItems:"center", flexDirection:"column"}}> 
+                                <Image img={icon}></Image>
+                                <Typography pt={2}>ASARERAWERERARER</Typography>
+                            </Grid>
+                            <Grid item xs={3} sx={{display:"flex", alignItems:"center", flexDirection:"column"}}> 
+                                <Image img={icon}></Image>
+                                <Typography pt={2}>ASARERAWERERARER</Typography>
+                            </Grid>
+                            <Grid item xs={3} sx={{display:"flex", alignItems:"center", flexDirection:"column"}}> 
+                                <Image img={icon}></Image>
+                                <Typography pt={2}>ASARERAWERERARER</Typography>
+                            </Grid>
+                            <Grid item xs={3} sx={{display:"flex", alignItems:"center", flexDirection:"column"}}> 
+                                <Image img={icon}></Image>
+                                <Typography pt={2}>ASARERAWERERARER</Typography>
                             </Grid>
                         </Grid>
                     </Grid>
