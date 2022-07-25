@@ -23,16 +23,14 @@ export default class UserObject {
     };
 
     static findLoginUser(user, password) {
-
         return conn.execute(
             'SELECT * FROM `users` WHERE `username` = ? AND `password` = ? ', [user, password]
         );
     };
 
-    static findUser(user, password) {
-
+    static findUser(user) {
         return conn.execute(
-            'SELECT * FROM `users` WHERE `username` = ? AND `password` = ? ', [user, password]
+            'SELECT * FROM `users` WHERE `username` = ?', [user]
         );
     };
 }

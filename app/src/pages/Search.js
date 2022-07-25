@@ -1,20 +1,21 @@
 import { useState } from "react";
-import {Avatar, Box, Grid, Typography} from "@mui/material";
+import {Box, Grid} from "@mui/material";
 import Nav from "../components/nav/nav.js";
-import ModelPagination from "../components/pagination/pagination.js";
-import Button from "../components/UI/buttons/button.js";
-import icon from "../others/images/icon.png";
-import Image from "../components/UI/image/image.js";
 import SearchForm from "../components/search/searchForm.js";
 import SearchResult from "../components/search/searchResult.js";
 const Search = (props) => {
-    const [search, setSearch] = useState(true)
+    const [search, setSearch] = useState(true);
+    const [result, setResult] = useState(null); // resulting data of form search 
 
     // Will run after searching for a person, to render the other comp
     function setSearchHandler() {
         setSearch(!search);
     }
     
+    function setResultHandler(data) {
+        setResult(data);
+    }
+
     // const ctxNations = useContext(NationsContext);
 
     // for (const node of ctxNations.canvasNodes) {
@@ -47,7 +48,7 @@ const Search = (props) => {
             <Nav></Nav>
             <Box sx={{p:{xs:"5rem 0 5rem 0", lg:2}, display:'flex', justifyContent:'space-between', alignItems:'center'}}>
                 <Grid container direction="column"  sx={{p:3, backgroundColor:"#222", display:"flex", justifyContent:"space-between", alignItems:"center",  height:"88vh", borderRadius:{xs:0, lg:3} }}>
-                    {search ? <SearchForm></SearchForm> : <SearchResult></SearchResult>}
+                    {search ? <SearchForm result={result} setResultHandler={setResultHandler} setSearchHandler={setSearchHandler}/> : <SearchResult result={result} setSearchHandler={setSearchHandler}/>}
                 </Grid>
             </Box>
         </Box>

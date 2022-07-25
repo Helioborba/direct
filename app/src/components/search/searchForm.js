@@ -1,11 +1,48 @@
+import React, {useRef} from "react";
 import {Typography, Grid} from "@mui/material";
 import { FormControl, TextField } from "@mui/material";
 import Button from "../UI/buttons/button";
 import SearchIcon from '@mui/icons-material/Search';
 
+
 const SearchForm = (props) => {
+    // Refs are used for the form inputs
+    const usernameField = useRef();
+        
+    // Send data to server
+    function sendSearchRequest(event) {
+        event.preventDefault();
+
+        // The data
+        const userData = { data : { username: usernameField.current.value} };
+        
+        fetch('/api/sys/findUser', {
+            method: 'POST', 
+            mode: 'cors',
+            cache: 'no-cache',
+            credentials: 'same-origin',
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            redirect: 'follow',
+            referrerPolicy: 'no-referrer', 
+            body: JSON.stringify(userData) 
+        })
+        .then(res => res.json())
+        .then(reqData => {
+            if(!reqData.error) {
+                props.setResultHandler(reqData.users);
+                props.setSearchHandler();
+            }
+        })
+        .catch( err => console.log(err));
+
+        // Clear the fields
+        usernameField.current.value = '';
+    }
+
     return (
-        <FormControl component="form" onSubmit={props.sendMessage} sx={{width:"100%"}}>
+        <FormControl component="form" onSubmit={sendSearchRequest} sx={{width:"100%"}}>
             <Grid container direction='column' sx={{p:20}}>
                 <Grid item>
                     <Typography>Type the name of the person or group ID to search</Typography>
@@ -13,7 +50,7 @@ const SearchForm = (props) => {
                 <Grid item>
                     <TextField
                         id="input-field-chat"
-                        inputRef={props.chatField}
+                        inputRef={usernameField}
                         fullWidth
                         placeholder={"Person name or Group ID"}
                         InputLabelProps={{
