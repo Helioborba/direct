@@ -14,45 +14,82 @@ const SearchResult = (props) => {
         setCurrentPage(value);
     }
 
-    function render() {
+    function createComponents() {
         // Create all of the inner grids 
         const componentGroup = []; // a array containing the inner grids in a collection of 4
         const subGroup = []; // array containing the jsx inner grids
+        let updatedKey = null; // Used to keep the updated index because of the 0-1 offset 
 
         for (const [key, value] of Object.entries(props.result)) {
-            let updatedKey = Number(key) + 1;
-            
-            subGroup.push(<SearchInnerGrid>{value.username}</SearchInnerGrid>); // add the current value to the sub group
+            updatedKey = Number(key) + 1;
+            subGroup.push(<SearchInnerGrid key={key}>{value.username}</SearchInnerGrid>); // add the current value to the sub group
         
             // add the subgroup
             if (updatedKey % 4 === 0) {
-                componentGroup.push([...subGroup]); // add the whole jsx group to the componentGroup
+                componentGroup.push(
+                    <Grid key={`o-${key}`} container item xs={4} sx={{display:"flex", justifyContent:"flex-start", alignItems:"center"}}>
+                        {[...subGroup]}
+                    </Grid>
+                ); // add the whole jsx group to the componentGroup
                 subGroup.length = 0; // flush the array
-                console.log(componentGroup)
-            }
-            
-            // Add the rest of the data to the group array when there's no more groups to form
-            if (props.result.length === updatedKey) {
-                componentGroup.push(subGroup);
+                continue;
+            } 
+
+            // This if adds the rest of the data to the group array when there's no more groups to form
+            if (props.result.length === updatedKey) { 
+                componentGroup.push(
+                    <Grid key={`o-${key}-e`} container item xs={4} sx={{display:"flex", justifyContent:"flex-start", alignItems:"center"}}>
+                        {[...subGroup]}
+                    </Grid>
+                );
             }
         }
-        // const componentInnerGridArray = props.result.map((data, index) => {
-        //     // Used to set if the component can be wrapped later on inside the outer grid
-        //     if (index % 4 === 0) {
-        //         keyIndex += 1;
-        //     }
-            
-        //     return { grid: [keyIndex], component: <SearchInnerGrid>{data.username}</SearchInnerGrid>}
-        // })
-
-        // Wrap every 4 innerGrids to the OuterGrid to complete the row
-        // const assembledComponents = componentInnerGridArray.map( (component) => {
-            
-        // })
-
-
-        // return componentInnerGridArray
+        return componentGroup;
     }
+
+    // Organize for each 3 groups of 4 grids
+    function groupComponents() {
+        const groupedComponents = []; // This array holds the object containing all of the 4 inner grids
+        const subGroupComponents = []; // this array contains the components
+        let groupCompletionKey = 1; // Used after each newly formed group array; it start at 1 because the index of the bottom navigation also starts at 1
+        let updatedKey = null; // Used to keep the updated index because of the 0-1 offset
+        
+        const createdComponents = createComponents(); // create the comps before grouping (need this step to check the array length)
+
+        for (const [key, value] of Object.entries(createdComponents)) {
+            updatedKey = Number(key) + 1; // don't forget, the key is a string
+            subGroupComponents.push(value)
+
+            // add the subgroup to the component group
+            if (updatedKey % 3 === 0) {
+                groupedComponents.push({index: groupCompletionKey, components: [...subGroupComponents]});
+                subGroupComponents.length = 0; // flush the array
+                groupCompletionKey += 1;
+                continue;
+            }
+            
+            // Add the remaining jsx to the component group
+            if (createdComponents.length === updatedKey) {
+                groupedComponents.push({index: groupCompletionKey, components: [...subGroupComponents]});
+            }
+
+        }
+        return groupedComponents;
+    }
+    
+    // Used to get which comp should be rendered based on the keys, needs a array to work
+    function render() {
+        const componentsGrid = groupComponents();
+
+        return  componentsGrid.map( (groupdObject) => {
+                if( groupdObject.index === currentPage ) {
+                    return groupdObject.components;
+                }
+                return null;
+            }
+        )
+    };
+
     return(
         <React.Fragment>
             <Grid item xs={1} sx={{position:'relative', width:'100%', display:"flex", justifyContent:"end", alignItems:"center",}}>
@@ -61,9 +98,7 @@ const SearchResult = (props) => {
                 <Button onClick={props.setSearchHandler}>Go back</Button>
             </Grid>
             <Grid container direction="column" item xs={10} sx={{display:"flex", alignItems:"center"}}>
-                <Grid container item xs={4} sx={{display:"flex", justifyContent:"space-between", alignItems:"center"}}>
-                   {render()}
-                </Grid>
+                {render()}
                 {/* <Grid container item xs={4} sx={{display:"flex", justifyContent:"space-between", alignItems:"center"}}>
                     <Grid item xs={3} sx={{display:"flex", alignItems:"center", flexDirection:"column"}}> 
                         <Image img={icon}></Image>
