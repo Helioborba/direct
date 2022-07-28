@@ -7,7 +7,7 @@ import React, {useState} from "react";
 import SearchInnerGrid from "./searchInnerGrid.js";
 const SearchResult = (props) => {
     const [currentPage, setCurrentPage] = useState(1); // Pagination current page
-    let numberOfPages = 3; // Holds the amount of necessary pages needed to render the other grids
+    let numberOfPages = 1; // Holds the amount of necessary pages needed to render the other grids
 
     // receives both the event and value
     const currentPageHandler = (e, value) => {
@@ -77,9 +77,12 @@ const SearchResult = (props) => {
         return groupedComponents;
     }
     
-    // Used to get which comp should be rendered based on the keys, needs a array to work
+    // Used to get which comp should be rendered based on the keys, needs a array with objects containing indexes to work
     function render() {
         const componentsGrid = groupComponents();
+
+        // HERE IS SET THE NUMBER OF PAGES BASED ON HOW MANY GROUPS OF COMPONENTS WE GOT
+        numberOfPages = componentsGrid.length; 
 
         return  componentsGrid.map( (groupdObject) => {
                 if( groupdObject.index === currentPage ) {
@@ -99,42 +102,6 @@ const SearchResult = (props) => {
             </Grid>
             <Grid container direction="column" item xs={10} sx={{display:"flex", alignItems:"center"}}>
                 {render()}
-                {/* <Grid container item xs={4} sx={{display:"flex", justifyContent:"space-between", alignItems:"center"}}>
-                    <Grid item xs={3} sx={{display:"flex", alignItems:"center", flexDirection:"column"}}> 
-                        <Image img={icon}></Image>
-                        <Typography pt={2}>ASARERAWERERARER</Typography>
-                    </Grid>
-                    <Grid item xs={3} sx={{display:"flex", alignItems:"center", flexDirection:"column"}}> 
-                        <Image img={icon}></Image>
-                        <Typography pt={2}>ASARERAWERERARER</Typography>
-                    </Grid>
-                    <Grid item xs={3} sx={{display:"flex", alignItems:"center", flexDirection:"column"}}> 
-                        <Image img={icon}></Image>
-                        <Typography pt={2}>ASARERAWERERARER</Typography>
-                    </Grid>
-                    <Grid item xs={3} sx={{display:"flex", alignItems:"center", flexDirection:"column"}}> 
-                        <Image img={icon}></Image>
-                        <Typography pt={2}>ASARERAWERERARER</Typography>
-                    </Grid>   
-                </Grid>
-                <Grid container item xs={4} sx={{display:"flex", justifyContent:"space-between", alignItems:"center"}}>
-                    <Grid item xs={3} sx={{display:"flex", alignItems:"center", flexDirection:"column"}}> 
-                        <Image img={icon}></Image>
-                        <Typography pt={2}>ASARERAWERERARER</Typography>
-                    </Grid>
-                    <Grid item xs={3} sx={{display:"flex", alignItems:"center", flexDirection:"column"}}> 
-                        <Image img={icon}></Image>
-                        <Typography pt={2}>ASARERAWERERARER</Typography>
-                    </Grid>
-                    <Grid item xs={3} sx={{display:"flex", alignItems:"center", flexDirection:"column"}}> 
-                        <Image img={icon}></Image>
-                        <Typography pt={2}>ASARERAWERERARER</Typography>
-                    </Grid>
-                    <Grid item xs={3} sx={{display:"flex", alignItems:"center", flexDirection:"column"}}> 
-                        <Image img={icon}></Image>
-                        <Typography pt={2}>ASARERAWERERARER</Typography>
-                    </Grid>
-                </Grid> */}
             </Grid>
             <Grid item xs={1} sx={{display:"flex", justifyContent:"center", alignItems:"center"}}>
                 <ModelPagination currentPage={currentPage} currentPageHandler={currentPageHandler} numberOfPages={numberOfPages}></ModelPagination>

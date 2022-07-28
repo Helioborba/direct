@@ -32,17 +32,6 @@ const ModalNotification = (props) => {
             >
                 <DialogTitle id="scroll-dialog-title">Notifications</DialogTitle>
                 <DialogContent dividers={true}>
-                    {/* <DialogContentText
-                        id="scroll-dialog-description"
-                        ref={descriptionElementRef}
-                        tabIndex={-1}
-                    >
-                        {[...new Array(50)]
-                        .map(
-                            () => `Row de dados`,
-                        )
-                        .join('\n')}
-                    </DialogContentText> */}
                     <DialogContentText>
                         <Accordion></Accordion>
                     </DialogContentText>

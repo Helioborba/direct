@@ -33,4 +33,10 @@ export default class UserObject {
             'SELECT * FROM `users` WHERE `username` = ?', [user]
         );
     };
+
+    static userProfile(user) {
+        return conn.execute(
+            'SELECT * FROM `users` WHERE `username` = ?', [user]
+        );
+    };
 }
