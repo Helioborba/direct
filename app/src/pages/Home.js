@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import {Box, Typography, Grid} from "@mui/material";
 import Nav from "../components/nav/nav.js";
 import { useSpring, animated } from 'react-spring';

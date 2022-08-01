@@ -1,4 +1,5 @@
 import UserObject from "../models/mysql.js";
+import fs from 'fs';
 
 // Novelty function
 function sleep(ms) {
@@ -10,7 +11,6 @@ function sleep(ms) {
 // controls
 export async function postNewUser(req, res, next) { 
     const data = req.body.data;
-    console.log("data received: ", data);
 
     // Query stage
     const User = new UserObject(data.username, data.email, data.password);
@@ -23,7 +23,6 @@ export async function postNewUser(req, res, next) {
 
 export async function postFindLoginUser(req, res, next) { 
     const data = req.body.data;
-    console.log("data: ", data);
 
     // Query stage
     UserObject.findLoginUser(data.username, data.password)
@@ -51,7 +50,6 @@ export async function postFindUser(req, res, next) {
         })
     }
     const data = req.body.data;
-    console.log("data: ", data);
 
     // Query stage 
     UserObject.findUser(data.username)
@@ -82,7 +80,6 @@ export async function postGetProfile(req, res, next) {
         })
     }
     const data = req.body.data;
-    console.log("data: ", data);
 
     // Query stage 
     UserObject.findUser(data.username)
