@@ -7,6 +7,7 @@ const ProfileTextField= forwardRef((props, ref) => {
             id="input-field-chat"
             inputRef={ref}
             fullWidth
+            label={props.label}
             placeholder={props.username || null}
             InputLabelProps={{
                 sx: { color: '#fff'}

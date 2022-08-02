@@ -7,12 +7,13 @@ import Button from "../UI/buttons/button.js";
 const ModalProfile = (props) => {
     const nameRef = useRef();
     const introRef = useRef();
-    const birthdayRef = useRef();
+    const birthdayDayRef = useRef();
+    const birthdayMonthRef = useRef();
 
     function sendData(event) {
         event.preventDefault();
 
-        const data = {name: nameRef.current.value, intro: introRef.current.value, birthday: birthdayRef.current.value }; // 'User depois vai virar o id do usuario'
+        const data = {name: nameRef.current.value, intro: introRef.current.value, birthday: `${birthdayMonthRef.current.value}/${birthdayDayRef.current.value}` }; // 'User depois vai virar o id do usuario'
         console.log(data);
 
         // fetch('', {
@@ -29,7 +30,8 @@ const ModalProfile = (props) => {
         // Clear the form
         nameRef.current.value = '';
         introRef.current.value = '';
-        birthdayRef.current.value = '';
+        birthdayMonthRef.current.value = '';
+        birthdayDayRef.current.value = '';
     }
 
     return(
@@ -67,9 +69,14 @@ const ModalProfile = (props) => {
                     <Grid item xs={2}>
                         <Typography>Birthday: </Typography> 
                     </Grid>
-                    <Grid item xs={10}>
-                        <Grid container direction='row' sx={{width:"100%"}}>
-                            <ProfileTextField ref={birthdayRef}></ProfileTextField> 
+                    <Grid item xs={1}>
+                        <Grid container direction='row' sx={{width:"100%", pr:2}}>
+                            <ProfileTextField label={"Month"} ref={birthdayDayRef}></ProfileTextField> 
+                        </Grid>
+                    </Grid>
+                    <Grid item xs={1}>
+                        <Grid container direction='row' sx={{width:"100%",pr:2}}>
+                            <ProfileTextField label={"Day"} ref={birthdayMonthRef}></ProfileTextField> 
                         </Grid>
                     </Grid>
                 </Grid>

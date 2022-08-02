@@ -6,12 +6,13 @@ const ProfileTextFieldMultiline = forwardRef((props, ref) => {
             id="input-field-chat"
             inputRef={ref}
             multiline
-            maxRows={props.maxRows || 4} // default is 4
+            rows={2}
+            maxRows={props.maxRows || 2} // default is 4
             fullWidth
-            placeholder={props.username || '\n\n'} // the new lines help give the status a bit of 'multiline' sentiment
-            InputLabelProps={{
+            InputProps={{
                 sx: { color: '#fff'}
             }}
+            placeholder={props.username}
             sx={{
                 input: { // set the input styles and autofill
                     color: '#fff',
