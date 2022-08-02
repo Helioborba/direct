@@ -1,5 +1,5 @@
 // import { useContext } from "react";
-import {Box, Grid, Typography, Button} from "@mui/material";
+import {Box, Grid, Typography, Button, Avatar} from "@mui/material";
 import ProfileForm from "../components/profile/ProfileForm.js";
 import Nav from "../components/nav/nav.js";
 const Profile = (props) => {
@@ -16,6 +16,23 @@ const Profile = (props) => {
                             </Grid>
                         </Box>
                     </Grid>
+                    <Grid container item xs={12} sx={{my:2}}>
+                        <Grid container item xs={6} sx={{ display:'flex', justifyContent:'center', alignItems:'center'}}>
+                            Avatar
+                        </Grid>
+                        <Grid container item xs={6} sx={{ display:'flex', justifyContent:'center', alignItems:'center'}}>
+                            Banner
+                        </Grid>
+                    </Grid>
+                    <Grid container item xs={12} sx={{mt:4}}>
+                        <Grid container item xs={6} sx={{ display:'flex', justifyContent:'center', alignItems:'center'}}>
+                            <Avatar sx={{fontSize:"5em", width:200, height:200}}>S</Avatar>
+                        </Grid>
+                        <Grid container item xs={6} sx={{ display:'flex', justifyContent:'center', alignItems:'center'}}>
+
+                        </Grid>
+                    </Grid>
+                    
                     <Grid container item>
                         <ProfileForm></ProfileForm>
                         <Grid container item xs={12} sx={{mt:7, display:'flex', justifyContent:'center', alignItems:'center' }}>
