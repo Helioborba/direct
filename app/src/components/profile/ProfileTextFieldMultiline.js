@@ -7,7 +7,6 @@ const ProfileTextFieldMultiline = forwardRef((props, ref) => {
             inputRef={ref}
             multiline
             rows={2}
-            maxRows={props.maxRows || 2} // default is 4
             fullWidth
             InputProps={{
                 sx: { color: '#fff'}

@@ -15,7 +15,7 @@ const style = {
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
-  p: 4,
+  p: 4
 };
 
 
@@ -51,6 +51,7 @@ const ModalAccount = (props) => {
     usernameField.current.value = '';
     emailField.current.value = '';
     passwordField.current.value = '';
+    
     
     // Close modal
     props.onClose();
@@ -115,24 +116,24 @@ const ModalAccount = (props) => {
                       fullWidth
                       placeholder={"Type your Email"}
                       InputLabelProps={{
-                          sx: { color: '#000'}
+                        sx: { color: '#000'}
                       }}
                       sx={{
                           input: { // set the input styles and autofill
-                              color: '#000',
-                              "&:-webkit-autofill": {
-                                WebkitBoxShadow: "0 0 0 1000px #fff inset",
-                                WebkitTextFillColor: '#000 !important'
-                              }
+                            color: '#000',
+                            "&:-webkit-autofill": {
+                              WebkitBoxShadow: "0 0 0 1000px #fff inset",
+                              WebkitTextFillColor: '#000 !important'
+                            }
                           },
                           fieldset: {
-                              borderColor: '#000'
+                            borderColor: '#000'
                           },
                           '&:hover fieldset': {
-                              borderColor: (theme) => `${theme.palette.primary.main} !important`
+                            borderColor: (theme) => `${theme.palette.primary.main} !important`
                           },
                           '&.Mui-focused input': { // - Set the Input border when parent is focused 
-                              borderColor: '#fff !important',
+                            borderColor: '#fff !important',
                           },
                       }}
                     />
