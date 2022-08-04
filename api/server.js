@@ -19,9 +19,9 @@ const app = express(); // Principal para funcionar o node basicamente
 const __dirname = path.resolve(); // Dirname parece não existir pré-definido usando ES6 Import .js, por isso tem q ser definido
 
 // Express
-app.use(urlencoded({extended: true})); //body-parser está obsoleto, utilizar urlenconded!
+app.use(json({limit: '20mb'}));
+app.use(urlencoded({extended: true, limit: '20mb'})); //body-parser está obsoleto, utilizar urlenconded!
 app.use(stat(join(__dirname,'public')));
-app.use(json());
 
 
 // CORS para HTTP request não terem erro

@@ -13,11 +13,11 @@ const Profile = (props) => {
         setHoverDiv(!hoverDiv);
     }
 
-    
     const handleClick = () => {
         fileInput.current.click();
     }
 
+    // Apparently, you can use the blob for the image source 
     return(
         <Box sx={{width:"100vw", minHeight:"100vh", backgroundColor:"#555"}}>
             {/* <ModalAvatar open={open} openHandler={openHandler}></ModalAvatar> */}

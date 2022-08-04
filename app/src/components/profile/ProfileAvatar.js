@@ -1,43 +1,55 @@
 import {IconButton, FormControl} from "@mui/material";
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import Input from "../form/input";
+import { useState, useRef, useContext } from "react";
+import Message from "../../context/message";
 
 const ProfileAvatar = (props) => {
-    
+    const [image, setImage] = useState(null);
+    const formRef = useRef();
+    const MessageCtx = useContext(Message);
     // Used to transform the file object into a file stream
     const blobToData = (blob) => {
         return new Promise((resolve) => {
-          const reader = new FileReader()
-          reader.onloadend = () => resolve(reader.result)
-          reader.readAsDataURL(blob)
+          const reader = new FileReader();
+          reader.onloadend = () => resolve(reader.result);
+          reader.readAsDataURL(blob);
         })
     }
 
+    // Add the file to the memory when the user select it
     const handleFileChange = async event => {
         const data = event.target.files[0];
-        console.log(await blobToData(data));
+        setImage(await blobToData(data));
+
+        // Submit the form
+        formRef.current.dispatchEvent(
+            new Event("submit", { cancelable: true, bubbles: true })
+        );
     }
 
     const submitHandler = event => {
         event.preventDefault();
-        const data = event.target.value;
-        console.log(data)
-        // fetch('/upload', {
-        //     method: 'POST', 
-        //     mode: 'cors',
-        //     cache: 'no-cache',
-        //     credentials: 'same-origin',
-        //     headers: {
-        //       'Content-Type': 'application/json'
-        //     },
-        //     redirect: 'follow',
-        //     referrerPolicy: 'no-referrer', 
-        //     body: JSON.stringify(data) 
-        // });
-        console.log(`Data sent.\n${data}`);
+        const imageData = {data: { id:MessageCtx.userProvider.profile_id, image:image}};
+        fetch('/api/sys/newProfilePic', {
+            method: 'POST', 
+            mode: 'cors',
+            cache: 'no-cache',
+            credentials: 'same-origin',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            redirect: 'follow',
+            referrerPolicy: 'no-referrer', 
+            body: JSON.stringify(imageData) 
+        })
+        .then(res=> res.json())
+        .then(res=> console.log(res))
+        .catch(err=>console.log(err))
     }
+
     return (
-        <FormControl component="form" onSubmit={submitHandler} sx={{position:'absolute', display:"flex", justifyContent:'center', alignItems:'center'}}>
+        <FormControl component="form" onSubmit={submitHandler} ref={formRef} sx={{position:'absolute', display:"flex", justifyContent:'center', alignItems:'center'}}>
             <IconButton component='button' sx={{position:'absolute'}}>
                 <Input type="file" onChange={(e) => handleFileChange(e)} ref={props.fileInput} id="anex-profile-picture" style={{display:'none'}}/>
                 <CameraAltIcon sx={{position:'absolute', pointerEvents:'none', width:100, height:100, color:"blue"}}></CameraAltIcon >
