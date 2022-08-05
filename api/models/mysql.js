@@ -20,6 +20,7 @@ export default class UserObject {
         const profile_id = createFourDigitId(this.username);
         const res = []; // result array
 
+        // Not using the multiquery feature because of the sql injection problem, instead going for each step.
         // creates user profile
         res.push(conn.execute(
             'INSERT INTO profile (id) VALUES (?)', [profile_id]
@@ -31,13 +32,9 @@ export default class UserObject {
         return res;
     }
 
-    static fetchAll() {
-        return conn.execute('SELECT title, content FROM `heroku_3f91cda5aaca95a`.`tester`');
-    };
-
     static findLoginUser(user, password) {
         return conn.execute(
-            'SELECT * FROM `users` WHERE `username` = ? AND `password` = ? ', [user, password]
+            'SELECT `u`.`id`, `u`.`username`, `u`.`password`, `u`.`email`, `u`.`profile_id`, `profile_picture`, `biography`, `banner` FROM `users` u INNER JOIN `profile` on `u`.`profile_id` = `profile`.`id` WHERE `username` = ? AND `password` = ? ', [user, password]
         );
     };
 
@@ -55,7 +52,7 @@ export default class UserObject {
 
     static userImage(id, blob) {
         return conn.execute(
-            'UPDATE `profile` SET `profile_picture` = ? WHERE `id` = ?', [ blob, id]
+            'UPDATE `profile` SET `profile_picture` = ? WHERE `id` = ?', [blob, id]
         );
     };
 }

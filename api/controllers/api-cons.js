@@ -34,7 +34,8 @@ export async function postFindLoginUser(req, res, next) {
             const parsedData = data[0][0] || null; // get the data inside the row
             // Check if the row returned data or not
             if(parsedData?.username) {
-                res.send({ logged: true, message: 'Login Success', id: parsedData.id, name: parsedData.username, profile_id: parsedData.profile_id, error: false});
+                // The image needs to turn into a utf8 string before going, quite strange that node will make it turn into a buffer and object data after sending
+                res.send({ logged: true, message: 'Login Success', id: parsedData.id, name: parsedData.username, profile_id: parsedData.profile_id, profilePicture: parsedData.profile_picture.toString('utf8'), biography: parsedData.biography, banner:parsedData.banner, error: false});
             } else {
                 res.send({ logged: false, message: 'Login Failed', error: true}); // Tell the client the login attempt failed
             }

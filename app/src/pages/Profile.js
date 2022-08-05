@@ -1,23 +1,27 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useContext, useEffect } from "react";
 import {Box, Grid, Typography, Button, Avatar} from "@mui/material";
 import ProfileForm from "../components/profile/ProfileForm.js";
 import Nav from "../components/nav/nav.js";
 import ProfileAvatar from "../components/profile/ProfileAvatar.js";
+import Message from "../context/message.js";
 const Profile = (props) => {
 
     // Used for checking if the person want's to change his profile pic
     const [hoverDiv, setHoverDiv] = useState(false);
     const fileInput = useRef(null);
+    const MessageCtx = useContext(Message);
 
     function hoverDivHandler() {
         setHoverDiv(!hoverDiv);
+        //console.log(MessageCtx.userProvider.profilePicture)
     }
 
     const handleClick = () => {
         fileInput.current.click();
     }
-
+    
     // Apparently, you can use the blob for the image source 
+    // Need to check if user is logged later
     return(
         <Box sx={{width:"100vw", minHeight:"100vh", backgroundColor:"#555"}}>
             {/* <ModalAvatar open={open} openHandler={openHandler}></ModalAvatar> */}
@@ -41,9 +45,10 @@ const Profile = (props) => {
                     </Grid>
                     <Grid container item xs={12} sx={{mt:4}}>
                         <Grid container item xs={6} sx={{ position:'relative', display:'flex', justifyContent:'center', alignItems:'center'}}>
-                            <Avatar onMouseOver={hoverDivHandler} onMouseOut={hoverDivHandler} onClick={handleClick} sx={{fontSize:"5em", width:200, height:200, filter: hoverDiv && 'blur(2px)'}}>S</Avatar>
+                            <Avatar src={MessageCtx.userProvider?.profilePicture} onMouseOver={hoverDivHandler} onMouseOut={hoverDivHandler} onClick={handleClick} sx={{fontSize:"5em", width:200, height:200, filter: hoverDiv && 'blur(2px)'}}>S</Avatar>
                             {hoverDiv && (
-                                <ProfileAvatar fileInput={fileInput} handleClick={handleClick}></ProfileAvatar>
+                                // This will cause the component render cycle to be messy, need to find a better way to work it out after updating the avatar
+                                <ProfileAvatar hoverDivHandler={hoverDivHandler} fileInput={fileInput} handleClick={handleClick}></ProfileAvatar>
                             )}
                         </Grid>
                         <Grid container item xs={6} sx={{ display:'flex', justifyContent:'center', alignItems:'center'}}>
