@@ -61,11 +61,7 @@ const Home = (props) => {
             <Box  sx={{p:{xs:"5rem 0 5rem 0", lg:2}, display:'flex', justifyContent:'space-between', alignItems:'center'}}>
                 <Grid container direction="column" wrap="nowrap"  sx={{backgroundColor:"#222",  minHeight:"88vh", pt:2, pb:10, mr:2, borderRadius:{xs:0, lg:3}, border:"4px solid #1976d2" }}>
                     <Grid item xs={12} sx={{ position:'relative', display:'flex', flexDirection:"column", justifyContent:"center", alignItems:"center"}} >
-                        {/* <Avatar>S</Avatar>
-                        <Avatar>S</Avatar>
-                        <Avatar>S</Avatar>
-                        <Avatar>S</Avatar>
-                    <Avatar>S</Avatar> */}
+                       
                         <Grid item  sx={{display:'flex', flexDirection:"column", justifyContent:"start", alignItems:"center"}}>
                             <Typography variant='h1'>Welcome to Direct</Typography>
                         </Grid>

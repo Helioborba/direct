@@ -8,6 +8,8 @@ const ProfileAvatar = (props) => {
     const [image, setImage] = useState(null);
     const formRef = useRef();
     const MessageCtx = useContext(Message);
+
+    // This should become a function, as it is the universal way of handling picture data
     // Used to transform the file object into a file stream
     const blobToData = (blob) => {
         return new Promise((resolve) => {

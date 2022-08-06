@@ -17,7 +17,6 @@ const ChatModel = (props) => {
     const ctxMessage = useContext(Message);
     const chatField = useRef();
    
-    // Preciso trabalhar no envio de imagens depois
     const fileInput = useRef(null);
 
     const handleClick = () => {

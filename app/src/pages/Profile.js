@@ -4,6 +4,8 @@ import ProfileForm from "../components/profile/ProfileForm.js";
 import Nav from "../components/nav/nav.js";
 import ProfileAvatar from "../components/profile/ProfileAvatar.js";
 import Message from "../context/message.js";
+import ProfileBanner from "../components/profile/ProfileBanner.js";
+
 const Profile = (props) => {
 
     // Used for checking if the person want's to change his profile pic
@@ -52,7 +54,7 @@ const Profile = (props) => {
                             )}
                         </Grid>
                         <Grid container item xs={6} sx={{ display:'flex', justifyContent:'center', alignItems:'center'}}>
-
+                            <ProfileBanner></ProfileBanner>
                         </Grid>
                     </Grid>
                     

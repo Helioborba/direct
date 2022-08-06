@@ -55,4 +55,10 @@ export default class UserObject {
             'UPDATE `profile` SET `profile_picture` = ? WHERE `id` = ?', [blob, id]
         );
     };
+
+    static userBanner(id, blob) {
+        return conn.execute(
+            'UPDATE `profile` SET `banner` = ? WHERE `id` = ?', [blob, id]
+        );
+    };
 }
