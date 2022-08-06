@@ -6,7 +6,7 @@ import Message from '../context/message.js';
 
 // The friend list is actually the chat
 import ChatModel from "../components/chat/chatModel";
-import ChatWarning from "../components/chat/chatWarning";
+import NotLoggedWarning from "../components/alerts/NotLoggedWarning.js";
 
 const FriendList = (props) => {
     const ctxLogin = useContext(Message);
@@ -16,7 +16,7 @@ const FriendList = (props) => {
             <Nav></Nav>
             <Box sx={{p:{xs:"5rem 0 5rem 0", lg:2}, display:'flex', justifyContent:'space-between', alignItems:'center'}}>
                 <Grid container direction="row"  sx={{backgroundColor:"#222",  height:"88vh", borderRadius:{xs:0, lg:3} }}>
-                    {ctxLogin.userProvider.logged ? <ChatModel/> : <ChatWarning/>}
+                    {ctxLogin.userProvider.logged ? <ChatModel/> : <NotLoggedWarning>the Chat</NotLoggedWarning>}
                 </Grid>
             </Box>
         </Box>

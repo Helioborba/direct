@@ -2,5 +2,6 @@
 ## Purpose
 A chat application.
 
-## To-do
-- Come up with a better name.
+
+## Notes
+- The images are being stored in the local DB rather than a CDN for obvious reasons (deploy).
