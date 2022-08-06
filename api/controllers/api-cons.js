@@ -50,7 +50,7 @@ export async function postFindUser(req, res, next) {
         
         // Returns a array of objects
         return  data.map((data) => {
-            return {id: data.id, username: data.username, profilePicture: data.profile_picture?.toString('utf8')}
+            return {id: data.id, username: data.username, profilePicture: data.profile_picture?.toString('utf8'), banner: data.banner?.toString('utf8')}
         })
     }
     const data = req.body.data;

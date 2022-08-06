@@ -41,7 +41,7 @@ export default class UserObject {
     // Used in search
     static findUser(user) {
         return conn.execute(
-            'SELECT `u`.`id`, `u`.`username`, `p`.`profile_picture` FROM `users` u, `profile` p WHERE u.`username` = ? && p.`id` = u.`profile_id`', [user]
+            'SELECT `u`.`id`, `u`.`username`, `p`.`profile_picture`, `p`.`banner` FROM `users` u, `profile` p WHERE u.`username` = ? && p.`id` = u.`profile_id`', [user]
         );
     };
 

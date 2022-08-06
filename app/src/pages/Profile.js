@@ -10,7 +10,6 @@ const Profile = (props) => {
     const ctxLogin = useContext(Message);
     return(
         <Box sx={{width:"100vw", minHeight:"100vh", backgroundColor:"#555"}}>
-            {/* <ModalAvatar open={open} openHandler={openHandler}></ModalAvatar> */}
             <Nav></Nav>
             <Box sx={{p:{xs:"5rem 0 5rem 0", lg:2}, display:'flex', alignItems:'center'}}>
                 <Grid container direction="column" sx={{backgroundColor:"#222",  minHeight:"88vh", pt:2, pb:10, mr:2, borderRadius:{xs:0, lg:3}}}>

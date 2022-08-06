@@ -31,6 +31,7 @@ const SearchForm = (props) => {
         .then(res => res.json())
         .then(reqData => {
             if(!reqData.error) {
+                console.log(reqData.users)
                 props.setResultHandler(reqData.users);
                 props.setSearchHandler();
             }
