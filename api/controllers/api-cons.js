@@ -1,5 +1,4 @@
 import UserObject from "../models/mysql.js";
-import fs from 'fs';
 
 // Novelty function
 function sleep(ms) {
@@ -8,7 +7,7 @@ function sleep(ms) {
     });
 }
 
-// controls
+// Used to create user
 export async function postNewUser(req, res, next) {
     const data = req.body.data;
 
@@ -22,6 +21,7 @@ export async function postNewUser(req, res, next) {
     .catch( err => console.log(err));
 }
 
+// Used to login
 export async function postFindLoginUser(req, res, next) { 
     const data = req.body.data;
 
@@ -44,11 +44,13 @@ export async function postFindLoginUser(req, res, next) {
     .catch( err => console.log(err) );
 }
 
+// Used for the search
 export async function postFindUser(req, res, next) { 
-    function removePass(data) {
-        // Returns a array of objects without password
+    function mapUsers(data) { // Helps in making the profilePicture renaming
+        
+        // Returns a array of objects
         return  data.map((data) => {
-            return {id: data.id, username: data.username}
+            return {id: data.id, username: data.username, profilePicture: data.profile_picture?.toString('utf8')}
         })
     }
     const data = req.body.data;
@@ -64,7 +66,7 @@ export async function postFindUser(req, res, next) {
 
             // Check if the row returned data or not
             if(parsedData?.username) {
-                res.send({ message: 'User found', users: removePass(data[0]), error: false});
+                res.send({ message: 'User found', users: mapUsers(data[0]), error: false});
             } else {
                res.send({ message: 'User not found', error: true}); // Tell the client the login attempt failed
             }
@@ -73,33 +75,13 @@ export async function postFindUser(req, res, next) {
     .catch( err => console.log(err) );
 }
 
-export async function postGetProfile(req, res, next) { 
-    function removePass(data) {
-        // Returns a array of objects without password
-        return  data.map((data) => {
-            return {id: data.id, username: data.username}
-        })
-    }
+//// The area below is for the user Profile 
+// This is one is for the profile form
+export async function postGetProfile(req, res, next) {  // Not used yet
     const data = req.body.data;
-
-    // Query stage 
-    UserObject.findUser(data.username)
-    .then( (data) => {
-        if( data[0] === undefined ) { // The problem with SQL lib is that it returns a empty array in case it's not found
-            res.send({ message: 'User not found', error: true});
-        } else {
-            const parsedData = data[0][0] || null; // Used to check if any result has been received for real
-
-            // Check if the row returned data or not
-            if(parsedData?.username) {
-                res.send({ message: 'User found', users: removePass(data[0]), error: false});
-            } else {
-               res.send({ message: 'User not found', error: true}); // Tell the client the login attempt failed
-            }
-        }
-    })
-    .catch( err => console.log(err) );
+    UserObject.userProfile(data.username);
 }
+
 
 export async function postImage(req, res, next) { 
     const data = req.body.data;
@@ -122,3 +104,6 @@ export async function postBanner(req, res, next) {
     })
     .catch( err => console.log(err) );
 }
+
+///////
+

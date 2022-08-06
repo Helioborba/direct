@@ -6,8 +6,6 @@ function createFourDigitId(username) {
 }
 /**
  *   Object containing the bridge for the queries
- *   For post use addUser().
- *   For get use fetchAll().
  * */
 export default class UserObject {
     constructor(username, email, password) {
@@ -16,6 +14,7 @@ export default class UserObject {
         this.password = password;
     }
 
+    // Main function : creates the user
     addUser() {
         const profile_id = createFourDigitId(this.username);
         const res = []; // result array
@@ -32,18 +31,21 @@ export default class UserObject {
         return res;
     }
 
+    // Used for login
     static findLoginUser(user, password) {
         return conn.execute(
             'SELECT `u`.`id`, `u`.`username`, `u`.`password`, `u`.`email`, `u`.`profile_id`, `profile_picture`, `biography`, `banner` FROM `users` u INNER JOIN `profile` on `u`.`profile_id` = `profile`.`id` WHERE `username` = ? AND `password` = ? ', [user, password]
         );
     };
 
+    // Used in search
     static findUser(user) {
         return conn.execute(
-            'SELECT * FROM `users` WHERE `username` = ?', [user]
+            'SELECT `u`.`id`, `u`.`username`, `p`.`profile_picture` FROM `users` u, `profile` p WHERE u.`username` = ? && p.`id` = u.`profile_id`', [user]
         );
     };
 
+    // not used yet
     static userProfile(user) {
         return conn.execute(
             'SELECT * FROM `users` WHERE `username` = ?', [user]

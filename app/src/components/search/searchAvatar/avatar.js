@@ -1,9 +1,9 @@
 import { Avatar} from "@mui/material";
 
-const Image = (props) => {
+const SearchAvatar = (props) => {
     return (
         <Avatar
-            src={`${props.img}?w=248&fit=crop&auto=format`}
+            src={`${props.img}`}
             sx={{...props.sx, height:100, width:100}}
             alt={props.title}
             loading="lazy"
@@ -11,4 +11,4 @@ const Image = (props) => {
     )
 }
 
-export default Image;
+export default SearchAvatar;

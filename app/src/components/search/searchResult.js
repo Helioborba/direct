@@ -1,8 +1,6 @@
 import { Grid, Typography} from "@mui/material";
 import ModelPagination from "../pagination/pagination.js";
 import Button from "../UI/buttons/button.js";
-import icon from "../../others/images/icon.png";
-import Image from "../UI/image/image.js";
 import React, {useState} from "react";
 import SearchInnerGrid from "./searchInnerGrid.js";
 const SearchResult = (props) => {
@@ -21,8 +19,9 @@ const SearchResult = (props) => {
         let updatedKey = null; // Used to keep the updated index because of the 0-1 offset 
 
         for (const [key, value] of Object.entries(props.result)) {
+            console.log(props.result)
             updatedKey = Number(key) + 1;
-            subGroup.push(<SearchInnerGrid key={key}>{value.username}</SearchInnerGrid>); // add the current value to the sub group
+            subGroup.push(<SearchInnerGrid key={key} icon={value.profilePicture}>{value.username}</SearchInnerGrid>); // add the current value to the sub group
         
             // add the subgroup
             if (updatedKey % 4 === 0) {
