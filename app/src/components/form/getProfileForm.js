@@ -11,7 +11,7 @@ const ProfileForm = (props) => {
                     id="input-field-chat"
                     inputRef={props.chatField}
                     fullWidth
-                    placeholder={props.username || null}
+                    placeholder={props.displayName || null}
                     InputLabelProps={{
                         sx: { color: '#fff'}
                     }}

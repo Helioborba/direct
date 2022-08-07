@@ -8,7 +8,7 @@ const ProfileTextField= forwardRef((props, ref) => {
             inputRef={ref}
             fullWidth
             label={props.label}
-            placeholder={props.username || null}
+            placeholder={props.displayName || null}
             InputLabelProps={{
                 sx: { color: '#fff'}
             }}

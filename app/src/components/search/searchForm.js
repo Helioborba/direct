@@ -7,14 +7,14 @@ import SearchIcon from '@mui/icons-material/Search';
 
 const SearchForm = (props) => {
     // Refs are used for the form inputs
-    const usernameField = useRef();
+    const displayNameField = useRef();
         
     // Send data to server
     function sendSearchRequest(event) {
         event.preventDefault();
 
         // The data
-        const userData = { data : { username: usernameField.current.value} };
+        const userData = { data : { displayName: displayNameField.current.value} };
         
         fetch('/api/sys/findUser', {
             method: 'POST', 
@@ -31,7 +31,7 @@ const SearchForm = (props) => {
         .then(res => res.json())
         .then(reqData => {
             if(!reqData.error) {
-                console.log(reqData.users)
+                // Update the state after getting the data as well
                 props.setResultHandler(reqData.users);
                 props.setSearchHandler();
             }
@@ -39,7 +39,7 @@ const SearchForm = (props) => {
         .catch( err => console.log(err));
 
         // Clear the fields
-        usernameField.current.value = '';
+        displayNameField.current.value = '';
     }
 
     return (
@@ -51,7 +51,7 @@ const SearchForm = (props) => {
                 <Grid item>
                     <TextField
                         id="input-field-chat"
-                        inputRef={usernameField}
+                        inputRef={displayNameField}
                         fullWidth
                         placeholder={"Person name or Group ID"}
                         InputLabelProps={{

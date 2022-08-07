@@ -20,15 +20,24 @@ export default class UserObject {
         const res = []; // result array
 
         // Not using the multiquery feature because of the sql injection problem, instead going for each step.
-        // creates user profile
         res.push(conn.execute(
             'INSERT INTO profile (id) VALUES (?)', [profile_id]
         ))
         // creates user
-        res.push(conn.execute(
-            'INSERT INTO users (username, email, password, profile_id ) VALUES (?, ?, ?, ?)', [this.username, this.email, this.password, profile_id ]
+        res.push(conn.execute( // The username WILL be always the display name to new accounts until the person changes it
+            'INSERT INTO users (username, display_name, email, password, profile_id ) VALUES (?, ?, ?, ?, ?)', [this.username, this.username, this.email, this.password, profile_id ]
         ))
+
         return res;
+    
+        
+    }
+
+    // Used to validate if user exists, helps to not break the query
+    userExists() {
+        return conn.execute(
+            'SELECT `username` FROM `users` u WHERE `u`.`username` = ?',  [this.username]
+        )
     }
 
     // Used for login
@@ -41,14 +50,14 @@ export default class UserObject {
     // Used in search
     static findUser(user) {
         return conn.execute(
-            'SELECT `u`.`id`, `u`.`username`, `p`.`profile_picture`, `p`.`banner` FROM `users` u, `profile` p WHERE u.`username` = ? && p.`id` = u.`profile_id`', [user]
+            'SELECT `u`.`id`, `u`.`display_name`, `p`.`profile_picture`, `p`.`banner` FROM `users` u, `profile` p WHERE u.`display_name` = ? && p.`id` = u.`profile_id`', [user]
         );
     };
 
-    // not used yet
-    static userProfile(user) {
+    // not used yet, will be for changing dates, bio, display name
+    static userProfile(id) {
         return conn.execute(
-            'SELECT * FROM `users` WHERE `username` = ?', [user]
+            'SELECT * FROM `users` WHERE `id` = ?', [id]
         );
     };
 

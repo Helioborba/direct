@@ -45,7 +45,10 @@ const ModalAccount = (props) => {
         redirect: 'follow',
         referrerPolicy: 'no-referrer', 
         body: JSON.stringify(userData) 
-    });
+    })
+    .then(res=>res.json())
+    .then(res=>console.log(res))
+    .catch(err=>console.log(err));
 
     // Clear the fields
     usernameField.current.value = '';

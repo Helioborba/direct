@@ -12,13 +12,29 @@ export async function postNewUser(req, res, next) {
     const data = req.body.data;
 
     // Query stage
-    // Careful in the .then, there's a array because there's 2 queries running.
+    // Careful in the .then, there's a array cause we have 2 queries running.
     const User = new UserObject(data.username, data.email, data.password);
-    User.addUser()
-    [1].then( () => { // there's actually no need for this then, as we are not checking any problems in the query itself
-        res.send({ message: 'Added Successfully'});
+    
+    User.userExists()
+    .then( (resultQuery) => {
+        const parsedData = resultQuery[0][0] || null; // get the data inside the row
+        // Check if the user exist, if it does tell it exist else run the query normally
+        if(parsedData?.username) {
+            res.send({error: true, errorMessage: "The username is already in use"})
+        } else {
+            User.addUser()
+            [0].then( (resultQuery) => {
+                if(resultQuery != null) { // there is actually no checking
+                    res.send({ message: 'Added Successfully'});
+                } else {
+                    res.send({message : `Error in query: ${resultQuery.errorMessage}`})
+                }
+            })
+            .catch( err => console.log(err));
+        }
+        
     })
-    .catch( err => console.log(err));
+
 }
 
 // Used to login
@@ -50,13 +66,14 @@ export async function postFindUser(req, res, next) {
         
         // Returns a array of objects
         return  data.map((data) => {
-            return {id: data.id, username: data.username, profilePicture: data.profile_picture?.toString('utf8'), banner: data.banner?.toString('utf8')}
+            return {id: data.id, displayName: data.display_name, profilePicture: data.profile_picture?.toString('utf8'), banner: data.banner?.toString('utf8')}
         })
     }
+    
     const data = req.body.data;
 
     // Query stage 
-    UserObject.findUser(data.username)
+    UserObject.findUser(data.displayName)
     .then( (data) => {
         if( data[0] === undefined ) { // The problem with SQL lib is that it returns a empty array in case it's not found
             res.send({ message: 'User not found', error: true});
@@ -65,7 +82,7 @@ export async function postFindUser(req, res, next) {
             const parsedData = data[0][0] || null; // Used to check if any result has been received for real
 
             // Check if the row returned data or not
-            if(parsedData?.username) {
+            if(parsedData?.display_name) {
                 res.send({ message: 'User found', users: mapUsers(data[0]), error: false});
             } else {
                res.send({ message: 'User not found', error: true}); // Tell the client the login attempt failed

@@ -51,7 +51,6 @@ const ModalLogin = (props) => {
         .then(res => res.json())
         .then(data => {
             ctxLogin.userHandler(data)
-            console.log(data);
         })
         .catch( err => console.log(err));
 
@@ -75,10 +74,10 @@ const ModalLogin = (props) => {
                 <Typography id="modal-modal-title" variant="h6" color={'white'} component="h2">
                     Log into Direct
                 </Typography>
-                <Typography id="modal-modal-description" color={'white'}  sx={{ mt: 2 }}>
+                <Typography id="modal-modal-description" color={'white'}  sx={{mt: 2}}>
                     Type your account information to get right back in
                 </Typography>
-                <FormControl component="form" onSubmit={sendLoginRequest} sx={{width:"100%",pt:2}}>
+                <FormControl component="form" onSubmit={sendLoginRequest} sx={{width:"100%", pt:2}}>
                   <Grid container direction='row'>
                     <Grid item xs={6} p={2}>
                       <Typography color={'white'}>
@@ -147,16 +146,16 @@ const ModalLogin = (props) => {
                     <Grid item xs={12} sx={{display:'flex', justifyContent:'center', alignItems:'center', mt: 5}}>
                       <Button type={'submit'} variant={'outlined'} sx={{ '&:hover': {borderColor: '#1976d2'}, m:1}}>
                           <Grid container sx={{display:'flex', justifyContent:'center', alignItems:'center', p:1}}>
-                              <Grid item xs={12} sx={{display:'flex', justifyContent:'center', alignItems:'center'}}>
-                                  <Typography>Login</Typography>
-                              </Grid>
+                                <Grid item xs={12} sx={{display:'flex', justifyContent:'center', alignItems:'center'}}>
+                                    <Typography>Login</Typography>
+                                </Grid>
                           </Grid>
                       </Button>
                       <Button onClick={props.onClose} variant={'outlined'} sx={{ '&:hover': {borderColor: '#1976d2'}, ml:3}}>
                           <Grid container sx={{display:'flex', justifyContent:'center', alignItems:'center', p:1}}>
-                              <Grid item xs={12}>
-                                  <Typography>Go back</Typography>
-                              </Grid>
+                                <Grid item xs={12}>
+                                    <Typography>Go back</Typography>
+                                </Grid>
                           </Grid>
                       </Button>
                     </Grid>
