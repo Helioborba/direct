@@ -22,14 +22,14 @@ const Home = (props) => {
             from: { x: 3 },
             x: 1,
             delay: 1000,
-            config: { frequency:2},
+            config: { frequency: 2 },
             onRest: () => {
-                setFlip(!flip)
+                setFlip(!flip);
             },
         })
         
         return (
-          <animated.svg
+        <animated.svg
             style={{overflow:'visible',  top:290, width: 1200, height: 1 }}
             strokeWidth="2"
             stroke="rgb(255, 30, 171)"
@@ -38,10 +38,9 @@ const Home = (props) => {
             strokeDasharray={1200}
             strokeDashoffset={
                x.to(x => (1 - x) * 1195) 
-            }
-            >
+            }>
             <path d="M 0 0 q 600 100 1200 0" style={{stroke:'#1976d2', fill:"#222", fillOpacity:"0",  strokeWidth:5}} />
-          </animated.svg>
+        </animated.svg>
         )
     }
 
@@ -61,7 +60,6 @@ const Home = (props) => {
             <Box  sx={{p:{xs:"5rem 0 5rem 0", lg:2}, display:'flex', justifyContent:'space-between', alignItems:'center'}}>
                 <Grid container direction="column" wrap="nowrap"  sx={{backgroundColor:"#222",  minHeight:"88vh", pt:2, pb:10, mr:2, borderRadius:{xs:0, lg:3}, border:"4px solid #1976d2" }}>
                     <Grid item xs={12} sx={{ position:'relative', display:'flex', flexDirection:"column", justifyContent:"center", alignItems:"center"}} >
-                       
                         <Grid item  sx={{display:'flex', flexDirection:"column", justifyContent:"start", alignItems:"center"}}>
                             <Typography variant='h1'>Welcome to Direct</Typography>
                         </Grid>

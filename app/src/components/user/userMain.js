@@ -1,19 +1,47 @@
-import React, { useState, useRef, useContext } from "react";
-import {Box, Grid, Typography, Button, Avatar} from "@mui/material";
+import React, { useState, useEffect } from "react";
+import {Box, Grid, Typography,  Avatar} from "@mui/material";
 
 const UserMain = (props) => {
+    const [src, setSrc] = useState(null);
+    const data = {data: { username: props.username}}
+
+    function fetchUser() {
+        fetch('/api/sys/findProfile', {
+            method:"post",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(res => res.json())
+        .then(res => {
+            setSrc(res.profilePicture);
+            console.log(res);
+        })
+        .catch(err => {console.log(err)});
+    }
+
+    
+    useEffect( () => {
+        const identifier = setTimeout( () => {
+        fetchUser();
+        return () => {
+            clearTimeout(identifier);
+        };
+      })
+    },[])
 
     return(
         <React.Fragment>
             <Grid container item sx={{ position:'relative', display:'flex', flexDirection:"column", justifyContent:"center", alignItems:"center"}} >
                 <Box sx={{p:{xs:"5rem 0 5rem 0", lg:2}, display:'flex', justifyContent:'space-between', alignItems:'center'}}>
                     <Grid container direction="row"  sx={{backgroundColor:"#222", borderRadius:{xs:0, lg:3} }}>
-                        <Typography>{props.name}</Typography>
+                        <Typography>{props.username}</Typography>
                     </Grid>
                 </Box>
                 <Grid container item xs={12} sx={{my:4}}>
                     <Grid container item xs={6} sx={{ position:'relative', display:'flex', justifyContent:'center', alignItems:'center'}}>
-                        <Avatar sx={{fontSize:"5em", width:200, height:200}}>S</Avatar>
+                        <Avatar src={src} sx={{fontSize:"5em", width:200, height:200}}></Avatar>
                     </Grid>
                     <Grid container item xs={6} sx={{ position:'relative', display:'flex', justifyContent:'center'}}>
                         <Grid item xs={12}><Typography>Groups</Typography></Grid>

@@ -55,9 +55,9 @@ export default class UserObject {
     };
 
     // not used yet, will be for changing dates, bio, display name
-    static userProfile(id) {
+    static userProfile(username) {
         return conn.execute(
-            'SELECT * FROM `users` WHERE `id` = ?', [id]
+            'SELECT `u`.`display_name`, `u`.`username`, `p`.`profile_picture`, `p`.`banner` FROM `users` u,`profile` p WHERE `u`.`username` = ? && `u`.`profile_id` = `p`.`id` ', [username]
         );
     };
 
