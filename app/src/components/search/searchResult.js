@@ -19,8 +19,11 @@ const SearchResult = (props) => {
         let updatedKey = null; // Used to keep the updated index because of the 0-1 offset 
 
         for (const [key, value] of Object.entries(props.result)) {
+            console.log(props.result)
             updatedKey = Number(key) + 1;
-            subGroup.push(<SearchInnerGrid key={key} id={value.id} icon={value.profilePicture} banner={value.banner}>{value.displayName}</SearchInnerGrid>); // add the current value to the sub group
+            subGroup.push(
+                <SearchInnerGrid key={key} id={value.id} username={value.username} icon={value.profilePicture} banner={value.banner}>{value.displayName}</SearchInnerGrid>
+            ); // add the current value to the sub group
         
             // add the subgroup
             if (updatedKey % 4 === 0) {

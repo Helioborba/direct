@@ -20,7 +20,7 @@ const Router = (props) => {
                     <Route path="/chat" element={<Chat/>}/>
                     <Route path="/search" element={<Search/>}/>
                     <Route path="/profile" element={<Profile/>}/>
-                    <Route path="/user/:id" component={<User/>} />
+                    <Route path="/user/:name" element={<User/>} />
                     <Route path="/*" element={<NotFound/>}/>
                 </Routes>
             </Box>
