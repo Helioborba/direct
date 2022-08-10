@@ -29,7 +29,7 @@ const UserMain = (props) => {
             clearTimeout(identifier);
         };
       })
-    },[])
+    },[fetchUser])
 
     return(
         <React.Fragment>

@@ -24,7 +24,7 @@ const ProfileAvatar = (props) => {
         const data = event.target.files[0];
         console.log(data)
         setImage(await blobToData(data));
-        // console.log(image)
+        
         // Submit the form
         formRef.current.dispatchEvent(
             new Event("submit", { cancelable: true, bubbles: true })
@@ -50,7 +50,8 @@ const ProfileAvatar = (props) => {
         .then(res=> res.json())
         .then(res=> {
             console.log(res);
-            MessageCtx.userProvider.profilePicture = image;
+            props.setProfilePic(image); // description below
+            MessageCtx.userProvider.profilePicture = image; // Need to find a way to update this using the state itself, to make a one line
         }
         )
         .catch(err=>console.log(err))
@@ -65,7 +66,7 @@ const ProfileAvatar = (props) => {
     },[MessageCtx.userProvider?.profilePicture])
 
     return (
-        <FormControl component="form" onSubmit={submitHandler} ref={formRef} sx={{position:'absolute', display:"flex", justifyContent:'center', alignItems:'center'}}>
+        <FormControl component="form" onSubmit={submitHandler} ref={formRef} sx={{ visibility: props.hoverDiv ? 'visible' : 'hidden', position:'absolute', display:"flex", justifyContent:'center', alignItems:'center'}}>
             <IconButton component='button' sx={{position:'absolute'}}>
                 <Input type="file" onChange={(e) => handleFileChange(e)} ref={props.fileInput} id="anex-profile-picture" style={{display:'none'}}/>
                 <CameraAltIcon sx={{position:'absolute', pointerEvents:'none', width:100, height:100, color:"blue"}}></CameraAltIcon >

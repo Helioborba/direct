@@ -1,32 +1,31 @@
-import React, { useState, useRef, useContext } from "react";
+import React, { useState, useRef, useContext, useEffect } from "react";
 import {Box, Grid, Typography, Button, Avatar} from "@mui/material";
 import ProfileForm from "./ProfileForm.js";
-import Nav from "../nav/nav.js";
 import ProfileAvatar from "./ProfileAvatar.js";
 import Message from "../../context/message.js";
 import ProfileBanner from "./ProfileBanner.js";
 
 const ProfileMain = (props) => {
+    const MessageCtx = useContext(Message);
 
     // Used for checking if the person want's to change his profile pic
     const [hoverDiv, setHoverDiv] = useState(false);
+    const [profilePic, setProfilePic] = useState(MessageCtx.userProvider?.profilePicture || null ); 
     const fileInput = useRef(null);
-    const MessageCtx = useContext(Message);
 
     function hoverDivHandler() {
         setHoverDiv(!hoverDiv);
-        //console.log(MessageCtx.userProvider.profilePicture)
     }
 
     const handleClick = () => {
         fileInput.current.click();
     }
-    
+
     // Apparently, you can use the blob for the image source 
     // Need to check if user is logged later
     return(
         <React.Fragment>
-            <Grid container item sx={{ position:'relative', display:'flex', flexDirection:"column", justifyContent:"center", alignItems:"center"}} >
+            <Grid container item sx={{position:'relative', display:'flex', flexDirection:"column", justifyContent:"center", alignItems:"center"}} >
                 <Box sx={{p:{xs:"5rem 0 5rem 0", lg:2}, display:'flex', justifyContent:'space-between', alignItems:'center'}}>
                     <Grid container direction="row"  sx={{backgroundColor:"#222", borderRadius:{xs:0, lg:3} }}>
                         <Typography>Manage your profile</Typography>
@@ -43,11 +42,9 @@ const ProfileMain = (props) => {
             </Grid>
             <Grid container item xs={12} sx={{mt:4}}>
                 <Grid container item xs={6} sx={{ position:'relative', display:'flex', justifyContent:'center', alignItems:'center'}}>
-                    <Avatar src={MessageCtx.userProvider?.profilePicture} onMouseOver={hoverDivHandler} onMouseOut={hoverDivHandler} onClick={handleClick} sx={{fontSize:"5em", width:200, height:200, filter: hoverDiv && 'blur(2px)'}}>S</Avatar>
-                    {hoverDiv && (
-                        // This will cause the component render cycle to be messy, need to find a better way to work it out after updating the avatar
-                        <ProfileAvatar hoverDivHandler={hoverDivHandler} fileInput={fileInput} handleClick={handleClick}></ProfileAvatar>
-                    )}
+                    <Avatar src={profilePic} onMouseOver={hoverDivHandler} onMouseOut={hoverDivHandler} onClick={handleClick} sx={{fontSize:"5em", width:200, height:200, filter: hoverDiv && 'blur(2px)'}}>S</Avatar>
+                    {/* // This will cause the component render cycle to be messy, need to find a better way to work it out after updating the avatar */}
+                    <ProfileAvatar hoverDivHandler={hoverDivHandler} setProfilePic={setProfilePic} hoverDiv={hoverDiv} fileInput={fileInput} handleClick={handleClick}></ProfileAvatar>
                 </Grid>
                 <Grid container item xs={6} sx={{ display:'flex', justifyContent:'center', alignItems:'center'}}>
                     <ProfileBanner></ProfileBanner>
