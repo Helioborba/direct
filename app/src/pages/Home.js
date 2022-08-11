@@ -6,6 +6,7 @@ import ChatIcon from '@mui/icons-material/Chat';
 import SendIcon from '@mui/icons-material/Send';
 import Button from "../components/UI/buttons/button.js";
 import ModalAccount from "../components/modals/modalAccount.js";
+
 // Problema com o SVG: Ele é grande demais e esta ofuscando a nav 
 const Home = (props) => {
     const [open, setOpen] = useState(false);
