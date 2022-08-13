@@ -1,7 +1,5 @@
-import {Typography, Grid} from "@mui/material";
-import { FormControl, TextField, IconButton } from "@mui/material";
-import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
-import Input from "./input.js";
+import {Grid} from "@mui/material";
+import {FormControl, TextField } from "@mui/material";
 
 const ProfileForm = (props) => {
     return (

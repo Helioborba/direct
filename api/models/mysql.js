@@ -54,7 +54,6 @@ export default class UserObject {
         );
     };
 
-    // not used yet, will be for changing dates, bio, display name
     static userProfile(username) {
         return conn.execute(
             'SELECT `u`.`display_name`, `u`.`username`, `p`.`profile_picture`, `p`.`banner` FROM `users` u,`profile` p WHERE `u`.`username` = ? && `u`.`profile_id` = `p`.`id` ', [username]
@@ -70,6 +69,12 @@ export default class UserObject {
     static userBanner(id, blob) {
         return conn.execute(
             'UPDATE `profile` SET `banner` = ? WHERE `id` = ?', [blob, id]
+        );
+    };
+
+    static addFriend(id, targetId, date) {
+        return conn.execute(
+            'INSERT INTO `friends` values (?, ?, ?)', [id, targetId, date]
         );
     };
 }

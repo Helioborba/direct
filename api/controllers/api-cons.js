@@ -142,21 +142,11 @@ export async function postBanner(req, res, next) {
 // Friend request
 export async function postFriendRequest(req, res, next) { 
     const data = req.body.data;
-    let yourDate = new Date();
-    console.log(`${data} and ${yourDate.toISOString().split('T')[0]}`);
-    // UserObject.userProfile(data.username)
-    // .then( (data) => {
-    //     if( data[0] === undefined ) { 
-    //         res.send({ message: 'User not found', error: true});
-    //     } else {
-    //         const parsedData = data[0][0] || null; 
+    let date = new Date();
 
-    //         if(parsedData?.username) {
-    //             res.send({ message: 'User found', username: parsedData.usernam?.toString('utf8'), profilePicture: parsedData.profile_picture?.toString('utf8'), banner: parsedData.banner?.toString('utf8'),  error: false});
-    //         } else {
-    //            res.send({ message: 'User not found', error: true});
-    //         }
-    //     }
-    // })
-    // .catch( err => console.log(err) );
+    UserObject.addFriend(data.id, data.targetId, date)
+    .then( (res) => {
+        res.send({ message: 'added friend', res:res, error: false});
+    })
+    .catch( err => console.log(err) );
 }
