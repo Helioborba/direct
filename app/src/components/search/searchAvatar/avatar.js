@@ -1,4 +1,4 @@
-import { Avatar} from "@mui/material";
+import { Avatar } from "@mui/material";
 
 const SearchAvatar = (props) => {
     return (

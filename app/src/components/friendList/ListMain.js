@@ -1,15 +1,14 @@
 import React, { useContext, useEffect, useState, useRef } from "react";
 import {Typography, Grid} from "@mui/material";
 import banner from "../../others/images/banner.jpg";
-import Message from '../../context/message.js';
 import {Avatar} from "@mui/material";
 import Button from "../UI/buttons/button";
-import ChatInput from "../form/chatInput.js";
-
+import BannerBackground from "../search/searchAvatar/bannerBackground.js";
+import {Link, Box} from "@mui/material";
+import { NavLink } from "react-router-dom";
 // Caixas do chat
-import ChatUserBox from "../chatBoxes/user";
-import ChatOthersBox from "../chatBoxes/others";
 import ChatMessagePreview from "./ChatMessagePreview";
+import UserListGrid from "./subComponents/UserListGrid";
 
 const ListMain = (props) => {
 
@@ -22,16 +21,14 @@ const ListMain = (props) => {
   
         /* Track */
         '::-webkit-scrollbar-track': {
-            boxShadow: 'inset 0 0 5px grey',
-            borderTopLeftRadius:{xs:0, lg:15},
-            borderBottomRightRadius:{xs:0, lg:15}
+            boxShadow: 'inset 0 0 5px grey'
+         
         },
            
         /* Handle */
         '::-webkit-scrollbar-thumb': {
             background: '#666',
-            borderTopLeftRadius:{xs:0, lg:15},
-            borderBottomRightRadius:{xs:0, lg:15}
+          
         },
           
         /* Handle on hover */
@@ -43,20 +40,20 @@ const ListMain = (props) => {
         
         <React.Fragment>
             {/* Avatar and Navigation */}
-            <Grid container item direction="column" wrap={'nowrap'} sx={{maxHeight:"100%"}} xs={4}>
+            <Grid container item direction="column" wrap={'nowrap'} sx={{maxHeight: "100%"}} xs={4}>
                 {/* Avatar */}
-                <Grid item display='flex' flexDirection='column' sx={{backgroundColor:"#222", borderTopLeftRadius:{xs:0, lg:15}, display:"flex", justifyContent:'center', alignItems:'center'}} xs={1}> 
+                <Grid item display='flex' flexDirection='column' sx={{backgroundColor:"#222", borderTopLeftRadius:{xs:0, lg:15}, display:"flex", justifyContent:'center', alignItems:'center', boxShadow:'12px 0px 10px -5px rgba(10,10,10,0.5)'}} xs={1}> 
                     <Grid item>
                         <Typography>Chat</Typography>
                     </Grid>
                 </Grid>
-                <Grid item display='flex' flexDirection='column' sx={{overflow:'scroll', backgroundColor:"#222", display:"flex", justifyContent:'center', alignItems:'center'}} xs={10}> 
-                    <Grid sx={{width: '100%'}}>
+                <Grid item display='flex' flexDirection='column' sx={{overflowY:'scroll',...scrollBar, backgroundColor:"#222", display:"flex", justifyContent:'center', alignItems:'center', boxShadow:'10px 0px 10px -5px rgba(10,10,10,0.5)'}} xs={10}> 
+                    <Grid sx={{width: '100%', height:"100%"}}>
                         <ChatMessagePreview/>
                     </Grid>
                 </Grid>
                 {/* Navi */}
-                <Grid item display='flex' flexDirection='column' xs={1} sx={{display:"flex", justifyContent:"flex-end", alignItems:'center', backgroundColor:"#222", borderBottomLeftRadius:{xs:0, lg:15}, p:{xs:0, lg:2}, boxShadow:'12px 0px 10px -5px rgba(10,10,10,0.2)'}}> 
+                <Grid item display='flex' flexDirection='column' xs={1} sx={{display:"flex", justifyContent:"flex-end", alignItems:'center', backgroundColor:"#222", borderBottomLeftRadius:{xs:0, lg:15}, p:{xs:0, lg:2}, boxShadow:'10px 0px 10px -5px rgba(10,10,10,0.5)'}}> 
                     <Grid item>
                         <Button>
                             Go back
@@ -68,17 +65,44 @@ const ListMain = (props) => {
             {/* Banner and Chat */}
             <Grid container item direction="column" xs={8}>
                 {/* Banner */}
-                <Grid item display='flex' flexDirection='column' xs={3} sx={{borderRadius:{xs:0, lg:3}, display:"flex", justifyContent:'center', alignItems:'center'}}> 
-                    <Typography>antooio</Typography>
+                <Grid container item display='flex'  xs={11} sx={{ borderRadius:{xs:0, lg:3}, display:"flex", justifyContent:'center', alignItems:'center'}}> 
+                    <Grid container item display='flex' flexDirection='row' xs={12} sx={{display:"flex", justifyContent:'center', alignItems:'stretch', borderRadius:{xs:0, lg:3}}}> 
+                        <Grid container item xs={4} sx={{display:"flex", justifyContent:'center', alignItems:'stretch'}}>
+                            <UserListGrid banner={banner}>Santos</UserListGrid>
+                        </Grid>
+                        <Grid container item xs={4}>
+                            <UserListGrid banner={banner}>Santos</UserListGrid>
+                        </Grid>
+                        <Grid container item xs={4}>
+                            <UserListGrid banner={banner}>Santos</UserListGrid>
+                        </Grid>
+                    </Grid>
+                    <Grid container item display='flex' flexDirection='row' xs={12} sx={{borderRadius:{xs:0, lg:3}}}> 
+                        <Grid container item xs={4}>
+                            <UserListGrid banner={banner}>Santos</UserListGrid>
+                        </Grid>
+                        <Grid container item xs={4}>
+                            <UserListGrid banner={banner}>Santos</UserListGrid>
+                        </Grid>
+                        <Grid container item xs={4}>
+                            <UserListGrid banner={banner}>Santos</UserListGrid>
+                        </Grid>
+                    </Grid>
+                    <Grid container item display='flex' flexDirection='row' xs={12} sx={{borderRadius:{xs:0, lg:3}}}> 
+                        <Grid container item xs={4}>
+                            <UserListGrid banner={banner}>Santos</UserListGrid>
+                        </Grid>
+                        <Grid container item xs={4}>
+                            <UserListGrid banner={banner}>Santos</UserListGrid>
+                        </Grid>
+                        <Grid container item xs={4}>
+                            <UserListGrid banner={banner}>Santos</UserListGrid>
+                        </Grid>
+                    </Grid>
                 </Grid>
-                {/* Chat */} 
-                <Grid item container direction='column' wrap='nowrap'  xs={9} sx={{display:'flex', justifyContent:'space-between', maxHeight:'70vh', overflow:"hidden" }}> 
-                    <Grid item container sx={{textAlign:"start", paddingY: 6, paddingX: 10, overflowY:'scroll', ...scrollBar}}>
-                        {/* HERE IS THE MAIN CHAT BOXES */}
-                    </Grid>
-                    <Grid item sx={{display:'flex', borderTop:"1px solid #333", justifyContent:'center', alignItems:'center', p:2}}>
-                        [<Typography key={'E-10'}>Not Logged</Typography>]
-                    </Grid>
+                {/*  */}
+                <Grid item xs={1} sx={{display:'flex', borderTop:"1px solid #333", justifyContent:'center', alignItems:'center'}}>
+                    [<Typography key={'E-10'} >Not Logged</Typography>]
                 </Grid>
             </Grid>
         </React.Fragment>

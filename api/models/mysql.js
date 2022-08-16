@@ -50,7 +50,7 @@ export default class UserObject {
     // Used in search
     static findUser(user) {
         return conn.execute(
-            'SELECT `u`.`id`, `u`.`username`, `u`.`display_name`, `p`.`profile_picture`, `p`.`banner` FROM `users` u, `profile` p WHERE u.`display_name` = ? && p.`id` = u.`profile_id`', [user]
+            "SELECT `u`.`id`, `u`.`username`, `u`.`display_name`, `p`.`profile_picture`, `p`.`banner` FROM `users` u, `profile` p WHERE u.`display_name` LIKE CONCAT('%',  ?,  '%') && p.`id` = u.`profile_id`", [user]
         );
     };
 
