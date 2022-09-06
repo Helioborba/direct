@@ -4,7 +4,11 @@ import Message from "../../context/message";
 
 const UserMain = (props) => {
     const [src, setSrc] = useState(null);
-    const msgCtx = useContext(Message)
+
+    // used for adding a friend
+    const [id, setId] = useState(null);
+    const msgCtx = useContext(Message);
+
     function fetchUser() {
         const data = {data: { username: props.username}}
         fetch('/api/sys/findProfile', {
@@ -17,26 +21,31 @@ const UserMain = (props) => {
         .then(res => res.json())
         .then(res => {
             setSrc(res.profilePicture);
+            setId(res.id);
             console.log(res);
         })
         .catch(err => {console.log(err)});
     }
 
-    function show(event) {
-        const data = {data: { id: msgCtx.userProvider.id}}
+    function addFriend(event) {
+        const data = {data: { id: msgCtx.userProvider.id, targetId: id }}
         console.log(data)
-        fetch('/api/sys/addFriend', {
-            method:"post",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-        .then(res => res.json())
-        .then(res => {
-            console.log(res);
-        })
-        .catch(err => {console.log(err)});
+        if ( id != null && msgCtx.userProvider?.id != undefined) {
+            fetch('/api/sys/addFriend', {
+                method:"post",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(res => res.json())
+            .then(res => {
+                console.log(res);
+            })
+            .catch(err => {console.log(err)});
+        } else {
+            console.log('Cannot add')
+        }
     }
     
     useEffect( () => {
@@ -104,7 +113,7 @@ const UserMain = (props) => {
                             </Grid>
                         </Grid>
                         <Grid container item direction='column' xs={12} sx={{p:10}}>
-                            <Button onClick={show}>Add User</Button>
+                            <Button onClick={() => addFriend()}>Add User</Button>
                             <Button>Block User</Button>
                         </Grid>
                         {/* above is the 'title' */}

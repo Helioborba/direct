@@ -3,6 +3,11 @@ import ModelPagination from "../pagination/pagination.js";
 import Button from "../UI/buttons/button.js";
 import React, {useState} from "react";
 import SearchInnerGrid from "./searchInnerGrid.js";
+
+
+// Keep in mind that ALL of the user data (profile pic, banner, id, etc) 
+// is actually fetched inside the USERMAIN.JS
+
 const SearchResult = (props) => {
     const [currentPage, setCurrentPage] = useState(1); // Pagination current page
     let numberOfPages = 1; // Holds the amount of necessary pages needed to render the other grids

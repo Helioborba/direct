@@ -56,7 +56,7 @@ export default class UserObject {
 
     static userProfile(username) {
         return conn.execute(
-            'SELECT `u`.`display_name`, `u`.`username`, `p`.`profile_picture`, `p`.`banner` FROM `users` u,`profile` p WHERE `u`.`username` = ? && `u`.`profile_id` = `p`.`id` ', [username]
+            'SELECT `u`.`display_name`, `u`.`username`, `u`.`id`, `p`.`profile_picture`, `p`.`banner` FROM `users` u,`profile` p WHERE `u`.`username` = ? && `u`.`profile_id` = `p`.`id` ', [username]
         );
     };
 

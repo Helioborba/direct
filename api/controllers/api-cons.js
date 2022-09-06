@@ -60,7 +60,7 @@ export async function postFindLoginUser(req, res, next) {
 
 // Used for the search
 export async function postFindUser(req, res, next) { 
-    function mapUsers(data) { // Helps in making the profilePicture renaming
+    function mapUsers(data) { // Helps in renaming
         
         // Returns a array of objects
         return  data.map((data) => {
@@ -104,7 +104,7 @@ export async function postGetProfile(req, res, next) {
             const parsedData = data[0][0] || null; 
 
             if(parsedData?.username) {
-                res.send({ message: 'User found', username: parsedData.usernam?.toString('utf8'), profilePicture: parsedData.profile_picture?.toString('utf8'), banner: parsedData.banner?.toString('utf8'),  error: false});
+                res.send({ message: 'User found', id: parsedData.id, username: parsedData.username?.toString('utf8'), profilePicture: parsedData.profile_picture?.toString('utf8'), banner: parsedData.banner?.toString('utf8'),  error: false});
             } else {
                res.send({ message: 'User not found', error: true});
             }
@@ -144,9 +144,14 @@ export async function postFriendRequest(req, res, next) {
     const data = req.body.data;
     let date = new Date();
 
-    UserObject.addFriend(data.id, data.targetId, date)
-    .then( (res) => {
-        res.send({ message: 'added friend', res:res, error: false});
-    })
-    .catch( err => console.log(err) );
+    console.log ('data id ', data.id ,'other ', data.targetId)
+    if( data.id != data.targetId ) {
+        UserObject.addFriend(data.id, data.targetId, date)
+        .then( (res) => {
+            res.send({ message: 'added friend', res:res, error: false});
+        })
+        .catch( err => console.log(err) );
+    } else {
+        res.send({ message: 'cant add same user as friend', error: true});
+    }
 }
