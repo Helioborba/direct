@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
 import {Box, Grid, Typography,  Avatar, Button} from "@mui/material";
 import Message from "../../context/message";
+import ErrorAlert from "../alerts/errorAlert";
 
 const UserMain = (props) => {
     const [src, setSrc] = useState(null);
 
     // used for adding a friend
     const [id, setId] = useState(null);
+    const [error, setError] = useState(false);
     const msgCtx = useContext(Message);
 
     function fetchUser() {
@@ -45,6 +47,7 @@ const UserMain = (props) => {
             .catch(err => {console.log(err)});
         } else {
             console.log('Cannot add')
+            setError({title:'Cannot add friend', text: 'you are not logged in'})
         }
     }
     
@@ -59,6 +62,7 @@ const UserMain = (props) => {
 
     return(
         <React.Fragment>
+            {error ? <ErrorAlert title={error?.title}>{error?.text}</ErrorAlert> : null}
             <Grid container item sx={{ position:'relative', display:'flex', flexDirection:"column", justifyContent:"center", alignItems:"center"}} >
                 <Box sx={{p:{xs:"5rem 0 5rem 0", lg:2}, display:'flex', justifyContent:'space-between', alignItems:'center'}}>
                     <Grid container direction="row"  sx={{backgroundColor:"#222", borderRadius:{xs:0, lg:3} }}>
