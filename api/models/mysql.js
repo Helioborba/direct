@@ -74,7 +74,7 @@ export default class UserObject {
 
     static addFriend(id, targetId, date) {
         return conn.execute(
-            'INSERT INTO `friends` values (?, ?, ?)', [id, targetId, date]
+            'INSERT INTO `friends` (id, target_id, date) values (?, ?, ?)', [id, targetId, date]
         );
     };
 }

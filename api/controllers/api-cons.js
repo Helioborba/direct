@@ -30,7 +30,7 @@ export async function postNewUser(req, res, next) {
                     res.send({message : `Error in query: ${resultQuery.errorMessage}`})
                 }
             })
-            .catch( err => console.log(err));
+            .catch( err => console.log("postNewUser Error: \n\n", err));
         }  
     })
 }
@@ -55,7 +55,7 @@ export async function postFindLoginUser(req, res, next) {
             }
         }
     })
-    .catch( err => console.log(err) );
+    .catch( err => console.log("postFindLoginUser Error: \n\n", err) );
 }
 
 // Used for the search
@@ -87,7 +87,7 @@ export async function postFindUser(req, res, next) {
             }
         }
     })
-    .catch( err => console.log(err) );
+    .catch( err => console.log("postFindUser Error: \n\n", err) );
 }
 
 //// The area below is for the user Profile 
@@ -110,7 +110,7 @@ export async function postGetProfile(req, res, next) {
             }
         }
     })
-    .catch( err => console.log(err) );
+    .catch( err => console.log("postGetProfile Error: \n\n", err) );
 }
 
 // profile pictures
@@ -122,7 +122,7 @@ export async function postImage(req, res, next) {
     .then( (data) => {
         res.send({ message: 'done', error: false});
     })
-    .catch( err => console.log(err) );
+    .catch( err => console.log("postImage Error: \n\n", err) );
 }
 
 // Banners
@@ -134,7 +134,7 @@ export async function postBanner(req, res, next) {
     .then( (data) => {
         res.send({ message: 'done', error: false});
     })
-    .catch( err => console.log(err) );
+    .catch( err => console.log("postBanner Error: \n\n", err) );
 }
 
 ///////
@@ -144,14 +144,16 @@ export async function postFriendRequest(req, res, next) {
     const data = req.body.data;
     let date = new Date();
 
-    console.log ('data id ', data.id ,'other ', data.targetId)
-    if( data.id != data.targetId ) {
+    if( data.id !== data.targetId ) { // Stops the user from adding himself
         UserObject.addFriend(data.id, data.targetId, date)
-        .then( (res) => {
-            res.send({ message: 'added friend', res:res, error: false});
+        .then( (data) => {
+            res.send({ message: 'added friend', message:data, error: false});
         })
-        .catch( err => console.log(err) );
+        .catch( (err) => {
+            console.log("friendRequest Error: \n\n", err )
+            res.send({ message: 'cannot add duplicate as friend', error: true});
+        });
     } else {
-        res.send({ message: 'cant add same user as friend', error: true});
+        res.send({ message: 'cannot add the same user as friend', error: true});
     }
 }

@@ -1,15 +1,17 @@
-import { Alert, AlertTitle } from "@mui/material";
+import { Alert, AlertTitle, Slide } from "@mui/material";
 
 /**
- * 
  * Used for errors only
  */
 const ErrorAlert = (props) => {
+    
     return (
-        <Alert severity="error">
-            <AlertTitle>{props.title}</AlertTitle>
-            {props.children}
-        </Alert>
+        <Slide in={true}>
+            <Alert severity="error">
+                <AlertTitle>{props.title}</AlertTitle>
+                {props.children}
+            </Alert>
+        </Slide>
     )
 }
 

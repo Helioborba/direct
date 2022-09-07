@@ -1,13 +1,14 @@
 import { Alert, AlertTitle, Slide } from "@mui/material";
+
 /**
- * Used for Informational errors
+ * 
+ * Used for success alerts (green)
  */
-const InfoAlert = (props) => {
-
-
+const SuccessAlert = (props) => {
+    
     return (
         <Slide in={true}>
-            <Alert severity="info" >
+            <Alert severity="success">
                 <AlertTitle>{props.title}</AlertTitle>
                 {props.children}
             </Alert>
@@ -15,4 +16,4 @@ const InfoAlert = (props) => {
     )
 }
 
-export default InfoAlert;
+export default SuccessAlert;

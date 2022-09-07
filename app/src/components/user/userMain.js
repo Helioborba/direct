@@ -1,17 +1,20 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useCallback } from "react";
 import {Box, Grid, Typography,  Avatar, Button} from "@mui/material";
 import Message from "../../context/message";
 import ErrorAlert from "../alerts/errorAlert";
+import InfoAlert from "../alerts/infoAlert";
+
 
 const UserMain = (props) => {
     const [src, setSrc] = useState(null);
 
     // used for adding a friend
     const [id, setId] = useState(null);
-    const [error, setError] = useState(false);
+    const [alertMessage, setAlertMessage] = useState(false);
+
     const msgCtx = useContext(Message);
 
-    function fetchUser() {
+    const fetchUser = useCallback( () => {
         const data = {data: { username: props.username}}
         fetch('/api/sys/findProfile', {
             method:"post",
@@ -24,15 +27,13 @@ const UserMain = (props) => {
         .then(res => {
             setSrc(res.profilePicture);
             setId(res.id);
-            console.log(res);
         })
         .catch(err => {console.log(err)});
-    }
+    },[props.username])
 
     function addFriend(event) {
         const data = {data: { id: msgCtx.userProvider.id, targetId: id }}
-        console.log(data)
-        if ( id != null && msgCtx.userProvider?.id != undefined) {
+        if ( id !== null && msgCtx.userProvider?.id !== undefined) { // this validation should actually be done by the backend, and should not be that needed if the user can't add himself/is not logged 
             fetch('/api/sys/addFriend', {
                 method:"post",
                 headers: {
@@ -42,12 +43,15 @@ const UserMain = (props) => {
             })
             .then(res => res.json())
             .then(res => {
-                console.log(res);
+                if (res.error) {
+                    setAlertMessage({type: 'error', title:'Cannot add friend', text: res.message});
+                } else {
+                    setAlertMessage({type: 'success', title:'Friend Request', text: "A friend request has been sent successfully!"});
+                }
             })
             .catch(err => {console.log(err)});
         } else {
-            console.log('Cannot add')
-            setError({title:'Cannot add friend', text: 'you are not logged in'})
+            setAlertMessage({type: 'info', title:'Cannot add friend', text: 'you are not logged in'}) // This is not necessary actually, the anonymous user will not be able to actually see the buttons later on 
         }
     }
     
@@ -62,7 +66,11 @@ const UserMain = (props) => {
 
     return(
         <React.Fragment>
-            {error ? <ErrorAlert title={error?.title}>{error?.text}</ErrorAlert> : null}
+            {/* Alerts, this should become a component in itself (it will repeat in most places) */}
+            {alertMessage?.type === 'error' ? <ErrorAlert title={alertMessage?.title}>{alertMessage?.text}</ErrorAlert> : null}
+            {alertMessage?.type === 'info' ? <InfoAlert title={alertMessage?.title}>{alertMessage?.text}</InfoAlert> : null}
+            {alertMessage?.type === 'success' ? <InfoAlert title={alertMessage?.title}>{alertMessage?.text}</InfoAlert> : null}
+
             <Grid container item sx={{ position:'relative', display:'flex', flexDirection:"column", justifyContent:"center", alignItems:"center"}} >
                 <Box sx={{p:{xs:"5rem 0 5rem 0", lg:2}, display:'flex', justifyContent:'space-between', alignItems:'center'}}>
                     <Grid container direction="row"  sx={{backgroundColor:"#222", borderRadius:{xs:0, lg:3} }}>

@@ -90,6 +90,13 @@ const Nav = (props) => {
     )
   }
   
+  // useEffect(() => {
+  //   // const loginStatus = ctxLogin.userProvider.logged
+  //   // if (loginStatus) {
+      
+  //   // }
+  // }, [ctxLogin.userProvider.logged]);
+
   return (
     <React.Fragment>
       <ModalLogin open={open} onClose={onClose}/>
