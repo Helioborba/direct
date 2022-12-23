@@ -51,6 +51,7 @@ services:
             - ./mysql/DumpAdminer.sql:/docker-entrypoint-initdb.d/DumpAdminer.sql
         environment:
             - MYSQL_ROOT_PASSWORD=root
+            
     adminer:
         image: adminer
         restart: always
