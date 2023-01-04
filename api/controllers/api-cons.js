@@ -157,3 +157,25 @@ export async function postFriendRequest(req, res, next) {
         res.send({ message: 'cannot add the same user as friend', error: true});
     }
 }
+
+
+// Friend request
+export async function debug(req, res, next) { 
+    const data = req.body.data;
+    //let date = new Date();
+
+    console.log(data);
+    res.send({ message: "done", data: data});
+    // if( data.id !== data.targetId ) { // Stops the user from adding himself
+    //     UserObject.addFriend(data.id, data.targetId, date)
+    //     .then( (data) => {
+    //         res.send({ message: 'added friend', message:data, error: false});
+    //     })
+    //     .catch( (err) => {
+    //         console.log("friendRequest Error: \n\n", err )
+    //         res.send({ message: 'cannot add duplicate as friend', error: true});
+    //     });
+    // } else {
+    //     res.send({ message: 'cannot add the same user as friend', error: true});
+    // }
+}

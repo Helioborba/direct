@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { postNewUser, postFindLoginUser, postFindUser, postImage, postBanner, postGetProfile, postFriendRequest } from '../controllers/api-cons.js';
+import { postNewUser, postFindLoginUser, postFindUser, postImage, postBanner, postGetProfile, postFriendRequest, debug } from '../controllers/api-cons.js';
 
 const router = Router();
 
@@ -11,5 +11,8 @@ router.post("/newProfilePic", postImage);
 router.post("/newBannerPic", postBanner);
 router.post("/findProfile", postGetProfile); // not to be confused with the find users used in search (returns a single result)
 router.post("/addFriend", postFriendRequest);
+
+// Used for debugging
+router.post("/debug", debug);
 
 export default router;

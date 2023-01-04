@@ -50,6 +50,22 @@ const ModalAccount = (props) => {
     .then(res=>console.log(res))
     .catch(err=>console.log(err));
 
+    // fetch('/api/sys/debug', {
+    //   method: 'POST', 
+    //   mode: 'cors',
+    //   cache: 'no-cache',
+    //   credentials: 'same-origin',
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   redirect: 'follow',
+    //   referrerPolicy: 'no-referrer', 
+    //   body: JSON.stringify(userData) 
+    // })
+    // .then(res=>res.json())
+    // .then(res=>console.log(res))
+    // .catch(err=>console.log(err));
+
     // Clear the fields
     usernameField.current.value = '';
     emailField.current.value = '';

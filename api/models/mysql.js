@@ -23,14 +23,13 @@ export default class UserObject {
         res.push(conn.execute(
             'INSERT INTO profile (id) VALUES (?)', [profile_id]
         ))
+        
         // creates user
         res.push(conn.execute( // The username WILL be always the display name to new accounts until the person changes it
             'INSERT INTO users (username, display_name, email, password, profile_id ) VALUES (?, ?, ?, ?, ?)', [this.username, this.username, this.email, this.password, profile_id ]
         ))
 
         return res;
-    
-        
     }
 
     // Used to validate if user exists, helps to not break the query
